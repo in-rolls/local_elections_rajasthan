@@ -1,4 +1,114 @@
-## Rajasthan Gram Panchayat Election Data (2020--2022)
+## Rajasthan Local Elections Repository
+
+Two things live here.
+
+**The 2020--2022 gram panchayat scrape** — a Scrapy spider against the
+[Rajasthan SEC site](https://sec.rajasthan.gov.in/grampanchayatdetails.aspx), its
+gzipped output in `data/*.csv.gz`, and the notebooks that pushed it to Dataverse.
+Documented under "2020--2022 scrape" below; this is the repository's original
+content, and it is the authoritative source for those four files. Copies of them
+circulating uncompressed elsewhere should be checked against it — see the
+warning below.
+
+**A standardised sarpanch panel for 2005, 2010, 2015 and 2020**, plus source
+material for municipal, zilla parishad and panchayat samiti bodies. Added when
+Rajasthan was split out of [quota_raj](https://github.com/in-rolls/quota_raj) so
+the data has a home independent of any one paper.
+
+## Published data: `data/fin/`
+
+`data/fin/` is what other repositories consume. Everything under `data/source/`
+is raw input.
+
+| file | rows | grain |
+| --- | ---: | --- |
+| `source_2005_std.parquet` | 9,178 | one row per gram panchayat seat |
+| `source_2010_std.parquet` | 9,166 | " |
+| `source_2015_std.parquet` | 9,862 | " |
+| `source_2020_std.parquet` | 11,314 | " |
+
+Columns: `year`, `district_raw`, `samiti_raw`, `gp_raw`, `gp_std`, `winner_name`,
+`winner_female`, `female_reserved`, `caste_category`, `reservation_raw`.
+
+Those row counts are a contract. `local_elections`'
+`adapters/rajasthan.py` hard-codes them as `DECLARED` and raises
+*"the sibling changed"* if they move, so a silent change here fails loudly there.
+
+**Two things that will bite you if you assume otherwise.**
+
+*Rajasthan's reservation vocabulary is not the other states'.* It prints `GEN`
+for an unreserved seat where others print `NONE`, and `OBC` where others print
+`BC`. `caste_category` keeps Rajasthan's own labels; the consuming adapter maps
+them (`CASTE = {"GEN": "NONE", "SC": "SC", "ST": "ST", "OBC": "BC"}`).
+
+*2020 has no winners.* `winner_name` is empty and `winner_female` is `NA` for
+all 11,314 rows of the 2020 slice: its source is a reservation roster
+(`District, PanchayatSamiti, NameOfGramPanchyat, CategoryOfGramPanchyat`), not a
+results publication, so the script sets `winner_female = NA_integer_`. You know
+which seats were reserved, not who won them. Winner information for 2020 lives
+separately in `data/source/sarpanch/background/2020--2022/WinnerSarpanch.csv`.
+2005, 2010 and 2015 all carry winners.
+
+| year | seats | districts | samitis | female reserved | female winners |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 2005 | 9,178 | 32 | 233 | 3,072 | 3,338 |
+| 2010 | 9,166 | 33 | 246 | 4,360 | 4,819 |
+| 2015 | 9,862 | 33 | 296 | 4,770 | 5,092 |
+| 2020 | 11,314 | 33 | 348 | 5,495 | — |
+
+Female winners exceed female-reserved seats in every year with winner data
+(3,338 > 3,072 in 2005; 4,819 > 4,360 in 2010; 5,092 > 4,770 in 2015) — women
+also win unreserved seats, so `winner_female` is not a restatement of
+`female_reserved`.
+
+*The panel is unbalanced by construction.* Seats grow 9,178 to 11,314 (~23%) and
+samitis 233 to 348 across the four cycles, through delimitation driven by
+population growth and urbanisation rather than any change in coverage.
+
+### How it is produced
+
+```
+data/source/sarpanch/sarpanch_{2005,2010,2015_manual_sex,2020_clean}.csv
+  -> scripts/01_standardize_source.R
+  -> data/fin/source_{2005,2010,2015,2020}_std.parquet
+```
+
+`sarpanch_2015_manual_sex.csv` carries winner sex coded by hand: the 2015 official
+records omit it, so it was read off candidate names and corrected manually.
+
+### Verifying a copy
+
+`data/fin/CHECKSUMS.sha256` pins the bytes, `data/fin/SCHEMA.json` records row
+counts and columns. From `data/fin/`:
+
+```bash
+shasum -a 256 -c CHECKSUMS.sha256
+```
+
+The published parquets are the exact files every current analysis was built on.
+Re-running `scripts/01_standardize_source.R` reproduces them value-for-value
+(verified with `all.equal()` on all four), though not byte-for-byte — parquet
+writing is not deterministic across arrow versions.
+
+## `data/source/`
+
+Organised by the body being elected: `sarpanch/`, `municipal/`,
+`zilla_parishad/`, `panchayat_samiti/`. Raw Rajasthan SEC publications — result
+books as PDF, candidate and winner CSVs for 2020--2022, and the 2005/2010/2015
+sarpanch spreadsheets.
+
+**A corrupted copy of `WardWinningPanch.csv` is in circulation.** The
+authoritative file is this repository's own scraper output,
+`data/WarnWinningPanch.csv.gz` (110,297 rows) — the uncompressed copy under
+`data/source/` matches it exactly. The other, which reached `quota` and `quota_raj`, has been through Excel,
+which converted panchayat *names* that look like times into times — `6-00`
+became `6:00 PM` — and mangled the election-period field, turning `SEP 2021` into
+`Sep-21`. Both files have 110,296 rows and the same header, so the damage is easy
+to miss; it shows up in 32 rows plus about 2,130 date fields. If you have a copy
+from elsewhere, check `Grampanchayat` for values like `6:00 PM` before using it.
+
+
+## 2020--2022 scrape
 
 We scrape the [Rajasthan SEC site with gram panchayat results for 2020--2022](https://sec.rajasthan.gov.in/grampanchayatdetails.aspx). 
 

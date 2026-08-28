@@ -1,0 +1,74 @@
+{
+  "source_2005_std.parquet": {
+    "sha256": "79eea3c387b778c3876ae0b1ea55417d12b1d0dffd8e10ba879e1a1d9dd5081d",
+    "rows": 9178,
+    "cols": 10,
+    "bytes": 343929,
+    "columns": [
+      "year",
+      "district_raw",
+      "samiti_raw",
+      "gp_raw",
+      "gp_std",
+      "winner_name",
+      "winner_female",
+      "female_reserved",
+      "caste_category",
+      "reservation_raw"
+    ]
+  },
+  "source_2010_std.parquet": {
+    "sha256": "bfcbaa78d3873a517eb9946515d5fa2aa505359eabcf4ad4c94c1f40b2290375",
+    "rows": 9166,
+    "cols": 10,
+    "bytes": 351452,
+    "columns": [
+      "year",
+      "district_raw",
+      "samiti_raw",
+      "gp_raw",
+      "gp_std",
+      "winner_name",
+      "winner_female",
+      "female_reserved",
+      "caste_category",
+      "reservation_raw"
+    ]
+  },
+  "source_2015_std.parquet": {
+    "sha256": "d1e0814a80a96de30229ac9b766a9e944ad3986d4b361d9d3bca1dcc5d75ff24",
+    "rows": 9862,
+    "cols": 10,
+    "bytes": 395798,
+    "columns": [
+      "year",
+      "district_raw",
+      "samiti_raw",
+      "gp_raw",
+      "gp_std",
+      "winner_name",
+      "winner_female",
+      "female_reserved",
+      "caste_category",
+      "reservation_raw"
+    ]
+  },
+  "source_2020_std.parquet": {
+    "sha256": "49951c02110772e611768f0e2f129cdc0a8d80deb5cee060e2f2b2e6e57be242",
+    "rows": 11314,
+    "cols": 10,
+    "bytes": 361248,
+    "columns": [
+      "year",
+      "district_raw",
+      "samiti_raw",
+      "gp_raw",
+      "gp_std",
+      "winner_name",
+      "winner_female",
+      "female_reserved",
+      "caste_category",
+      "reservation_raw"
+    ]
+  }
+}
