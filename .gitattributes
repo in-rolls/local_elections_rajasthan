@@ -1,0 +1,4 @@
+# Raw source data must survive a round-trip byte-for-byte. Several SEC exports
+# are CRLF and git would silently normalise them to LF on checkout, changing the
+# bytes and any checksum taken over them.
+* -text
