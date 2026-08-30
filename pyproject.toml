@@ -1,0 +1,20 @@
+[project]
+name = "local-elections-rajasthan-data"
+version = "0.0.0"
+description = "Reproducible transformations for Rajasthan local-election data"
+requires-python = ">=3.12"
+classifiers = ["Private :: Do Not Upload"]
+dependencies = ["pandas", "pdfplumber", "pyarrow==23.0.1"]
+
+[dependency-groups]
+dev = ["pytest", "ruff"]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "SIM", "RUF"]

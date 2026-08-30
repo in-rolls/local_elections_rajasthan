@@ -1,0 +1,24 @@
+PY ?= uv run python
+
+.PHONY: data extract parse lint test check
+
+data: extract parse
+
+extract:
+	$(PY) -m scripts.extract_panchayat_samiti_2010
+
+parse:
+	$(PY) -m scripts.parse_panchayat_samiti_2010
+
+lint:
+	uv run ruff check scripts/runlog.py \
+		scripts/extract_panchayat_samiti_2010.py \
+		scripts/parse_panchayat_samiti_2010.py tests
+	uv run ruff format --check scripts/runlog.py \
+		scripts/extract_panchayat_samiti_2010.py \
+		scripts/parse_panchayat_samiti_2010.py tests
+
+test:
+	$(PY) -m pytest tests -q
+
+check: lint test

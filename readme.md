@@ -10,8 +10,9 @@ content, and it is the authoritative source for those four files. Copies of them
 circulating uncompressed elsewhere should be checked against it — see the
 warning below.
 
-**A standardised sarpanch panel for 2005, 2010, 2015 and 2020**, plus source
-material for municipal, zilla parishad and panchayat samiti bodies. Added when
+**A standardised rural panel**: sarpanch seats for 2005, 2010, 2015 and 2020,
+and Panchayat Samiti member wards for 2010. The repository also holds unparsed
+municipal, Zila Parishad and other Panchayat Samiti source books. Added when
 Rajasthan was split out of [quota_raj](https://github.com/in-rolls/quota_raj) so
 the data has a home independent of any one paper.
 
@@ -22,13 +23,17 @@ is raw input.
 
 | file | rows | grain |
 | --- | ---: | --- |
+| `panchayat_samiti_2010_std.parquet` | 5,273 | one row per Panchayat Samiti member ward |
 | `source_2005_std.parquet` | 9,178 | one row per gram panchayat seat |
 | `source_2010_std.parquet` | 9,166 | " |
 | `source_2015_std.parquet` | 9,862 | " |
 | `source_2020_std.parquet` | 11,314 | " |
 
-Columns: `year`, `district_raw`, `samiti_raw`, `gp_raw`, `gp_std`, `winner_name`,
-`winner_female`, `female_reserved`, `caste_category`, `reservation_raw`.
+The four `source_*` files share these columns: `year`, `district_raw`,
+`samiti_raw`, `gp_raw`, `gp_std`, `winner_name`, `winner_female`,
+`female_reserved`, `caste_category`, `reservation_raw`. The Panchayat Samiti
+file's field-level contract and two source repairs are in
+[`panchayat_samiti_2010_DICTIONARY.md`](data/fin/panchayat_samiti_2010_DICTIONARY.md).
 
 Those row counts are a contract. `local_elections`'
 `adapters/rajasthan.py` hard-codes them as `DECLARED` and raises
@@ -65,6 +70,31 @@ also win unreserved seats, so `winner_female` is not a restatement of
 samitis 233 to 348 across the four cycles, through delimitation driven by
 population growth and urbanisation rather than any change in coverage.
 
+### Panchayat Samiti member wards, 2010
+
+The 2010 result book's useful table is one row per member ward. Its earlier
+“No. of Panchayati Raj Institutions and their Constituencies/Wards” table is
+not treated as data; it supplies validation totals only. The parser requires
+5,273 serials in exact order, 248 unique district–Samiti bodies across 33
+districts, a unique `(district, samiti, ward)` key, continuous wards within each
+body, and exact agreement with all printed reservation totals.
+
+Extraction and parsing are separate commands. The extraction retains source
+words and coordinates without interpreting them; the parser never opens the
+PDF.
+
+```text
+data/source/panchayat_samiti/panchayat_samiti_2010.pdf
+  -> scripts/extract_panchayat_samiti_2010.py
+  -> data/extracted/panchayat_samiti_2010_pages.jsonl
+  -> scripts/parse_panchayat_samiti_2010.py
+  -> data/fin/panchayat_samiti_2010_std.parquet
+```
+
+Both commands emit structured JSON logs. Run `make data` to rebuild the two
+artifacts and `make check` for lint and parser tests. Python dependencies and
+the PyArrow version that determines Parquet bytes are locked by `uv.lock`.
+
 ### How it is produced
 
 ```
@@ -95,7 +125,8 @@ writing is not deterministic across arrow versions.
 Organised by the body being elected: `sarpanch/`, `municipal/`,
 `zilla_parishad/`, `panchayat_samiti/`. Raw Rajasthan SEC publications — result
 books as PDF, candidate and winner CSVs for 2020--2022, and the 2005/2010/2015
-sarpanch spreadsheets.
+sarpanch spreadsheets. The 2010 Panchayat Samiti result book is parsed; the
+other Panchayat Samiti, Zila Parishad and municipal holdings are not.
 
 **A corrupted copy of `WardWinningPanch.csv` is in circulation.** The
 authoritative file is this repository's own scraper output,

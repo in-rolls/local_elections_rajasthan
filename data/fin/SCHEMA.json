@@ -1,4 +1,31 @@
 {
+  "panchayat_samiti_2010_std.parquet": {
+    "sha256": "4962f1596fa8b38a6565605d169c483db1ff0015619312de4c28d657c0ec0011",
+    "rows": 5273,
+    "cols": 19,
+    "bytes": 98107,
+    "columns": [
+      "year",
+      "serial",
+      "district_raw",
+      "samiti_raw",
+      "ward_no_raw",
+      "ward_no",
+      "reservation_raw",
+      "caste_category",
+      "female_reserved",
+      "winner_name",
+      "winner_sex_raw",
+      "winner_female",
+      "winner_category_raw",
+      "winner_category",
+      "winner_caste_category",
+      "winner_category_sex_agree",
+      "party_raw",
+      "source_path",
+      "source_page"
+    ]
+  },
   "source_2005_std.parquet": {
     "sha256": "7dddf673a69504d7f0f8c50d98b9f6e68a96c9220eba8bbe80d9dfe4de3040ac",
     "rows": 9178,
