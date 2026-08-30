@@ -11,8 +11,9 @@ circulating uncompressed elsewhere should be checked against it — see the
 warning below.
 
 **A standardised rural panel**: sarpanch seats for 2005, 2010, 2015 and 2020,
-and Panchayat Samiti member wards for 2005 and 2010. The repository also holds unparsed
-municipal, Zila Parishad and other Panchayat Samiti source books. Added when
+Panchayat Samiti member wards for 2005 and 2010, and Zila Parishad member wards
+for 2005 and 2010. The repository also holds unparsed municipal and later rural
+source books. Added when
 Rajasthan was split out of [quota_raj](https://github.com/in-rolls/quota_raj) so
 the data has a home independent of any one paper.
 
@@ -25,6 +26,8 @@ is raw input.
 | --- | ---: | --- |
 | `panchayat_samiti_2005_std.parquet` | 5,257 | one row per Panchayat Samiti member seat |
 | `panchayat_samiti_2010_std.parquet` | 5,273 | one row per Panchayat Samiti member ward |
+| `zila_parishad_2005_std.parquet` | 1,008 | one row per Zila Parishad member ward |
+| `zila_parishad_2010_std.parquet` | 1,013 | one row per Zila Parishad member ward |
 | `source_2005_std.parquet` | 9,178 | one row per gram panchayat seat |
 | `source_2010_std.parquet` | 9,166 | " |
 | `source_2015_std.parquet` | 9,862 | " |
@@ -33,11 +36,15 @@ is raw input.
 The four `source_*` files share these columns: `year`, `district_raw`,
 `samiti_raw`, `gp_raw`, `gp_std`, `winner_name`, `winner_female`,
 `female_reserved`, `caste_category`, `reservation_raw`. The Panchayat Samiti
-files' field-level contracts, source recodes and unresolved source
+and Zila Parishad files' field-level contracts, source recodes and source
 contradictions are in
 [`panchayat_samiti_2005_DICTIONARY.md`](data/fin/panchayat_samiti_2005_DICTIONARY.md)
 and
 [`panchayat_samiti_2010_DICTIONARY.md`](data/fin/panchayat_samiti_2010_DICTIONARY.md).
+The corresponding Zila Parishad contracts are
+[`zila_parishad_2005_DICTIONARY.md`](data/fin/zila_parishad_2005_DICTIONARY.md)
+and
+[`zila_parishad_2010_DICTIONARY.md`](data/fin/zila_parishad_2010_DICTIONARY.md).
 
 Those row counts are a contract. `local_elections`'
 `adapters/rajasthan.py` hard-codes them as `DECLARED` and raises
@@ -106,7 +113,35 @@ data/source/panchayat_samiti/panchayat_samiti_2010.pdf
   -> data/fin/panchayat_samiti_2010_std.parquet
 ```
 
-All four commands emit structured JSON logs. Run `make data` to rebuild the
+### Zila Parishad member seats, 2005 and 2010
+
+The detailed result tables yield 1,008 wards in 32 districts in 2005 and 1,013
+wards in 33 districts in 2010. The 2005 publication has one unfilled seat and
+1,007 winners; all 2010 seats have winners. Each parser requires exact agreement
+with the publication's independent reservation, winner sex/category, party and
+margin/status controls.
+
+Both books print Churu's complete 27-row roster as wards 5–31. The published
+files retain those values in `ward_no_raw` and supply `ward_no=1..27` from row
+order. The 2010 source overlays its selectable table text with a large-font
+watermark; extraction retains font metadata and parsing excludes that separate
+font layer before interpreting columns.
+
+```text
+data/source/zilla_parishad/zila_parishad_2005.pdf
+  -> scripts/extract_zila_parishad_2005.py
+  -> data/extracted/zila_parishad_2005_pages.jsonl
+  -> scripts/parse_zila_parishad_2005.py
+  -> data/fin/zila_parishad_2005_std.parquet
+
+data/source/zilla_parishad/zila_parishad_2010.pdf
+  -> scripts/extract_zila_parishad_2010.py
+  -> data/extracted/zila_parishad_2010_pages.jsonl
+  -> scripts/parse_zila_parishad_2010.py
+  -> data/fin/zila_parishad_2010_std.parquet
+```
+
+All extraction and parser commands emit structured JSON logs. Run `make data` to rebuild the
 extractions and Parquet files, and `make check` for lint and parser tests. Python dependencies and
 the PyArrow version that determines Parquet bytes are locked by `uv.lock`.
 
@@ -140,8 +175,8 @@ writing is not deterministic across arrow versions.
 Organised by the body being elected: `sarpanch/`, `municipal/`,
 `zilla_parishad/`, `panchayat_samiti/`. Raw Rajasthan SEC publications — result
 books as PDF, candidate and winner CSVs for 2020--2022, and the 2005/2010/2015
-sarpanch spreadsheets. The 2005 and 2010 Panchayat Samiti result books are
-parsed; the 2015 Panchayat Samiti book and all Zila Parishad and municipal
+sarpanch spreadsheets. The 2005 and 2010 Panchayat Samiti and Zila Parishad
+result books are parsed; the 2015 and 2020 rural books and all municipal
 holdings are not.
 
 **A corrupted copy of `WardWinningPanch.csv` is in circulation.** The
