@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "Cite the repository commit used; cite the separate Dataverse reference for the 2020–2022 website collection."
+type: dataset
+title: "Rajasthan local-election data, 2005–2022"
+authors:
+  - family-names: Sood
+    given-names: Gaurav
+    email: contact@gsood.com
+  - family-names: Laohaprapanon
+    given-names: Suriyan
+repository-code: "https://github.com/in-rolls/local_elections_rajasthan"
+url: "https://github.com/in-rolls/local_elections_rajasthan"
+keywords:
+  - Rajasthan
+  - local elections
+  - seat reservations
+references:
+  - type: data
+    title: "Gram Panchayat Election Data For Rajasthan (2020/2021/2022)"
+    authors:
+      - family-names: Sood
+        given-names: Gaurav
+      - family-names: Laohaprapanon
+        given-names: Suriyan
+    year: 2023
+    version: "1.0"
+    doi: 10.7910/DVN/6YPB5C
+    license: CC0-1.0
