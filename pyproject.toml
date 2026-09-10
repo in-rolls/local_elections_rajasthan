@@ -9,7 +9,7 @@ license-files = ["LICENSE"]
 keywords = ["Rajasthan", "elections", "panchayats", "reservation", "data"]
 requires-python = ">=3.12"
 classifiers = ["Private :: Do Not Upload"]
-dependencies = ["pandas>=2.2", "pdfplumber>=0.11", "pyarrow==23.0.1"]
+dependencies = ["pandas>=2.2", "pdfplumber>=0.11", "pyarrow==25.0.1"]
 
 [project.urls]
 Repository = "https://github.com/in-rolls/local_elections_rajasthan"
