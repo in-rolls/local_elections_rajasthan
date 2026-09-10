@@ -1,0 +1,94 @@
+{
+  "ContestingSarpanch.csv.gz": {
+    "output": "ContestingSarpanch.parquet",
+    "columns": [
+      "ElectionType",
+      "ElectionDuration",
+      "District",
+      "PanchayatSamiti",
+      "SrNo",
+      "NameOfGramPanchayat",
+      "CategoryOfGramPanchayat",
+      "ContestingCandidateSerialNo",
+      "NameOfContestingCandidate",
+      "FatherHusbandOfContestingCandidate",
+      "Gender",
+      "MartialStatus",
+      "CategoryOfCandidate",
+      "EducationStatus",
+      "ContestingCandidateOccupation",
+      "Age",
+      "TotalValueOfCapitalAssets",
+      "ChildrenBefore27111995",
+      "ChildrenOnOrAfter28111995",
+      "MobileNo",
+      "EmailAddress"
+    ]
+  },
+  "StatsNomination.csv.gz": {
+    "output": "StatsNomination.parquet",
+    "columns": [
+      "ElectionType",
+      "ElectionDuration",
+      "District",
+      "PanchayatSamiti",
+      "SrNo",
+      "GramPanchayat",
+      "NominationTotalNoOfNominationFilled",
+      "NominationCandidate",
+      "ValidlyNominatedCandidate",
+      "Withdrawal",
+      "Unopposed",
+      "Contestants"
+    ]
+  },
+  "WinnerSarpanch.csv.gz": {
+    "output": "WinnerSarpanch.parquet",
+    "columns": [
+      "ElectionType",
+      "ElectionDuration",
+      "District",
+      "PanchayatSamiti",
+      "SrNo",
+      "NameOfGramPanchyat",
+      "CategoryOfGramPanchyat",
+      "TotalNoOfContestingCandidate",
+      "ElectedUnoppose",
+      "TotalElectorateVotes",
+      "TotalPolledVotes",
+      "RejectedVotes",
+      "TotalValidVotes",
+      "PollPercent",
+      "WinnerCandidateName",
+      "ViewPledge",
+      "VoteSecureByWinner",
+      "RunnerupCandidateName",
+      "VoteSecureByRunnerup",
+      "TotalNoOfNOTACount",
+      "TenderedVotes"
+    ]
+  },
+  "WarnWinningPanch.csv.gz": {
+    "output": "WarnWinningPanch.parquet",
+    "columns": [
+      "ElectionType",
+      "ElectionDuration",
+      "District",
+      "PanchayatSamiti",
+      "SrNo",
+      "Grampanchayat",
+      "WardNo",
+      "NameOfVillage",
+      "CategoryOfWard",
+      "NameOfCandidate",
+      "TotalNoOfVotes",
+      "VotesPolled",
+      "PollPercent",
+      "WhetherElectedUnoppose",
+      "CategoryOfWinningCandidate",
+      "RemarkIfAny",
+      "WinnerVotes",
+      "LooserVotes"
+    ]
+  }
+}

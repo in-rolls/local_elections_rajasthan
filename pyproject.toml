@@ -1,13 +1,23 @@
 [project]
 name = "local-elections-rajasthan-data"
 version = "0.0.0"
-description = "Reproducible transformations for Rajasthan local-election data"
+description = "Rajasthan local-election records and reproducible data transformations"
+readme = "README.md"
+authors = [{ name = "Gaurav Sood", email = "contact@gsood.com" }, { name = "Suriyan Laohaprapanon" }]
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["Rajasthan", "elections", "panchayats", "reservation", "data"]
 requires-python = ">=3.12"
 classifiers = ["Private :: Do Not Upload"]
-dependencies = ["pandas", "pdfplumber", "pyarrow==23.0.1"]
+dependencies = ["pandas>=2.2", "pdfplumber>=0.11", "pyarrow==23.0.1"]
+
+[project.urls]
+Repository = "https://github.com/in-rolls/local_elections_rajasthan"
+Issues = "https://github.com/in-rolls/local_elections_rajasthan/issues"
 
 [dependency-groups]
-dev = ["pytest", "ruff"]
+dev = ["ruff>=0.14", "pre-commit>=4", { include-group = "test" }]
+test = ["pytest>=8"]
 
 [tool.uv]
 package = false
@@ -18,3 +28,10 @@ target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "W", "F", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.pytest.ini_options]
+minversion = "8"
+testpaths = ["tests"]
+pythonpath = ["."]
+xfail_strict = true
+addopts = ["-ra", "--strict-config", "--strict-markers"]
