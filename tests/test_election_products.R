@@ -15,7 +15,9 @@ stopifnot(length(files) == 8L)
 for (file in files) {
   expected <- read_parquet(file.path(published, file))
   actual <- read_parquet(file.path(rebuilt, file))
-  stopifnot(identical(actual, expected))
+  if (!identical(actual, expected)) {
+    stop(file, ": ", paste(all.equal(actual, expected, tolerance = 0), collapse = "; "))
+  }
 }
 
 records <- read_parquet(file.path(rebuilt, "source_records.parquet"))
