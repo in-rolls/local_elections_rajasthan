@@ -15,7 +15,11 @@ stopifnot(length(files) == 8L)
 for (file in files) {
   expected <- read_parquet(file.path(published, file))
   actual <- read_parquet(file.path(rebuilt, file))
-  if (!identical(actual, expected)) {
+  if (file == "gp_lgd_crosswalk.parquet") {
+    stopifnot(identical(select(actual, -match_distance), select(expected, -match_distance)))
+    # stringdist differs in the last floating-point bit across platforms.
+    stopifnot(max(abs(actual$match_distance - expected$match_distance)) < 1e-14)
+  } else if (!identical(actual, expected)) {
     stop(file, ": ", paste(all.equal(actual, expected, tolerance = 0), collapse = "; "))
   }
 }
@@ -42,6 +46,7 @@ stopifnot(is.null(best_gp("gram 12", bind_rows(reference[1, ], reference[1, ])))
 stopifnot(best_gp("gram 12", reference)$gp_code == 1)
 stopifnot(is.null(best_gp("zzzz", reference)))
 stopifnot(normalize_string("Gram-12") != normalize_string("Gram-13"))
+stopifnot(normalize_string("गाँव-४५") == "गाँव४५")
 devanagari_reference <- tibble(gp_name_std = "gp४४", gp_code = 44)
 stopifnot(is.null(best_gp("gp४५", devanagari_reference, threshold = 1)))
 ascii_reference <- tibble(gp_name_std = "gp45", gp_code = 45)

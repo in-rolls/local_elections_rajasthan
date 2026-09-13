@@ -14,7 +14,7 @@ normalize_string <- function(x) {
   x <- stringi::stri_trans_general(x, "Latin-ASCII")
   x <- stringi::stri_trans_tolower(x)
   x <- trimws(gsub("\\s+", " ", x))
-  gsub("[[:punct:]]", "", x)
+  stringi::stri_replace_all_regex(x, "\\p{P}", "")
 }
 
 make_match_key <- function(district, block, gp) {
