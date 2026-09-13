@@ -47,3 +47,12 @@ def test_schema_and_checksums_describe_every_published_parquet():
             "bytes": path.stat().st_size,
             "columns": parquet.schema_arrow.names,
         }
+
+
+def test_missing_gp_attributes_remain_missing():
+    for year in (2005, 2010):
+        table = pq.read_table(DATA / f"source_{year}_std.parquet").to_pandas()
+        assert table.winner_female.isna().sum() == {2005: 1, 2010: 12}[year]
+        missing_reservation = table.reservation_raw.isna()
+        assert table.loc[missing_reservation, "female_reserved"].isna().all()
+        assert missing_reservation.sum() == {2005: 0, 2010: 1}[year]
