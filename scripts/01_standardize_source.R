@@ -37,7 +37,7 @@ standardize_sex <- function(sex, category = NULL, infer_from_category = FALSE) {
     sex_upper <- toupper(trimws(sex))
     return(case_when(
       sex_upper %in% c("F", "FEMALE", "1") ~ 1L,
-      sex_upper %in% c("M", "MALE", "0", "O") ~ 0L
+      sex_upper %in% c("M", "MALE", "0") ~ 0L
     ))
   }
   if (infer_from_category && !is.null(category)) {
