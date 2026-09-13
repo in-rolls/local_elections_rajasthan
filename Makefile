@@ -1,6 +1,15 @@
 PY ?= uv run python
 
-.PHONY: data extract parse lint test check verify-data ci-docker
+.PHONY: data extract parse lint test check verify-data ci-docker elections test-r
+
+elections:
+	Rscript --vanilla scripts/02_candidate_events.R
+	Rscript --vanilla scripts/03_election_panels.R
+	Rscript --vanilla scripts/04_geographic_bridge.R
+	$(PY) -m scripts.update_metadata
+
+test-r:
+	Rscript --vanilla tests/test_election_products.R
 
 data: extract parse
 	$(PY) -m scripts.convert_scrape
