@@ -28,7 +28,10 @@ def test_schema_and_checksums_describe_every_published_parquet():
             if line.strip()
         )
     }
-    published = {path.name for path in DATA.glob("*_std.parquet")}
+    published = {
+        path.relative_to(DATA).as_posix()
+        for path in [*DATA.glob("*_std.parquet"), *DATA.glob("elections/*.parquet")]
+    }
 
     assert set(schema) == published
     assert set(checksums) == published
@@ -47,6 +50,17 @@ def test_schema_and_checksums_describe_every_published_parquet():
             "bytes": path.stat().st_size,
             "columns": parquet.schema_arrow.names,
         }
+
+
+def test_geographic_inputs_match_the_attributed_snapshots():
+    folder = ROOT / "data" / "source" / "geography"
+    manifest = json.loads((folder / "MANIFEST.json").read_text())
+    assert {p.name for p in folder.glob("*.csv")} == {
+        entry["file"] for entry in manifest["files"]
+    }
+    for entry in manifest["files"]:
+        assert sha256(folder / entry["file"]) == entry["sha256"]
+        assert len(entry["source_revision"]) == 40
 
 
 def test_missing_gp_attributes_remain_missing():

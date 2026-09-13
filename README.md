@@ -100,11 +100,42 @@ print(seats.select(["district_raw", "gp_raw", "female_reserved"]))
 uv run python -m scripts.convert_scrape --out data/derived/scrape_2020_2022
 ```
 
-The R workflow requires `readr`, `dplyr`, `arrow`, `stringi`, and `here`; run `Rscript scripts/01_standardize_source.R` from the repository root. Arrow versions can change Parquet bytes even when values agree. Preserve the published files when reproducing an analysis tied to their checksums.
+The source-standardization R workflow requires `readr`, `dplyr`, `arrow`, `stringi`, and `here`; run `Rscript scripts/01_standardize_source.R` from the repository root. Arrow versions can change Parquet bytes even when values agree. Preserve the published files when reproducing an analysis tied to their checksums.
+
+## Election histories and geographic links
+
+`data/fin/elections/` provides reusable election products built from the standardized GP sources and the original website exports:
+
+| Product | Rows | Record unit |
+| --- | ---: | --- |
+| `source_records.parquet` | 39,520 | Original standardized source row, with reviewed geographic labels and source identity |
+| `candidates_2020_events.parquet` | 67,689 | Distinct candidate record in a 2020 general-election phase |
+| `winners_2020_events.parquet` | 11,300 | Distinct winner record in a 2020 general-election phase |
+| `raj_05_10.parquet` | 7,667 | Unambiguous GP link between 2005 and 2010 |
+| `raj_10_15.parquet` | 7,447 | Unambiguous GP link between 2010 and 2015 |
+| `raj_15_20.parquet` | 7,882 | Unambiguous GP link between 2015 and 2020 |
+| `raj_05_20.parquet` | 5,334 | Unambiguous GP link across all four years |
+| `gp_lgd_crosswalk.parquet` | 5,219 | Accepted election match key to LGD GP link |
+
+The four panels retain the existing reservation, caste-category, winner, district/samiti, and history columns. `count_treated`, `never_treated`, and `always_treated` in the four-wave panel describe **2005, 2010, and 2015**, excluding 2020. `source_id_YYYY` links each panel wave back to the original attributes in `source_records.parquet`. Source identities combine the source-file name and its one-based row number before filtering; they are stable within the pinned source edition. They do not identify a person across different editions.
+
+Event identities include election type, phase, and reviewed district/samiti/GP labels. Candidate serial, name, and parent/spouse name determine candidate-key ambiguity. Winner sex is joined only through a unique candidate name within the same event. The files retain uniqueness flags, original source-row numbers, reservation-source comparisons, and missing values. Contact columns are omitted. Exact duplicate records are collapsed before identity checks; the retained `source_id` refers to the first source row.
+
+The GP crosswalk first uses exact normalized names within reviewed LGD blocks, then Jaro-Winkler distance at most 0.20. Tied best candidates are rejected, as are candidates with different nonempty numeric identifiers in their names. Multiple claims on a GP within a district/samiti retain only a unique closest match. These rules and the accepted links were transferred from `quota_raj` without changes. The crosswalk is built on the 2005–2010 panel and propagated by `match_key`; it is not a complete statewide LGD crosswalk. Studies attach their own Census/SHRUG covariates and outcomes.
+
+`data/source/geography/` contains the exact LGD GP directory, 2024 village-to-GP mapping, and reviewed district/samiti/block crosswalks used by the producer. Its `MANIFEST.json` records each file's original path, repository commit, and SHA-256. These are attributed reference snapshots; the LGD directory's original extraction is not reconstructed here. The `raj_block_xwalk.csv` is retained as a historical reviewed input; the active bridge uses `raj_samiti_xwalk.csv`.
+
+```bash
+Rscript -e 'install.packages(c("arrow", "dplyr", "readr", "stringi", "stringdist", "janitor"))'
+make elections
+make test-r
+```
+
+`make elections` rebuilds events, histories, and geographic links, then regenerates the shared schema and checksum files. `ELECTION_PRODUCTS_DIR` redirects the R outputs to another directory. `make test-r` rebuilds all eight products in a temporary directory and compares every value, column, type, and row position with the published products. It also checks source identities and ambiguous/numeric-name matching. Setting `QUOTA_RAJ_BASELINE` to a directory containing the predecessor election and SHRUG-panel files adds exact projection comparisons against those study baselines.
 
 ## Development
 
-`make check` runs Ruff, formatting, parser and data tests, and pre-commit hooks. `make ci-docker` runs the Python checks in standard Python 3.12 and 3.14 containers. Tests compare parsed records with all four published member-seat files, verify all eight standardized file hashes, and compare every website-export value with its original CSV. Python checks do not rebuild the R outputs.
+`make check` runs Ruff, formatting, parser and data tests, and pre-commit hooks. `make ci-docker` runs the Python checks in standard Python 3.12 and 3.14 containers. Tests compare parsed records with all four published member-seat files, verify standardized and election-product hashes and attributed geographic inputs, and compare every website-export value with its original CSV. `make test-r` and the election-products CI job additionally rebuild the R election products.
 
 ## Citation
 

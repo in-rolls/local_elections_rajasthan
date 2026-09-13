@@ -1,0 +1,46 @@
+{
+  "files": [
+    {
+      "file": "raj_district_xwalk.csv",
+      "source_repository": "https://github.com/in-rolls/quota_raj",
+      "source_revision": "50fbe05662a8f2a84c66e5b262df4c6c0051503d",
+      "source_path": "data/crosswalks/active/raj_district_xwalk.csv",
+      "sha256": "e3f58eb23b7f44be86ea25a1f6ab5c478e4d0721ccdb736f8444b2bc475244fa"
+    },
+    {
+      "file": "raj_samiti_std.csv",
+      "source_repository": "https://github.com/in-rolls/quota_raj",
+      "source_revision": "50fbe05662a8f2a84c66e5b262df4c6c0051503d",
+      "source_path": "data/crosswalks/active/raj_samiti_std.csv",
+      "sha256": "d70e9c58e020afea0ee3228ddfb510bc8402a3e94374b0f49f4d74cf1875f866"
+    },
+    {
+      "file": "raj_samiti_xwalk.csv",
+      "source_repository": "https://github.com/in-rolls/quota_raj",
+      "source_revision": "50fbe05662a8f2a84c66e5b262df4c6c0051503d",
+      "source_path": "data/crosswalks/active/raj_samiti_xwalk.csv",
+      "sha256": "fad26d12608c8ba506a691185ccaa26d5a73ab31c5a524cae4d9780a0d878901"
+    },
+    {
+      "file": "raj_block_xwalk.csv",
+      "source_repository": "https://github.com/in-rolls/quota_raj",
+      "source_revision": "50fbe05662a8f2a84c66e5b262df4c6c0051503d",
+      "source_path": "data/crosswalks/active/raj_block_xwalk.csv",
+      "sha256": "69004dab616b9b9d2a15005e5c423ca8f74cd26069495c1e3c47dedcae532453"
+    },
+    {
+      "file": "lgd_raj_block_gp.csv",
+      "source_repository": "https://github.com/in-rolls/quota_raj",
+      "source_revision": "50fbe05662a8f2a84c66e5b262df4c6c0051503d",
+      "source_path": "data/lgd/processed/lgd_raj_block_gp.csv",
+      "sha256": "453fc82c673b31819f061166dda68de1148451f62c693bf2c6dfd871db96c06a"
+    },
+    {
+      "file": "raj_village_gp_mapping_2024.csv",
+      "source_repository": "https://github.com/in-rolls/quota_raj",
+      "source_revision": "50fbe05662a8f2a84c66e5b262df4c6c0051503d",
+      "source_path": "data/lgd/raj_village_gp_mapping_2024.csv",
+      "sha256": "469888c02b619802be44933fdb9a4a14e4c921c46712d6d4f15f83dc784342b6"
+    }
+  ]
+}
