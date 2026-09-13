@@ -58,6 +58,10 @@ Member-seat files have additional source, vote, party, ward, and validation fiel
 
 The Gram Panchayat files contain changing rosters across years. They do not provide stable identifiers or a validated cross-year seat linkage. The 2020 standardized file is a reservation roster: **all 11,314 winner names and winner-sex values are missing**. The separate 11,432-row website winner file spans multiple election periods and is not automatically joined to that roster.
 
+Missing source sex and reservation labels remain missing in the standardized files; they are not coded as male or unreserved.
+
+The saved, manually reviewed linkages `sp_2005_2010_manually_reviewed.csv` and `sp_05_10_15_20_best_manual.csv` under `data/source/sarpanch/` preserve the historical links used by `quota`. The latter was transferred without changes from that study. These are historical research inputs, not newly validated statewide panels; the consuming study applies its own exclusions.
+
 The 2015 source omits winner sex. Its published coding was inferred from candidate names and manually reviewed; it is not a source-reported demographic field. Municipal publications and the 2015/2020 Panchayat Samiti and Zila Parishad books are held under `data/source/` but are outside the standardized member-seat exports.
 
 The member-seat parsers check printed statewide and body totals, retain vacant seats, and preserve raw values beside documented corrections. The 2005 Panchayat Samiti roster has one reservation-total disagreement and one filled seat with a blank winner name. Its ward numbers are inferred from source order. Both Zila Parishad books print Churu's 27 wards as 5–31; the files retain those printed values and provide an explicitly documented 1–27 sequence. See the dictionaries before using corrected or inferred fields.

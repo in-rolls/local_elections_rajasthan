@@ -64,10 +64,10 @@
     ]
   },
   "source_2005_std.parquet": {
-    "sha256": "7dddf673a69504d7f0f8c50d98b9f6e68a96c9220eba8bbe80d9dfe4de3040ac",
+    "sha256": "488ecf8e08225417e8f293f8edd596a57c2860439cd421a4ec82095e3b716d8d",
     "rows": 9178,
     "cols": 10,
-    "bytes": 343507,
+    "bytes": 343512,
     "columns": [
       "year",
       "district_raw",
@@ -82,10 +82,10 @@
     ]
   },
   "source_2010_std.parquet": {
-    "sha256": "2500b4342c756ede5fee788afb6cf236ca613e2ff701f8b3c1bcc80b514012f0",
+    "sha256": "8e4e4780fc6379a8367031c223d3321843e6c3ee8d9cc40aa5b153e58128d1be",
     "rows": 9166,
     "cols": 10,
-    "bytes": 351444,
+    "bytes": 351487,
     "columns": [
       "year",
       "district_raw",
