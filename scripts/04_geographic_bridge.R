@@ -11,8 +11,8 @@ best_gp <- function(name, candidates, threshold = 0.20) {
     return(NULL)
   }
   row <- candidates[positions, ]
-  a <- gsub("[^0-9]", "", name)
-  b <- gsub("[^0-9]", "", row$gp_name_std)
+  a <- gsub("[^0-9]", "", stringi::stri_trans_general(name, "Any-Latin; Latin-ASCII"))
+  b <- gsub("[^0-9]", "", stringi::stri_trans_general(row$gp_name_std, "Any-Latin; Latin-ASCII"))
   if (nzchar(a) && nzchar(b) && a != b) {
     return(NULL)
   }
