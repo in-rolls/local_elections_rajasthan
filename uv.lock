@@ -331,7 +331,7 @@ wheels = [
 ]
 
 [[package]]
-name = "local-elections-rajasthan-data"
+name = "local-elections-rajasthan"
 version = "0.0.0"
 source = { virtual = "." }
 dependencies = [
