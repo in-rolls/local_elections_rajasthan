@@ -1,5 +1,5 @@
 [project]
-name = "local-elections-rajasthan-data"
+name = "local-elections-rajasthan"
 version = "0.0.0"
 description = "Rajasthan local-election records and reproducible data transformations"
 readme = "README.md"
