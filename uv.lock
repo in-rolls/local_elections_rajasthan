@@ -332,7 +332,7 @@ wheels = [
 
 [[package]]
 name = "local-elections-rajasthan"
-version = "0.0.0"
+version = "1.0.0"
 source = { virtual = "." }
 dependencies = [
     { name = "pandas" },
