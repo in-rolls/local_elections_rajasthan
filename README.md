@@ -71,7 +71,7 @@ Earlier project notes reported spreadsheet-altered copies of the ward-winner fil
 
 | Collection | Source and method | Reproduction |
 | --- | --- | --- |
-| Gram Panchayat 2005/2010/2015/2020 | Saved Rajasthan source tables, with separate manual winner-sex coding for 2015 | `scripts/01_standardize_source.R` |
+| Gram Panchayat 2005/2010/2015/2020 | Saved Rajasthan source tables, with separate manual winner-sex coding for 2015 | `scripts/panels/01_standardize_source.R` |
 | Panchayat Samiti and Zila Parishad 2005/2010 | Rajasthan SEC PDF result books; extract positioned words, then parse the saved extraction | `make data` |
 | Website 2020–2022 | [Rajasthan SEC Gram Panchayat results page](https://sec.rajasthan.gov.in/grampanchayatdetails.aspx), collected with Scrapy | Offline conversion of the four saved CSVs |
 
@@ -93,13 +93,13 @@ seats = pq.read_table("data/fin/source_2015_std.parquet")
 print(seats.select(["district_raw", "gp_raw", "female_reserved"]))
 ```
 
-`make data` rebuilds the four PDF-based member-seat exports and the four website exports. It does not rebuild the R-based Gram Panchayat files. To regenerate only the website exports into a separate directory:
+`make data` rebuilds the four PDF-based member-seat exports and the four website exports. It does not rebuild the R-based Gram Panchayat files; `make sources` and `make elections` do. To regenerate only the website exports into a separate directory:
 
 ```bash
-uv run python -m scripts.convert_scrape --out data/derived/scrape_2020_2022
+uv run python -m scripts.scrape.convert --out data/derived/scrape_2020_2022
 ```
 
-The source-standardization R workflow requires `readr`, `dplyr`, `arrow`, `stringi`, and `here`; run `Rscript scripts/01_standardize_source.R` from the repository root. Arrow versions can change Parquet bytes even when values agree. Preserve the published files when reproducing an analysis tied to their checksums.
+The source-standardization R workflow requires `readr`, `dplyr`, `arrow`, `stringi`, and `here`; run `Rscript scripts/panels/01_standardize_source.R` from the repository root. Arrow versions can change Parquet bytes even when values agree. Preserve the published files when reproducing an analysis tied to their checksums.
 
 ## Election histories and geographic links
 
@@ -133,6 +133,16 @@ make test-r
 `make elections` rebuilds events, histories, and geographic links, then regenerates the shared schema and checksum files. `ELECTION_PRODUCTS_DIR` redirects the R outputs to another directory. `make test-r` rebuilds all eight products in a temporary directory and compares every value, column, type, and row position with the published products. It also checks source identities and ambiguous/numeric-name matching. Setting `QUOTA_RAJ_BASELINE` to a directory containing the predecessor election and SHRUG-panel files adds exact projection comparisons against those study baselines.
 
 ## Development
+
+Code is organized by source, each with its own stage:
+
+| Directory | Language | Turns | Into | Make target |
+|---|---|---|---|---|
+| `scripts/result_books/` | Python | 2005 and 2010 SEC result-book PDFs: `extract.py` keeps each page's positioned words, one parser per book reads its layout | `data/extracted/*_pages.jsonl`, `data/fin/*_std.parquet` | `extract`, `parse` |
+| `scripts/scrape/` | Python | Saved 2020–2022 SEC website exports | `data/fin/scrape_2020_2022/` | `scrape` |
+| `scripts/panels/` | R | Saved Gram Panchayat tables: standardize, then candidate events, election panels and the LGD bridge | `data/fin/source_*_std.parquet`, `data/fin/elections/` | `sources`, `elections` |
+
+`scripts/result_books/books.py` lists each book's source, hash and result-table pages; the parsers share `common.py`. `data/scrape_2023-01-03.log` is the crawler log from the website scrape.
 
 `make check` runs Ruff, formatting, parser and data tests. Tests compare parsed records with all four published member-seat files, verify standardized and election-product hashes and attributed geographic inputs, and compare every website-export value with its original CSV. `make test-r` rebuilds the R election products.
 

@@ -4,7 +4,7 @@ import gzip
 import pyarrow.parquet as pq
 import pytest
 
-from scripts import convert_scrape as converter
+from scripts.scrape import convert as converter
 
 
 def sample(tmp_path, rows):

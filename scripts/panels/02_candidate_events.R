@@ -1,4 +1,4 @@
-source("scripts/election_utils.R")
+source("scripts/panels/election_utils.R")
 
 phases <- c("JAN-MAR 2020", "SEP-OCT 2020")
 

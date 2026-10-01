@@ -7,25 +7,18 @@ and writes one Parquet row per Zila Parishad ward.
 
 import argparse
 import collections
-import json
-import os
+import functools
 import pathlib
 import re
-import tempfile
 
-import pandas
-
-from scripts.extract_zila_parishad_2010 import (
-    FIRST_PAGE,
-    LAST_PAGE,
-    SOURCE_RELATIVE,
-    SOURCE_SHA256,
-)
-from scripts.extract_zila_parishad_2010 import OUTPUT as EXTRACTED
+from scripts.result_books import common
+from scripts.result_books.books import BOOKS
 from scripts.runlog import get_logger
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "data/fin/zila_parishad_2010_std.parquet"
+BOOK = BOOKS["zila_parishad_2010"]
+EXTRACTED = BOOK.extracted
+OUTPUT = BOOK.parsed
+load_pages = functools.partial(common.load_pages, book=BOOK)
 
 EXPECTED_ROWS = 1013
 EXPECTED_DISTRICTS = 33
@@ -125,45 +118,6 @@ NULLABLE_INTEGER_COLUMNS = ["margin", "margin_below_votes"]
 LOGGER = get_logger(__name__)
 
 
-def load_pages(path):
-    """Load and validate the retained extraction and its provenance."""
-    with path.open(encoding="utf-8") as stream:
-        pages = [json.loads(line) for line in stream if line.strip()]
-    page_numbers = [page["source_page"] for page in pages]
-    expected_pages = list(range(FIRST_PAGE, LAST_PAGE + 1))
-    if page_numbers != expected_pages:
-        raise SystemExit(
-            f"extraction holds pages {page_numbers[:1]}..{page_numbers[-1:]}, "
-            f"expected every page {FIRST_PAGE}..{LAST_PAGE} in order"
-        )
-    bad_provenance = [
-        page["source_page"]
-        for page in pages
-        if page.get("source_path") != SOURCE_RELATIVE
-        or page.get("source_sha256") != SOURCE_SHA256
-    ]
-    if bad_provenance:
-        raise SystemExit(f"extraction provenance differs on pages {bad_provenance[:5]}")
-    return pages
-
-
-def cells(words):
-    """Assign one positioned source row to the publication's columns."""
-    return {
-        name: " ".join(
-            word["text"]
-            for word in sorted(words, key=lambda item: item["x0"])
-            if lower <= word["x0"] < upper
-        ).strip()
-        for name, lower, upper in COLUMN_BOUNDS
-    }
-
-
-def normalize_party(raw):
-    """Normalize the source's CPI(M) typography."""
-    return "CPI(M)" if raw in {"CPI M", "CPI(M)"} else raw
-
-
 def artifact_signature(word):
     """Return a stable signature for repeated positioned background text."""
     return (word["text"], round(word["x0"], 1), round(word["top"], 1))
@@ -187,7 +141,7 @@ def parse_page(page, artifacts=frozenset()):
     for ward_word in ward_words:
         top = ward_word["top"]
         words = [word for word in page_words if abs(word["top"] - top) <= 3]
-        raw = cells(words)
+        raw = common.cells(words, COLUMN_BOUNDS)
         name_prefix = " ".join(
             word["text"]
             for word in sorted(page_words, key=lambda item: item["x0"])
@@ -252,7 +206,7 @@ def parse_page(page, artifacts=frozenset()):
                     or raw["winner_sex_raw"] == "Female"
                 ),
                 "party_raw": raw["party_raw"],
-                "party": normalize_party(raw["party_raw"]),
+                "party": common.normalize_party(raw["party_raw"]),
                 "votes_secured": votes,
                 "margin": margin,
                 "margin_below_votes": (
@@ -260,7 +214,7 @@ def parse_page(page, artifacts=frozenset()):
                 ),
                 "elected_uncontested": int(uncontested),
                 "remark_raw": raw["remark_raw"] or None,
-                "source_path": SOURCE_RELATIVE,
+                "source_path": BOOK.source_relative,
                 "source_page": page["source_page"],
             }
         )
@@ -438,23 +392,6 @@ def validate(rows):
     )
 
 
-def write_parquet(rows, output):
-    """Atomically write the analysis-ready seat table."""
-    output.parent.mkdir(parents=True, exist_ok=True)
-    frame = pandas.DataFrame(rows, columns=OUTPUT_COLUMNS)
-    for column in NULLABLE_INTEGER_COLUMNS:
-        frame[column] = frame[column].astype("Int64")
-    with tempfile.NamedTemporaryFile(
-        dir=output.parent, suffix=".parquet", delete=False
-    ) as stream:
-        temporary = pathlib.Path(stream.name)
-    try:
-        frame.to_parquet(temporary, index=False)
-        os.replace(temporary, output)
-    finally:
-        temporary.unlink(missing_ok=True)
-
-
 def main(argv=None):
     """Parse, validate, and publish the 2010 member-seat table."""
     parser = argparse.ArgumentParser(description=__doc__)
@@ -473,7 +410,7 @@ def main(argv=None):
     pages = load_pages(args.input)
     rows = parse_pages(pages)
     validate(rows)
-    write_parquet(rows, args.output)
+    common.write_parquet(rows, args.output, OUTPUT_COLUMNS, NULLABLE_INTEGER_COLUMNS)
     LOGGER.info(
         "parsing completed",
         extra={
