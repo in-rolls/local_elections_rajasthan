@@ -2,7 +2,7 @@
 
 import pandas
 
-from scripts import parse_panchayat_samiti_2010 as parser
+from scripts.result_books import panchayat_samiti_2010 as parser
 
 
 def test_retained_extraction_parses_to_the_published_grain():

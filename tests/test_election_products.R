@@ -1,9 +1,9 @@
 published <- "data/fin/elections"
 rebuilt <- tempfile("rajasthan-elections-")
 Sys.setenv(ELECTION_PRODUCTS_DIR = rebuilt)
-source("scripts/02_candidate_events.R")
-source("scripts/03_election_panels.R")
-source("scripts/04_geographic_bridge.R")
+source("scripts/panels/02_candidate_events.R")
+source("scripts/panels/03_election_panels.R")
+source("scripts/panels/04_geographic_bridge.R")
 directory <- read_csv("data/source/geography/lgd_raj_block_gp.csv", show_col_types = FALSE)
 blocks <- read_csv("data/source/geography/raj_samiti_xwalk.csv", show_col_types = FALSE)
 save_product(build_geographic_bridge(

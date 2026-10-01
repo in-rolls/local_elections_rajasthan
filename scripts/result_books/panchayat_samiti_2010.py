@@ -7,27 +7,18 @@ seat roster, and writes one Parquet row per Panchayat Samiti member ward.
 
 import argparse
 import collections
-import json
-import os
+import functools
 import pathlib
 import re
-import tempfile
 
-import pandas
-
-from scripts.extract_panchayat_samiti_2010 import (
-    FIRST_PAGE,
-    LAST_PAGE,
-    SOURCE_RELATIVE,
-    SOURCE_SHA256,
-)
-from scripts.extract_panchayat_samiti_2010 import (
-    OUTPUT as EXTRACTED,
-)
+from scripts.result_books import common
+from scripts.result_books.books import BOOKS
 from scripts.runlog import get_logger
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "data/fin/panchayat_samiti_2010_std.parquet"
+BOOK = BOOKS["panchayat_samiti_2010"]
+EXTRACTED = BOOK.extracted
+OUTPUT = BOOK.parsed
+load_pages = functools.partial(common.load_pages, book=BOOK)
 
 EXPECTED_ROWS = 5273
 EXPECTED_DISTRICTS = 33
@@ -83,44 +74,10 @@ OUTPUT_COLUMNS = [
 LOGGER = get_logger(__name__)
 
 
-def load_pages(path):
-    """Load and validate the retained extraction, one record per source page."""
-    with path.open(encoding="utf-8") as stream:
-        pages = [json.loads(line) for line in stream if line.strip()]
-    page_numbers = [page["source_page"] for page in pages]
-    expected_pages = list(range(FIRST_PAGE, LAST_PAGE + 1))
-    if page_numbers != expected_pages:
-        raise SystemExit(
-            f"extraction holds pages {page_numbers[:1]}..{page_numbers[-1:]}, "
-            f"expected every page {FIRST_PAGE}..{LAST_PAGE} in order"
-        )
-    bad_provenance = [
-        page["source_page"]
-        for page in pages
-        if page.get("source_path") != SOURCE_RELATIVE
-        or page.get("source_sha256") != SOURCE_SHA256
-    ]
-    if bad_provenance:
-        raise SystemExit(f"extraction provenance differs on pages {bad_provenance[:5]}")
-    return pages
-
-
 def result_page(page):
     """Whether a page carries the repeated member-result table header."""
     header = {word["text"] for word in page["words"] if word["top"] < 90}
     return {"District", "Panchayat", "Samiti", "Ward", "Sex", "Party"} <= header
-
-
-def cells(words):
-    """Assign one positioned source line to the publication's columns."""
-    return {
-        name: " ".join(
-            word["text"]
-            for word in sorted(words, key=lambda item: item["x0"])
-            if lower <= word["x0"] < upper
-        ).strip()
-        for name, lower, upper in COLUMN_BOUNDS
-    }
 
 
 def parse_page(page):
@@ -144,7 +101,7 @@ def parse_page(page):
                 f"source page {page['source_page']} has {len(serials)} serials "
                 "on one text line"
             )
-        raw = cells(words)
+        raw = common.cells(words, COLUMN_BOUNDS)
         missing = [name for name, value in raw.items() if not value]
         if missing:
             raise SystemExit(
@@ -204,7 +161,7 @@ def parse_page(page):
                 "winner_caste_category": winner_category.removesuffix("W"),
                 "winner_category_sex_agree": winner_category_sex_agree,
                 "party_raw": raw["party_raw"],
-                "source_path": SOURCE_RELATIVE,
+                "source_path": BOOK.source_relative,
                 "source_page": page["source_page"],
             }
         )
@@ -311,21 +268,6 @@ def validate(rows):
     )
 
 
-def write_parquet(rows, output):
-    """Atomically write the analysis-ready seat table."""
-    output.parent.mkdir(parents=True, exist_ok=True)
-    frame = pandas.DataFrame(rows, columns=OUTPUT_COLUMNS)
-    with tempfile.NamedTemporaryFile(
-        dir=output.parent, suffix=".parquet", delete=False
-    ) as stream:
-        temporary = pathlib.Path(stream.name)
-    try:
-        frame.to_parquet(temporary, index=False)
-        os.replace(temporary, output)
-    finally:
-        temporary.unlink(missing_ok=True)
-
-
 def main(argv=None):
     """Parse, validate, and publish the 2010 member-seat table."""
     parser = argparse.ArgumentParser(description=__doc__)
@@ -344,7 +286,7 @@ def main(argv=None):
     pages = load_pages(args.input)
     rows = parse_pages(pages)
     validate(rows)
-    write_parquet(rows, args.output)
+    common.write_parquet(rows, args.output, OUTPUT_COLUMNS)
     LOGGER.info(
         "parsing completed",
         extra={

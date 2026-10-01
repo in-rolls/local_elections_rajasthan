@@ -1,4 +1,4 @@
-source("scripts/election_utils.R")
+source("scripts/panels/election_utils.R")
 
 best_gp <- function(name, candidates, threshold = 0.20) {
   distance <- stringdist::stringdist(name, candidates$gp_name_std, method = "jw")

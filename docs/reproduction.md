@@ -3,7 +3,7 @@
 The Gram Panchayat transformation reads four files under
 `data/source/sarpanch/`: `sarpanch_2005.csv`, `sarpanch_2010.csv`,
 `sarpanch_2015_manual_sex.csv`, and `sarpanch_2020_clean.csv`.
-`scripts/01_standardize_source.R` writes the corresponding `source_*_std.parquet`
+`scripts/panels/01_standardize_source.R` writes the corresponding `source_*_std.parquet`
 files. The 2015 winner-sex field is manually coded from names. The 2020 input
 contains reservations, so both winner fields are null.
 
@@ -21,8 +21,8 @@ the separate large-font watermark layer.
 For example:
 
 ```bash
-uv run python -m scripts.extract_panchayat_samiti_2010
-uv run python -m scripts.parse_panchayat_samiti_2010
+uv run python -m scripts.result_books.extract --book panchayat_samiti_2010
+uv run python -m scripts.result_books.panchayat_samiti_2010
 ```
 
 Extractors accept `--source` and `--output`. Their default outputs are
@@ -42,7 +42,7 @@ cell without type inference. `--check` compares the complete table, schema,
 source hashes, and output manifest.
 
 ```bash
-uv run python -m scripts.convert_scrape --check
+uv run python -m scripts.scrape.convert --check
 ```
 
 `uv.lock` pins the Python environment, including PyArrow 23.0.1. Tests compare

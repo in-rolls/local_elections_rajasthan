@@ -1,4 +1,4 @@
-source("scripts/election_utils.R")
+source("scripts/panels/election_utils.R")
 
 years <- c(2005, 2010, 2015, 2020)
 sources <- setNames(lapply(years, read_election), years)

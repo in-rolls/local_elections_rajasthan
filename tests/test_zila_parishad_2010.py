@@ -2,7 +2,7 @@
 
 import pandas
 
-from scripts import parse_zila_parishad_2010 as parser
+from scripts.result_books import zila_parishad_2010 as parser
 
 
 def test_retained_extraction_parses_to_the_published_grain():
