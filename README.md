@@ -1,6 +1,5 @@
 # Rajasthan local-election data, 2005–2022
 
-[![CI](https://github.com/in-rolls/local_elections_rajasthan/actions/workflows/ci.yml/badge.svg)](https://github.com/in-rolls/local_elections_rajasthan/actions/workflows/ci.yml)
 [![DOI](https://img.shields.io/badge/DOI-10.7910%2FDVN%2F6YPB5C-blue)](https://doi.org/10.7910/DVN/6YPB5C)
 
 Seat reservations and election results for Rajasthan's rural local governments. The repository provides standardized Gram Panchayat records for 2005, 2010, 2015, and 2020; Panchayat Samiti and Zila Parishad member records for 2005 and 2010; and a separate collection from the commission's 2020–2022 results website. Source publications and extraction files are retained for offline reproduction.
@@ -135,7 +134,7 @@ make test-r
 
 ## Development
 
-`make check` runs Ruff, formatting, parser and data tests, and pre-commit hooks. `make ci-docker` runs the Python checks in standard Python 3.12 and 3.14 containers. Tests compare parsed records with all four published member-seat files, verify standardized and election-product hashes and attributed geographic inputs, and compare every website-export value with its original CSV. `make test-r` and the election-products CI job additionally rebuild the R election products.
+`make check` runs Ruff, formatting, parser and data tests. Tests compare parsed records with all four published member-seat files, verify standardized and election-product hashes and attributed geographic inputs, and compare every website-export value with its original CSV. `make test-r` rebuilds the R election products.
 
 ## Citation
 
@@ -156,3 +155,7 @@ Code is [MIT licensed](LICENSE). The deposited 2020–2022 collection is release
 - [in-rolls/local_elections_up](https://github.com/in-rolls/local_elections_up) — UP Local Election Data --- GP and ULB. Seat reservation, winner, and candidates for some elections
 
 ✨ _Powered by [Adjacent](https://github.com/gojiplus/adjacent)_ 🚀
+
+## Maintenance
+
+This is a point-in-time data collection; see the [shared maintenance policy](https://github.com/soodoku/data-repos#maintenance-policy). Run the affected parser tests when code changes and the relevant data validators when inputs or outputs change. Full-data checks and publication are explicit operations. Routine edits do not require hosted CI, Docker, a Python-version matrix, Preen or pre-commit.
