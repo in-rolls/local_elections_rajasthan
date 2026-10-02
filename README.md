@@ -8,25 +8,36 @@ Seat reservations and election results for Rajasthan's rural local governments. 
 
 The eight standardized files are under [`data/fin/`](data/fin/). [SCHEMA.json](data/fin/SCHEMA.json) records their row counts and columns; [CHECKSUMS.sha256](data/fin/CHECKSUMS.sha256) verifies their bytes.
 
-| File | Year | Rows | Unit |
-| --- | ---: | ---: | --- |
-| `source_2005_std.parquet` | 2005 | 9,178 | Gram Panchayat seat |
-| `source_2010_std.parquet` | 2010 | 9,166 | Gram Panchayat seat |
-| `source_2015_std.parquet` | 2015 | 9,862 | Gram Panchayat seat |
-| `source_2020_std.parquet` | 2020 | 11,314 | Gram Panchayat reservation record |
-| `panchayat_samiti_2005_std.parquet` | 2005 | 5,257 | Panchayat Samiti member seat |
-| `panchayat_samiti_2010_std.parquet` | 2010 | 5,273 | Panchayat Samiti member ward |
-| `zila_parishad_2005_std.parquet` | 2005 | 1,008 | Zila Parishad member ward |
-| `zila_parishad_2010_std.parquet` | 2010 | 1,013 | Zila Parishad member ward |
+<!-- datasets:start -->
+
+| File | Rows | Each row represents |
+| --- | ---: | --- |
+| [elections/candidates_2020_events.parquet](data/fin/elections/candidates_2020_events.parquet) | 67,689 | Candidate in a 2020 general-election phase |
+| [elections/gp_lgd_crosswalk.parquet](data/fin/elections/gp_lgd_crosswalk.parquet) | 5,219 | Accepted election match key to LGD GP link |
+| [elections/raj_05_10.parquet](data/fin/elections/raj_05_10.parquet) | 7,667 | Unambiguous GP link between 2005 and 2010 |
+| [elections/raj_05_20.parquet](data/fin/elections/raj_05_20.parquet) | 5,334 | Unambiguous GP link across all four years |
+| [elections/raj_10_15.parquet](data/fin/elections/raj_10_15.parquet) | 7,447 | Unambiguous GP link between 2010 and 2015 |
+| [elections/raj_15_20.parquet](data/fin/elections/raj_15_20.parquet) | 7,882 | Unambiguous GP link between 2015 and 2020 |
+| [elections/source_records.parquet](data/fin/elections/source_records.parquet) | 39,520 | Source record with reviewed geography and identity |
+| [elections/winners_2020_events.parquet](data/fin/elections/winners_2020_events.parquet) | 11,300 | Winner in a 2020 general-election phase |
+| [panchayat_samiti_2005_std.parquet](data/fin/panchayat_samiti_2005_std.parquet) | 5,257 | Panchayat Samiti member seat |
+| [panchayat_samiti_2010_std.parquet](data/fin/panchayat_samiti_2010_std.parquet) | 5,273 | Panchayat Samiti member ward |
+| [scrape_2020_2022/ContestingSarpanch.parquet](data/fin/scrape_2020_2022/ContestingSarpanch.parquet) | 68,202 | Contesting Sarpanch candidate |
+| [scrape_2020_2022/StatsNomination.parquet](data/fin/scrape_2020_2022/StatsNomination.parquet) | 13,473 | Gram Panchayat nomination-statistics record |
+| [scrape_2020_2022/WarnWinningPanch.parquet](data/fin/scrape_2020_2022/WarnWinningPanch.parquet) | 110,296 | Ward-winning Panch record |
+| [scrape_2020_2022/WinnerSarpanch.parquet](data/fin/scrape_2020_2022/WinnerSarpanch.parquet) | 11,432 | Sarpanch winner record |
+| [source_2005_std.parquet](data/fin/source_2005_std.parquet) | 9,178 | Gram Panchayat seat |
+| [source_2010_std.parquet](data/fin/source_2010_std.parquet) | 9,166 | Gram Panchayat seat |
+| [source_2015_std.parquet](data/fin/source_2015_std.parquet) | 9,862 | Gram Panchayat seat |
+| [source_2020_std.parquet](data/fin/source_2020_std.parquet) | 11,314 | Gram Panchayat reservation record |
+| [zila_parishad_2005_std.parquet](data/fin/zila_parishad_2005_std.parquet) | 1,008 | Zila Parishad member ward |
+| [zila_parishad_2010_std.parquet](data/fin/zila_parishad_2010_std.parquet) | 1,013 | Zila Parishad member ward |
+
+<!-- datasets:end -->
 
 The separate website collection is available as Parquet under [`data/fin/scrape_2020_2022/`](data/fin/scrape_2020_2022/). Its [manifest](data/fin/scrape_2020_2022/MANIFEST.json) records source and output hashes. The DOI [10.7910/DVN/6YPB5C](https://doi.org/10.7910/DVN/6YPB5C) identifies this deposited 2020–2022 collection, not the subsequently added 2005–2020 standardized files.
 
-| File | Rows | Unit |
-| --- | ---: | --- |
-| `ContestingSarpanch.parquet` | 68,202 | Contesting Sarpanch candidate |
-| `StatsNomination.parquet` | 13,473 | Gram Panchayat nomination-statistics record |
-| `WinnerSarpanch.parquet` | 11,432 | Sarpanch winner record |
-| `WarnWinningPanch.parquet` | 110,296 | Ward-winning Panch record |
+
 
 The original four `*.csv.gz` files remain under [`data/`](data/). The spelling `WarnWinningPanch` is the original filename. All cells, repeated rows, and empty strings are retained in these four Parquet exports; numeric-looking values remain strings.
 
@@ -71,7 +82,7 @@ Earlier project notes reported spreadsheet-altered copies of the ward-winner fil
 
 | Collection | Source and method | Reproduction |
 | --- | --- | --- |
-| Gram Panchayat 2005/2010/2015/2020 | Saved Rajasthan source tables, with separate manual winner-sex coding for 2015 | `scripts/panels/01_standardize_source.R` |
+| Gram Panchayat 2005/2010/2015/2020 | Saved Rajasthan source tables, with separate manual winner-sex coding for 2015 | `src/local_elections_rajasthan/build/standardize_sources.py` |
 | Panchayat Samiti and Zila Parishad 2005/2010 | Rajasthan SEC PDF result books; extract positioned words, then parse the saved extraction | `make data` |
 | Website 2020–2022 | [Rajasthan SEC Gram Panchayat results page](https://sec.rajasthan.gov.in/grampanchayatdetails.aspx), collected with Scrapy | Offline conversion of the four saved CSVs |
 
@@ -83,7 +94,7 @@ The original website collector and download/upload notebooks are available at [c
 git clone https://github.com/in-rolls/local_elections_rajasthan.git
 cd local_elections_rajasthan
 uv sync --frozen --group dev
-make verify-data
+make verify
 ```
 
 ```python
@@ -96,10 +107,10 @@ print(seats.select(["district_raw", "gp_raw", "female_reserved"]))
 `make data` rebuilds the four PDF-based member-seat exports and the four website exports. It does not rebuild the R-based Gram Panchayat files; `make sources` and `make elections` do. To regenerate only the website exports into a separate directory:
 
 ```bash
-uv run python -m scripts.scrape.convert --out data/derived/scrape_2020_2022
+uv run python -m local_elections_rajasthan.parse.scrape.convert --out data/derived/scrape_2020_2022
 ```
 
-The source-standardization R workflow requires `readr`, `dplyr`, `arrow`, `stringi`, and `here`; run `Rscript scripts/panels/01_standardize_source.R` from the repository root. Arrow versions can change Parquet bytes even when values agree. Preserve the published files when reproducing an analysis tied to their checksums.
+Run `make sources` to standardize the four saved GP sources with Python.
 
 ## Election histories and geographic links
 
@@ -125,26 +136,17 @@ The GP crosswalk first uses exact normalized names within reviewed LGD blocks, t
 `data/source/geography/` contains the exact LGD GP directory, 2024 village-to-GP mapping, and reviewed district/samiti/block crosswalks used by the producer. Its `MANIFEST.json` records each file's original path, repository commit, and SHA-256. These are attributed reference snapshots; the LGD directory's original extraction is not reconstructed here. The `raj_block_xwalk.csv` is retained as a historical reviewed input; the active bridge uses `raj_samiti_xwalk.csv`.
 
 ```bash
-Rscript -e 'install.packages(c("arrow", "dplyr", "readr", "stringi", "stringdist", "janitor"))'
 make elections
-make test-r
+make verify
 ```
 
-`make elections` rebuilds events, histories, and geographic links, then regenerates the shared schema and checksum files. `ELECTION_PRODUCTS_DIR` redirects the R outputs to another directory. `make test-r` rebuilds all eight products in a temporary directory and compares every value, column, type, and row position with the published products. It also checks source identities and ambiguous/numeric-name matching. Setting `QUOTA_RAJ_BASELINE` to a directory containing the predecessor election and SHRUG-panel files adds exact projection comparisons against those study baselines.
+`make elections` rebuilds events, histories, and geographic links, then refreshes metadata and the README inventory. `ELECTION_PRODUCTS_DIR` redirects election products to another directory. `make verify` rebuilds into a temporary directory and compares the published fields, types, and row order with the retained sources.
 
 ## Development
 
-Code is organized by source, each with its own stage:
+Maintained Python code lives under `src/local_elections_rajasthan/`: `parse/` reads saved result books and website exports; `build/` standardizes sources and constructs election histories and geographic links. No R runtime is needed.
 
-| Directory | Language | Turns | Into | Make target |
-|---|---|---|---|---|
-| `scripts/result_books/` | Python | 2005 and 2010 SEC result-book PDFs: `extract.py` keeps each page's positioned words, one parser per book reads its layout | `data/extracted/*_pages.jsonl`, `data/fin/*_std.parquet` | `extract`, `parse` |
-| `scripts/scrape/` | Python | Saved 2020–2022 SEC website exports | `data/fin/scrape_2020_2022/` | `scrape` |
-| `scripts/panels/` | R | Saved Gram Panchayat tables: standardize, then candidate events, election panels and the LGD bridge | `data/fin/source_*_std.parquet`, `data/fin/elections/` | `sources`, `elections` |
-
-`scripts/result_books/books.py` lists each book's source, hash and result-table pages; the parsers share `common.py`. `data/scrape_2023-01-03.log` is the crawler log from the website scrape.
-
-`make check` runs Ruff, formatting, parser and data tests. Tests compare parsed records with all four published member-seat files, verify standardized and election-product hashes and attributed geographic inputs, and compare every website-export value with its original CSV. `make test-r` rebuilds the R election products.
+`make data` rebuilds all published outputs from saved sources. `make check` runs Ruff and the full source-to-Parquet verification. `make data-summary` refreshes the inventory above. The result-book parsers retain their checks on seat keys, printed totals, vacancies and source contradictions.
 
 ## Citation
 
@@ -168,4 +170,4 @@ Code is [MIT licensed](LICENSE). The deposited 2020–2022 collection is release
 
 ## Maintenance
 
-This is a point-in-time data collection; see the [shared maintenance policy](https://github.com/soodoku/data-repos#maintenance-policy). Run the affected parser tests when code changes and the relevant data validators when inputs or outputs change. Full-data checks and publication are explicit operations. Routine edits do not require hosted CI, Docker, a Python-version matrix, Preen or pre-commit.
+This is a point-in-time data collection; see the [shared maintenance policy](https://github.com/soodoku/data-repos#maintenance-policy). Run the affected parsers on retained inputs when code changes and the relevant data validators when inputs or outputs change. Full-data checks and publication are explicit operations. Routine edits do not require hosted CI, Docker, a Python-version matrix, Preen or pre-commit.

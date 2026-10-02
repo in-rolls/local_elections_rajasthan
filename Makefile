@@ -1,44 +1,44 @@
 PY ?= uv run python
+RUFF ?= uv run ruff
 
-.PHONY: data extract parse scrape sources elections lint test test-r check verify-data
+.PHONY: sync data extract parse scrape sources elections lint verify check data-summary
 
-# Stages: result books (PDF -> page words -> seat tables) and the 2020-2022 scrape
-# (CSV -> Parquet); then panels (standardized sources -> events -> panels -> LGD bridge).
-data: extract parse scrape
+sync:
+	uv sync --frozen --group dev
 
-# Rewrites the published source_*_std.parquet; Arrow versions can change their bytes.
+data:
+	$(MAKE) extract parse scrape sources elections
+
 sources:
-	Rscript --vanilla scripts/panels/01_standardize_source.R
+	$(PY) -m local_elections_rajasthan.build.standardize_sources
 
 elections:
-	Rscript --vanilla scripts/panels/02_candidate_events.R
-	Rscript --vanilla scripts/panels/03_election_panels.R
-	Rscript --vanilla scripts/panels/04_geographic_bridge.R
-	$(PY) -m scripts.update_metadata
-
-test-r:
-	Rscript --vanilla tests/test_election_products.R
+	$(PY) -m local_elections_rajasthan.build.candidate_events
+	$(PY) -m local_elections_rajasthan.build.election_panels
+	$(PY) -m local_elections_rajasthan.build.geographic_bridge
+	$(PY) -m local_elections_rajasthan.build.release build
+	$(PY) -m local_elections_rajasthan.build.release summary
 
 extract:
-	$(PY) -m scripts.result_books.extract
+	$(PY) -m local_elections_rajasthan.parse.result_books.extract
 
 parse:
-	$(PY) -m scripts.result_books.panchayat_samiti_2005
-	$(PY) -m scripts.result_books.panchayat_samiti_2010
-	$(PY) -m scripts.result_books.zila_parishad_2005
-	$(PY) -m scripts.result_books.zila_parishad_2010
+	$(PY) -m local_elections_rajasthan.parse.result_books.panchayat_samiti_2005
+	$(PY) -m local_elections_rajasthan.parse.result_books.panchayat_samiti_2010
+	$(PY) -m local_elections_rajasthan.parse.result_books.zila_parishad_2005
+	$(PY) -m local_elections_rajasthan.parse.result_books.zila_parishad_2010
 
 scrape:
-	$(PY) -m scripts.scrape.convert
+	$(PY) -m local_elections_rajasthan.parse.scrape.convert
 
 lint:
-	uv run ruff check .
-	uv run ruff format --check .
+	$(RUFF) check .
+	$(RUFF) format --check .
 
-test:
-	$(PY) -m pytest tests -q
+verify:
+	$(PY) -m local_elections_rajasthan.build.release verify
 
-check: lint test
+data-summary:
+	$(PY) -m local_elections_rajasthan.build.release summary
 
-verify-data:
-	$(PY) -m pytest tests/test_release_metadata.py tests/test_scrape_conversion.py -q
+check: lint verify

@@ -11,9 +11,9 @@ import functools
 import pathlib
 import re
 
-from scripts.result_books import common
-from scripts.result_books.books import BOOKS
-from scripts.runlog import get_logger
+from local_elections_rajasthan.parse.result_books import common
+from local_elections_rajasthan.parse.result_books.books import BOOKS
+from local_elections_rajasthan.runlog import get_logger
 
 BOOK = BOOKS["zila_parishad_2005"]
 EXTRACTED = BOOK.extracted

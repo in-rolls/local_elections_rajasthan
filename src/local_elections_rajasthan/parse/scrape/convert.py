@@ -10,7 +10,8 @@ from pathlib import Path
 import pyarrow as pa
 import pyarrow.parquet as pq
 
-ROOT = Path(__file__).resolve().parents[2]
+from local_elections_rajasthan.paths import ROOT
+
 CONTRACTS = json.loads((ROOT / "scrape_columns.json").read_text())
 
 

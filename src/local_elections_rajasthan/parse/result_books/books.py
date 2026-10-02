@@ -1,9 +1,8 @@
 """The four held SEC result books and the page interval holding each one's results."""
 
 import dataclasses
-import pathlib
 
-ROOT = pathlib.Path(__file__).resolve().parents[2]
+from local_elections_rajasthan.paths import ROOT
 
 
 @dataclasses.dataclass(frozen=True)
