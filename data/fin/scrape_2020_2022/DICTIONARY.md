@@ -3,7 +3,7 @@
 The four files retain the original collector's column names, including spelling
 variants. Every field is a string. Empty strings remain empty; percentages and
 counts are not parsed or validated by the offline converter. See
-[`scrape_columns.json`](../scrape_columns.json) for each file's exact column set.
+[`MANIFEST.json`](MANIFEST.json) for each file's exact column set.
 
 ## Shared location and election fields
 

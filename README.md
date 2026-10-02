@@ -37,8 +37,6 @@ The eight standardized files are under [`data/fin/`](data/fin/). [SCHEMA.json](d
 
 The separate website collection is available as Parquet under [`data/fin/scrape_2020_2022/`](data/fin/scrape_2020_2022/). Its [manifest](data/fin/scrape_2020_2022/MANIFEST.json) records source and output hashes. The DOI [10.7910/DVN/6YPB5C](https://doi.org/10.7910/DVN/6YPB5C) identifies this deposited 2020–2022 collection, not the subsequently added 2005–2020 standardized files.
 
-
-
 The original four `*.csv.gz` files remain under [`data/`](data/). The spelling `WarnWinningPanch` is the original filename. All cells, repeated rows, and empty strings are retained in these four Parquet exports; numeric-looking values remain strings.
 
 ## Columns
@@ -62,7 +60,7 @@ Member-seat files have additional source, vote, party, ward, and validation fiel
 
 - Panchayat Samiti: [2005](data/fin/panchayat_samiti_2005_DICTIONARY.md), [2010](data/fin/panchayat_samiti_2010_DICTIONARY.md).
 - Zila Parishad: [2005](data/fin/zila_parishad_2005_DICTIONARY.md), [2010](data/fin/zila_parishad_2010_DICTIONARY.md).
-- Website collection: [column definitions](docs/website-columns.md) and [exact column lists](scrape_columns.json).
+- Website collection: [column definitions](data/fin/scrape_2020_2022/DICTIONARY.md) and [exact column lists](data/fin/scrape_2020_2022/MANIFEST.json).
 
 ## Coverage and known gaps
 
@@ -86,7 +84,7 @@ Earlier project notes reported spreadsheet-altered copies of the ward-winner fil
 | Panchayat Samiti and Zila Parishad 2005/2010 | Rajasthan SEC PDF result books; extract positioned words, then parse the saved extraction | `make data` |
 | Website 2020–2022 | [Rajasthan SEC Gram Panchayat results page](https://sec.rajasthan.gov.in/grampanchayatdetails.aspx), collected with Scrapy | Offline conversion of the four saved CSVs |
 
-The original website collector and download/upload notebooks are available at [commit 1177de8](https://github.com/in-rolls/local_elections_rajasthan/tree/1177de86e7e2f106c4556eef6b98d3c75d2ba4b2/scripts). The maintained tools process saved sources. [Reproduction details](docs/reproduction.md) explain the extraction stages and validation controls.
+The original website collector and download/upload notebooks are available at [commit 1177de8](https://github.com/in-rolls/local_elections_rajasthan/tree/1177de86e7e2f106c4556eef6b98d3c75d2ba4b2/scripts). The maintained tools process saved sources.
 
 ## Usage
 
@@ -104,28 +102,40 @@ seats = pq.read_table("data/fin/source_2015_std.parquet")
 print(seats.select(["district_raw", "gp_raw", "female_reserved"]))
 ```
 
-`make data` rebuilds the four PDF-based member-seat exports and the four website exports. It does not rebuild the R-based Gram Panchayat files; `make sources` and `make elections` do. To regenerate only the website exports into a separate directory:
+`make data` rebuilds all published outputs from saved sources using Python:
+
+| Stage | Command | Inputs and outputs |
+| --- | --- | --- |
+| Extract result books | `make extract` | PDFs under `data/source/panchayat_samiti/` and `data/source/zilla_parishad/` → positioned words in `data/extracted/*_pages.jsonl` |
+| Parse result books | `make parse` | Saved page extractions → four member-seat Parquets |
+| Convert website exports | `make scrape` | Four original `data/*.csv.gz` files → `data/fin/scrape_2020_2022/` |
+| Standardize GP records | `make sources` | Saved GP tables → `data/fin/source_*_std.parquet` |
+| Build election histories | `make elections` | Standardized records and website exports → `data/fin/elections/`, refreshed metadata and README inventory |
+
+The GP inputs under `data/source/sarpanch/` are `sarpanch_2005.csv`, `sarpanch_2010.csv`, `sarpanch_2015_manual_sex.csv`, and `sarpanch_2020_clean.csv`. The 2015 winner-sex coding is manual; the 2020 reservation roster supplies no winner attributes.
+
+Extraction retains word coordinates without interpreting table columns. The 2010 Zila Parishad extraction also retains fonts so the parser can exclude the watermark layer. Parsing checks seat keys, serial or ward sequences, and printed reservation and winner totals. Aggregate controls are not added as seat observations; the member-seat dictionaries document retained contradictions.
+
+To reprocess one result book:
+
+```bash
+uv run python -m local_elections_rajasthan.parse.result_books.extract --book panchayat_samiti_2010
+uv run python -m local_elections_rajasthan.parse.result_books.panchayat_samiti_2010
+```
+
+The extractor accepts `--source` and `--output`; the parser accepts `--input` and `--output`.
+
+To regenerate only the website exports into a separate directory:
 
 ```bash
 uv run python -m local_elections_rajasthan.parse.scrape.convert --out data/derived/scrape_2020_2022
 ```
 
-Run `make sources` to standardize the four saved GP sources with Python.
+The website converter checks the expected headers defined in its Python module, rejects malformed or empty files, and preserves every source cell as text. Add `--check` to compare the saved exports, schemas and source hashes without rewriting them.
 
 ## Election histories and geographic links
 
-`data/fin/elections/` provides reusable election products built from the standardized GP sources and the original website exports:
-
-| Product | Rows | Record unit |
-| --- | ---: | --- |
-| `source_records.parquet` | 39,520 | Original standardized source row, with reviewed geographic labels and source identity |
-| `candidates_2020_events.parquet` | 67,689 | Distinct candidate record in a 2020 general-election phase |
-| `winners_2020_events.parquet` | 11,300 | Distinct winner record in a 2020 general-election phase |
-| `raj_05_10.parquet` | 7,667 | Unambiguous GP link between 2005 and 2010 |
-| `raj_10_15.parquet` | 7,447 | Unambiguous GP link between 2010 and 2015 |
-| `raj_15_20.parquet` | 7,882 | Unambiguous GP link between 2015 and 2020 |
-| `raj_05_20.parquet` | 5,334 | Unambiguous GP link across all four years |
-| `gp_lgd_crosswalk.parquet` | 5,219 | Accepted election match key to LGD GP link |
+`data/fin/elections/` contains the source records, candidate and winner events, GP panels, and LGD crosswalk listed in the inventory above.
 
 The four panels retain the existing reservation, caste-category, winner, district/samiti, and history columns. `count_treated`, `never_treated`, and `always_treated` in the four-wave panel describe **2005, 2010, and 2015**, excluding 2020. `source_id_YYYY` links each panel wave back to the original attributes in `source_records.parquet`. Source identities combine the source-file name and its one-based row number before filtering; they are stable within the pinned source edition. They do not identify a person across different editions.
 
