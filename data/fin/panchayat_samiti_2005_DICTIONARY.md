@@ -35,20 +35,20 @@ general-election report.
 | `samiti_raw` | string | Every seat row. | Printed `PANCHAYAT SAMITI`; 237 distinct `(district_raw, samiti_raw)` bodies. No missing values. |
 | `ward_no` | integer | Every seat row. | One-based row sequence within a Samiti, range 1–73. Inferred as described above; no missing values. |
 | `ward_no_inferred` | integer | Every seat row. | Always 1 because the result table does not print a ward number. |
-| `reservation_raw` | string | Every seat row. | Printed `WARD CATEG.` with spaces retained: `GEN`, `GEN W`, `SC`, `SC W`, `ST`, `ST W`, `OBC`, `OBC W`. No missing values. |
-| `reservation` | string | Every seat row. | `reservation_raw` with spaces removed. No missing values. |
-| `caste_category` | string | Every seat row. | `reservation` with a final `W` removed: `GEN`, `SC`, `ST`, `OBC`. No missing values. |
-| `female_reserved` | integer | Every seat row. | 1 exactly when `reservation` ends in `W`, otherwise 0. The roster yields 1,738 ones. |
-| `reservation_body_control_agree` | integer | Every seat row. | 0 only for serial 4,126, whose printed roster category conflicts with the Parbatsar and statewide controls; otherwise 1. |
+| `reserved_raw` | string | Every seat row. | Printed `WARD CATEG.` with spaces retained: `GEN`, `GEN W`, `SC`, `SC W`, `ST`, `ST W`, `OBC`, `OBC W`. No missing values. |
+| `reserved_code` | string | Every seat row. | `reserved_raw` with spaces removed. No missing values. |
+| `reserved_caste` | string | Every seat row. | `reserved_code` with a final `W` removed: `GEN`, `SC`, `ST`, `OBC`. No missing values. |
+| `reserved_woman` | integer | Every seat row. | 1 exactly when `reserved_code` ends in `W`, otherwise 0. The roster yields 1,738 ones. |
+| `reserved_body_control_agree` | integer | Every seat row. | 0 only for serial 4,126, whose printed roster category conflicts with the Parbatsar and statewide controls; otherwise 1. |
 | `seat_filled` | integer | Every seat row. | 0 only for serial 747, Shahbad ward 11, printed `VACANT`; otherwise 1. |
 | `winner_name` | string | Filled seats. | Printed elected-member `NAME`. Null for the vacant seat and for filled serial 3,100, whose source name cell is blank. |
 | `winner_name_missing` | integer | Filled seats. | 1 only for serial 3,100, the filled seat with a blank printed name; 0 for all other rows, including the structurally winner-less vacant seat. |
-| `winner_sex_raw` | string | Filled seats. | Printed `ELECTED CANDIDATE (M/F)`: `MALE` or `FEMALE`. Null only for the vacant seat. |
-| `winner_female` | nullable integer | Filled seats. | 1 for `FEMALE`, 0 for `MALE`; null for the vacant seat. |
-| `winner_category_raw` | string | Filled seats. | Printed `CATEGORY OF ELECTED CANDIDATE`, with spaces retained. Null only for the vacant seat. |
-| `winner_category` | string | Filled seats. | `winner_category_raw` with spaces removed. Null only for the vacant seat. |
-| `winner_caste_category` | string | Filled seats. | `winner_category` with a final `W` removed. Null only for the vacant seat. |
-| `winner_category_sex_agree` | nullable integer | Filled seats. | 1 when the sex and category columns agree; all 5,256 filled rows equal 1. Null for the vacant seat. |
+| `winner_woman_raw` | string | Filled seats. | Printed `ELECTED CANDIDATE (M/F)`: `MALE` or `FEMALE`. Null only for the vacant seat. |
+| `winner_woman` | nullable integer | Filled seats. | 1 for `FEMALE`, 0 for `MALE`; null for the vacant seat. |
+| `winner_caste_raw` | string | Filled seats. | Printed `CATEGORY OF ELECTED CANDIDATE`, with spaces retained. Null only for the vacant seat. |
+| `winner_caste_code` | string | Filled seats. | `winner_caste_raw` with spaces removed. Null only for the vacant seat. |
+| `winner_caste` | string | Filled seats. | `winner_caste_code` with a final `W` removed. Null only for the vacant seat. |
+| `winner_caste_woman_agree` | nullable integer | Filled seats. | 1 when the sex and category columns agree; all 5,256 filled rows equal 1. Null for the vacant seat. |
 | `party_raw` | string | Filled seats. | Printed party. `CPI M` is the source extraction for CPI(M); null only for the vacant seat. |
 | `party` | string | Filled seats. | `CPI M` becomes `CPI(M)`; all other party cells are unchanged. Null only for the vacant seat. |
 | `votes_secured` | nullable integer | Contested, filled seats. | Printed winner votes, range 115–17,947. Null for 127 uncontested winners and the vacant seat. No numeric sentinel is used. |
@@ -87,7 +87,7 @@ No district, Samiti, person, reservation or winner-category spelling is
 corrected. Serial 4,126 on physical page 165 prints `OBC W` for Parbatsar ward
 19. The detailed Parbatsar control on physical page 12 reports no OBC-women
 seat and six women-reserved seats, while the roster has seven. The roster value
-remains authoritative at row grain; `reservation_body_control_agree` records
+remains authoritative at row grain; `reserved_body_control_agree` records
 the unresolved contradiction rather than recoding the seat.
 
 Serial 3,100 on physical page 152 has a blank winner name but populated party,

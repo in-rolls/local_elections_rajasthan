@@ -49,10 +49,10 @@ The four standardized Gram Panchayat files share this dictionary:
 | `district_raw`, `samiti_raw`, `gp_raw` | Source geographic labels, trimmed and uppercased |
 | `gp_std` | Lowercase, transliterated Gram Panchayat label with punctuation removed; not a stable geographic identifier |
 | `winner_name` | Source winner name; null throughout the 2020 reservation roster |
-| `winner_female` | Winner-sex coding; null throughout 2020; 2015 is manually coded from names |
-| `female_reserved` | Whether the seat is reserved for women, parsed from the reservation label |
-| `caste_category` | Rajasthan's seat categories: `GEN`, `SC`, `ST`, or `OBC` |
-| `reservation_raw` | Original reservation label |
+| `winner_woman` | Winner-sex coding; null throughout 2020; 2015 is manually coded from names |
+| `reserved_woman` | Whether the seat is reserved for women, parsed from the reservation label |
+| `reserved_caste` | Rajasthan's seat categories: `GEN`, `SC`, `ST`, or `OBC` |
+| `reserved_raw` | Original reservation label |
 
 Winner characteristics and seat reservations describe different attributes. Women can win unreserved seats. `GEN` means unreserved and `OBC` denotes Other Backward Classes; downstream datasets may use different labels.
 
@@ -99,7 +99,7 @@ make verify
 import pyarrow.parquet as pq
 
 seats = pq.read_table("data/fin/source_2015_std.parquet")
-print(seats.select(["district_raw", "gp_raw", "female_reserved"]))
+print(seats.select(["district_raw", "gp_raw", "reserved_woman"]))
 ```
 
 `make data` rebuilds all published outputs from saved sources using Python:

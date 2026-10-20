@@ -70,11 +70,11 @@ COLUMN_BOUNDS = (
     ("district_serial_raw", 70, 90),
     ("district_raw", 90, 165),
     ("ward_no", 165, 190),
-    ("reservation_raw", 190, 225),
+    ("reserved_raw", 190, 225),
     ("winner_name", 225, 360),
     ("party_raw", 360, 395),
-    ("winner_sex_raw", 395, 430),
-    ("winner_category_raw", 430, 500),
+    ("winner_woman_raw", 395, 430),
+    ("winner_caste_raw", 430, 500),
     ("votes_raw", 500, 535),
     ("margin_raw", 535, 570),
 )
@@ -87,18 +87,18 @@ OUTPUT_COLUMNS = [
     "ward_no_raw",
     "ward_no",
     "ward_no_inferred",
-    "reservation_raw",
-    "reservation",
-    "caste_category",
-    "female_reserved",
+    "reserved_raw",
+    "reserved_code",
+    "reserved_caste",
+    "reserved_woman",
     "seat_filled",
     "winner_name",
-    "winner_sex_raw",
-    "winner_female",
-    "winner_category_raw",
-    "winner_category",
-    "winner_caste_category",
-    "winner_category_sex_agree",
+    "winner_woman_raw",
+    "winner_woman",
+    "winner_caste_raw",
+    "winner_caste_code",
+    "winner_caste",
+    "winner_caste_woman_agree",
     "party_raw",
     "party",
     "votes_secured",
@@ -112,8 +112,8 @@ OUTPUT_COLUMNS = [
 ]
 NULLABLE_INTEGER_COLUMNS = [
     "district_serial_raw",
-    "winner_female",
-    "winner_category_sex_agree",
+    "winner_woman",
+    "winner_caste_woman_agree",
     "votes_secured",
     "margin",
     "margin_below_votes",
@@ -141,14 +141,14 @@ def parse_page(page):
         top = ward_word["top"]
         words = [word for word in page["words"] if abs(word["top"] - top) <= 3]
         raw = common.cells(words, COLUMN_BOUNDS)
-        if not raw["district_raw"] or not raw["reservation_raw"]:
+        if not raw["district_raw"] or not raw["reserved_raw"]:
             raise SystemExit(
                 f"source page {page['source_page']} ward line at {top} "
                 "has a blank district or reservation"
             )
 
         ward_no = int(raw["ward_no"])
-        reservation = normalize_category(raw["reservation_raw"])
+        reservation = normalize_category(raw["reserved_raw"])
         unfilled = raw["winner_name"] == "UNFILLED"
         uncontested_inferred = bool(
             not unfilled and not raw["votes_raw"] and not raw["margin_raw"]
@@ -159,8 +159,8 @@ def parse_page(page):
                 name: raw[name]
                 for name in (
                     "party_raw",
-                    "winner_sex_raw",
-                    "winner_category_raw",
+                    "winner_woman_raw",
+                    "winner_caste_raw",
                     "votes_raw",
                     "margin_raw",
                 )
@@ -171,7 +171,7 @@ def parse_page(page):
                     f"source page {page['source_page']} unfilled ward {ward_no} "
                     f"also has result cells {populated}"
                 )
-            winner_category = None
+            winner_caste_code = None
             party = None
             votes = None
             margin = None
@@ -181,8 +181,8 @@ def parse_page(page):
                 for name in (
                     "winner_name",
                     "party_raw",
-                    "winner_sex_raw",
-                    "winner_category_raw",
+                    "winner_woman_raw",
+                    "winner_caste_raw",
                 )
                 if not raw[name]
             ]
@@ -191,7 +191,7 @@ def parse_page(page):
                     f"source page {page['source_page']} {raw['district_raw']} "
                     f"ward {ward_no} has blank result cells: {missing}"
                 )
-            winner_category = normalize_category(raw["winner_category_raw"])
+            winner_caste_code = normalize_category(raw["winner_caste_raw"])
             party = common.normalize_party(raw["party_raw"])
             if uncontested:
                 if raw["margin_raw"]:
@@ -210,12 +210,13 @@ def parse_page(page):
                 votes = int(raw["votes_raw"])
                 margin = int(raw["margin_raw"])
 
-        winner_female = None if unfilled else int(raw["winner_sex_raw"] == "FEMALE")
+        winner_woman = None if unfilled else int(raw["winner_woman_raw"] == "FEMALE")
         category_sex_agree = (
             None
             if unfilled
             else int(
-                not winner_category.endswith("W") or raw["winner_sex_raw"] == "FEMALE"
+                not winner_caste_code.endswith("W")
+                or raw["winner_woman_raw"] == "FEMALE"
             )
         )
         district_serial = (
@@ -233,22 +234,20 @@ def parse_page(page):
                 "ward_no_raw": ward_no,
                 "ward_no": ward_no,
                 "ward_no_inferred": 0,
-                "reservation_raw": raw["reservation_raw"],
-                "reservation": reservation,
-                "caste_category": reservation.removesuffix("W"),
-                "female_reserved": int(reservation.endswith("W")),
+                "reserved_raw": raw["reserved_raw"],
+                "reserved_code": reservation,
+                "reserved_caste": reservation.removesuffix("W"),
+                "reserved_woman": int(reservation.endswith("W")),
                 "seat_filled": int(not unfilled),
                 "winner_name": None if unfilled else raw["winner_name"],
-                "winner_sex_raw": None if unfilled else raw["winner_sex_raw"],
-                "winner_female": winner_female,
-                "winner_category_raw": (
-                    None if unfilled else raw["winner_category_raw"]
+                "winner_woman_raw": None if unfilled else raw["winner_woman_raw"],
+                "winner_woman": winner_woman,
+                "winner_caste_raw": (None if unfilled else raw["winner_caste_raw"]),
+                "winner_caste_code": winner_caste_code,
+                "winner_caste": (
+                    None if unfilled else winner_caste_code.removesuffix("W")
                 ),
-                "winner_category": winner_category,
-                "winner_caste_category": (
-                    None if unfilled else winner_category.removesuffix("W")
-                ),
-                "winner_category_sex_agree": category_sex_agree,
+                "winner_caste_woman_agree": category_sex_agree,
                 "party_raw": None if unfilled else raw["party_raw"],
                 "party": party,
                 "votes_secured": votes,
@@ -366,26 +365,26 @@ def validate(rows):
         },
     )
 
-    reservations = collections.Counter(row["reservation"] for row in rows)
+    reservations = collections.Counter(row["reserved_code"] for row in rows)
     if dict(reservations) != EXPECTED_RESERVATIONS:
         raise SystemExit(
-            f"reservation totals are {dict(reservations)}, "
+            f"reserved_code totals are {dict(reservations)}, "
             f"expected {EXPECTED_RESERVATIONS}"
         )
     if not set(reservations) <= RESERVATIONS:
-        raise SystemExit("reservation contains an unrecognized value")
+        raise SystemExit("reserved_code contains an unrecognized value")
     winner_rows = [row for row in rows if row["seat_filled"]]
     if len(winner_rows) != EXPECTED_WINNERS:
         raise SystemExit(f"parsed {len(winner_rows)} winners, expected 1,007")
     winner_controls = collections.Counter(
-        (row["winner_sex_raw"], row["winner_caste_category"]) for row in winner_rows
+        (row["winner_woman_raw"], row["winner_caste"]) for row in winner_rows
     )
     if dict(winner_controls) != EXPECTED_WINNER_SEX_CATEGORY:
         raise SystemExit(
             f"winner sex/category totals are {dict(winner_controls)}, "
             f"expected {EXPECTED_WINNER_SEX_CATEGORY}"
         )
-    if {row["winner_caste_category"] for row in winner_rows} != CATEGORIES:
+    if {row["winner_caste"] for row in winner_rows} != CATEGORIES:
         raise SystemExit("winner category contains an unrecognized value")
 
     parties = collections.Counter(row["party"] for row in winner_rows)
@@ -419,7 +418,7 @@ def validate(rows):
     conflicts = [
         row
         for row in winner_rows
-        if row["winner_category_sex_agree"] == 0 or row["margin_below_votes"] == 0
+        if row["winner_caste_woman_agree"] == 0 or row["margin_below_votes"] == 0
     ]
     if conflicts:
         details = [
@@ -427,8 +426,8 @@ def validate(rows):
                 row["source_page"],
                 row["district_raw"],
                 row["ward_no"],
-                row["winner_sex_raw"],
-                row["winner_category"],
+                row["winner_woman_raw"],
+                row["winner_caste_code"],
                 row["votes_secured"],
                 row["margin"],
             )

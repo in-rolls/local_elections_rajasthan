@@ -20,18 +20,18 @@ as seat records.
 | `ward_no_raw` | Ward number exactly as printed. |
 | `ward_no` | Usable ward number inferred from row order within district. |
 | `ward_no_inferred` | 1 when `ward_no` differs from the printed value. |
-| `reservation_raw` | Printed ward category, including source spacing. |
-| `reservation` | Compact category: `GEN`, `GENW`, `SC`, `SCW`, `ST`, `STW`, `OBC`, or `OBCW`. |
-| `caste_category` | `reservation` with a final `W` removed. |
-| `female_reserved` | 1 when `reservation` ends in `W`. |
+| `reserved_raw` | Printed ward category, including source spacing. |
+| `reserved_code` | Compact category: `GEN`, `GENW`, `SC`, `SCW`, `ST`, `STW`, `OBC`, or `OBCW`. |
+| `reserved_caste` | `reserved_code` with a final `W` removed. |
+| `reserved_woman` | 1 when `reserved_code` ends in `W`. |
 | `seat_filled` | 0 for the one printed unfilled seat, otherwise 1. |
 | `winner_name` | Printed elected-member name; null for the unfilled seat. |
-| `winner_sex_raw` | Printed `MALE` or `FEMALE`; null for the unfilled seat. |
-| `winner_female` | 1 for `FEMALE`, 0 for `MALE`, null for the unfilled seat. |
-| `winner_category_raw` | Printed elected-member category; null for the unfilled seat. |
-| `winner_category` | Compact elected-member category. |
-| `winner_caste_category` | `winner_category` with a final `W` removed. |
-| `winner_category_sex_agree` | Whether a winner category ending in `W` agrees with printed sex. |
+| `winner_woman_raw` | Printed `MALE` or `FEMALE`; null for the unfilled seat. |
+| `winner_woman` | 1 for `FEMALE`, 0 for `MALE`, null for the unfilled seat. |
+| `winner_caste_raw` | Printed elected-member category; null for the unfilled seat. |
+| `winner_caste_code` | Compact elected-member category. |
+| `winner_caste` | `winner_caste_code` with a final `W` removed. |
+| `winner_caste_woman_agree` | Whether a winner category ending in `W` agrees with printed sex. |
 | `party_raw` | Printed party label; null for the unfilled seat. |
 | `party` | Party with `CPI M` normalized to `CPI(M)`. |
 | `votes_secured` | Printed winner votes; null for uncontested or unfilled seats. |

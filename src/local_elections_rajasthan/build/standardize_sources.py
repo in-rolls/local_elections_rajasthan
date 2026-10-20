@@ -59,7 +59,13 @@ def standardize(year):
             "CategoryOfGramPanchyat",
         ]
         if year == 2020
-        else ["dist_name", "samiti_name", "gp", "gp_new", "reservation"]
+        else [
+            "dist_name",
+            "samiti_name",
+            "gp",
+            "gp_new",
+            "reservation",
+        ]  # old-name: raw file header
     )
     frame = pd.DataFrame(
         {
@@ -71,7 +77,7 @@ def standardize(year):
         }
     )
     frame["winner_name"] = None if year == 2020 else source["name"]
-    frame["winner_female"] = (
+    frame["winner_woman"] = (
         pd.Series(pd.NA, index=source.index, dtype="Int32")
         if year == 2020
         else (
@@ -84,9 +90,9 @@ def standardize(year):
         )
     )
     results = source[names[4]].map(reservation)
-    frame["female_reserved"] = pd.Series([x[0] for x in results], dtype="Int32")
-    frame["caste_category"] = [x[1] for x in results]
-    frame["reservation_raw"] = source[names[4]]
+    frame["reserved_woman"] = pd.Series([x[0] for x in results], dtype="Int32")
+    frame["reserved_caste"] = [x[1] for x in results]
+    frame["reserved_raw"] = source[names[4]]
     return frame
 
 
@@ -95,7 +101,7 @@ def main():
         save(
             standardize(year),
             f"source_{year}_std.parquet",
-            integer=["year", "winner_female", "female_reserved"],
+            integer=["year", "winner_woman", "reserved_woman"],
             directory=DATA,
         )
 

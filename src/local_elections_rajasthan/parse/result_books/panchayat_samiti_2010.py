@@ -43,10 +43,10 @@ COLUMN_BOUNDS = (
     ("district_raw", 127, 226),
     ("samiti_raw", 226, 330),
     ("ward_no", 330, 365),
-    ("reservation_raw", 365, 425),
+    ("reserved_raw", 365, 425),
     ("winner_name", 425, 605),
-    ("winner_sex_raw", 605, 640),
-    ("winner_category_raw", 640, 735),
+    ("winner_woman_raw", 605, 640),
+    ("winner_caste_raw", 640, 735),
     ("party_raw", 735, 842),
 )
 OUTPUT_COLUMNS = [
@@ -56,16 +56,16 @@ OUTPUT_COLUMNS = [
     "samiti_raw",
     "ward_no_raw",
     "ward_no",
-    "reservation_raw",
-    "caste_category",
-    "female_reserved",
+    "reserved_raw",
+    "reserved_caste",
+    "reserved_woman",
     "winner_name",
-    "winner_sex_raw",
-    "winner_female",
-    "winner_category_raw",
-    "winner_category",
-    "winner_caste_category",
-    "winner_category_sex_agree",
+    "winner_woman_raw",
+    "winner_woman",
+    "winner_caste_raw",
+    "winner_caste_code",
+    "winner_caste",
+    "winner_caste_woman_agree",
     "party_raw",
     "source_path",
     "source_page",
@@ -109,22 +109,22 @@ def parse_page(page):
                 f"has blank cells: {missing}"
             )
 
-        reservation_raw = raw["reservation_raw"]
-        winner_category_raw = raw["winner_category_raw"]
-        winner_category = winner_category_raw.replace(" ", "")
-        winner_category_sex_agree = int(
-            not winner_category.endswith("W") or raw["winner_sex_raw"] == "F"
+        reserved_raw = raw["reserved_raw"]
+        winner_caste_raw = raw["winner_caste_raw"]
+        winner_caste_code = winner_caste_raw.replace(" ", "")
+        winner_caste_woman_agree = int(
+            not winner_caste_code.endswith("W") or raw["winner_woman_raw"] == "F"
         )
-        if winner_category != winner_category_raw:
+        if winner_caste_code != winner_caste_raw:
             LOGGER.info(
                 "winner category spacing normalized",
                 extra={
                     "event": "source_recode_applied",
                     "source_page": page["source_page"],
                     "serial": int(raw["serial"]),
-                    "column": "winner_category",
-                    "raw_value": winner_category_raw,
-                    "value": winner_category,
+                    "column": "winner_caste_code",
+                    "raw_value": winner_caste_raw,
+                    "value": winner_caste_code,
                 },
             )
         serial = int(raw["serial"])
@@ -150,16 +150,16 @@ def parse_page(page):
                 "samiti_raw": raw["samiti_raw"],
                 "ward_no_raw": ward_no_raw,
                 "ward_no": ward_no,
-                "reservation_raw": reservation_raw,
-                "caste_category": reservation_raw.removesuffix("W"),
-                "female_reserved": int(reservation_raw.endswith("W")),
+                "reserved_raw": reserved_raw,
+                "reserved_caste": reserved_raw.removesuffix("W"),
+                "reserved_woman": int(reserved_raw.endswith("W")),
                 "winner_name": raw["winner_name"],
-                "winner_sex_raw": raw["winner_sex_raw"],
-                "winner_female": int(raw["winner_sex_raw"] == "F"),
-                "winner_category_raw": winner_category_raw,
-                "winner_category": winner_category,
-                "winner_caste_category": winner_category.removesuffix("W"),
-                "winner_category_sex_agree": winner_category_sex_agree,
+                "winner_woman_raw": raw["winner_woman_raw"],
+                "winner_woman": int(raw["winner_woman_raw"] == "F"),
+                "winner_caste_raw": winner_caste_raw,
+                "winner_caste_code": winner_caste_code,
+                "winner_caste": winner_caste_code.removesuffix("W"),
+                "winner_caste_woman_agree": winner_caste_woman_agree,
                 "party_raw": raw["party_raw"],
                 "source_path": BOOK.source_relative,
                 "source_page": page["source_page"],
@@ -214,21 +214,21 @@ def validate(rows):
     if gaps:
         raise SystemExit(f"non-contiguous ward rosters: {list(gaps)[:5]}")
 
-    reservations = collections.Counter(row["reservation_raw"] for row in rows)
+    reservations = collections.Counter(row["reserved_raw"] for row in rows)
     if dict(reservations) != EXPECTED_RESERVATIONS:
         raise SystemExit(
-            f"reservation totals are {dict(reservations)}, "
+            f"reserved_code totals are {dict(reservations)}, "
             f"expected {EXPECTED_RESERVATIONS}"
         )
-    castes = collections.Counter(row["caste_category"] for row in rows)
+    castes = collections.Counter(row["reserved_caste"] for row in rows)
     if dict(castes) != EXPECTED_CASTES:
         raise SystemExit(f"caste totals are {dict(castes)}, expected {EXPECTED_CASTES}")
-    if sum(row["female_reserved"] for row in rows) != EXPECTED_WOMEN_RESERVED:
+    if sum(row["reserved_woman"] for row in rows) != EXPECTED_WOMEN_RESERVED:
         raise SystemExit("women-reserved total differs from the printed 2,485")
 
-    if {row["winner_sex_raw"] for row in rows} != {"F", "M"}:
+    if {row["winner_woman_raw"] for row in rows} != {"F", "M"}:
         raise SystemExit("winner sex contains values outside F/M")
-    if {row["winner_category"] for row in rows} != RESERVATIONS:
+    if {row["winner_caste_code"] for row in rows} != RESERVATIONS:
         raise SystemExit("winner category contains an unrecognized value")
     if {row["party_raw"] for row in rows} != PARTIES:
         raise SystemExit("party contains an unrecognized value")
@@ -236,11 +236,11 @@ def validate(rows):
         (
             row["serial"],
             row["source_page"],
-            row["winner_sex_raw"],
-            row["winner_category"],
+            row["winner_woman_raw"],
+            row["winner_caste_code"],
         )
         for row in rows
-        if not row["winner_category_sex_agree"]
+        if not row["winner_caste_woman_agree"]
     }
     if conflicts != EXPECTED_WINNER_CONFLICTS:
         raise SystemExit(

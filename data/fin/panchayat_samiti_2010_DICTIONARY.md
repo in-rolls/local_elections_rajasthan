@@ -20,16 +20,16 @@ wards.
 | `samiti_raw` | string | Printed `Panchayat Samiti`. |
 | `ward_no_raw` | integer | Printed member `Ward no`. |
 | `ward_no` | integer | Member ward number after the one documented source correction below. |
-| `reservation_raw` | string | Printed seat `Ward Category`; one of `GEN`, `GENW`, `SC`, `SCW`, `ST`, `STW`, `OBC`, `OBCW`. |
-| `caste_category` | string | Seat category with a final `W` removed; `GEN`, `SC`, `ST`, or `OBC`. |
-| `female_reserved` | integer | 1 exactly when `reservation_raw` ends in `W`, otherwise 0. |
+| `reserved_raw` | string | Printed seat `Ward Category`; one of `GEN`, `GENW`, `SC`, `SCW`, `ST`, `STW`, `OBC`, `OBCW`. |
+| `reserved_caste` | string | Seat category with a final `W` removed; `GEN`, `SC`, `ST`, or `OBC`. |
+| `reserved_woman` | integer | 1 exactly when `reserved_raw` ends in `W`, otherwise 0. |
 | `winner_name` | string | Printed elected-member `Name`. |
-| `winner_sex_raw` | string | Printed `Sex`, `F` or `M`. |
-| `winner_female` | integer | 1 for printed `F`, 0 for printed `M`. This is a winner attribute, not a seat reservation. |
-| `winner_category_raw` | string | `Category of Elected Member` with source spacing preserved. |
-| `winner_category` | string | Compact winner category used for validation and recoding. |
-| `winner_caste_category` | string | `winner_category` with a final `W` removed. This is a winner attribute, not the ward category. |
-| `winner_category_sex_agree` | integer | 0 only when a winner category ending in `W` contradicts a printed Sex other than `F`; otherwise 1. |
+| `winner_woman_raw` | string | Printed `Sex`, `F` or `M`. |
+| `winner_woman` | integer | 1 for printed `F`, 0 for printed `M`. This is a winner attribute, not a seat reservation. |
+| `winner_caste_raw` | string | `Category of Elected Member` with source spacing preserved. |
+| `winner_caste_code` | string | Compact winner category used for validation and recoding. |
+| `winner_caste` | string | `winner_caste_code` with a final `W` removed. This is a winner attribute, not the ward category. |
+| `winner_caste_woman_agree` | integer | 0 only when a winner category ending in `W` contradicts a printed Sex other than `F`; otherwise 1. |
 | `party_raw` | string | Printed `Party`: `BJP`, `BSP`, `CPI(M)`, `INC`, `IND`, or `NCP`. |
 | `source_path` | string | Repository-relative path of the held source PDF. |
 | `source_page` | integer | Physical PDF page containing the row. |
@@ -40,7 +40,7 @@ All source cells are retained after whitespace between positioned words is
 collapsed to one space. There are two value-level repairs:
 
 - Serial 4,036 on PDF page 318 prints/extracts the winner category as
-  `G E N W`; `winner_category_raw` retains `G E N W` and `winner_category`
+  `G E N W`; `winner_caste_raw` retains `G E N W` and `winner_caste_code`
   records `GENW`.
 - Rajsamand–Bhim has 16 constituencies in the publication's control table and
   exactly 16 member rows. Its last row, serial 4,401 on PDF page 327, is printed
@@ -50,6 +50,6 @@ No place, person, party, seat-category, or winner-category values are otherwise
 corrected or linked.
 
 Serial 71 on PDF page 218 prints winner Sex `M` and winner category `OBCW`.
-Neither value is repaired: both raw readings remain, `winner_female` follows the
-explicit Sex column, and `winner_category_sex_agree` is 0. This does not affect
+Neither value is repaired: both raw readings remain, `winner_woman` follows the
+explicit Sex column, and `winner_caste_woman_agree` is 0. This does not affect
 the row's seat reservation, which is independently printed as `GEN`.

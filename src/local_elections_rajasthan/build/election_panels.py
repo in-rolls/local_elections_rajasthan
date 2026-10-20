@@ -1,5 +1,6 @@
 """Build unambiguous election histories from reviewed geographic labels."""
 
+import re
 from functools import reduce
 
 import pandas as pd
@@ -21,29 +22,31 @@ def winner_attributes(sources):
         winners.winner_key_unique & winners.gp_event_unique,
         [
             "match_key",
-            "female_winner_2020",
-            "candidate_reservation_raw",
-            "candidate_reservation_unique",
+            "winner_woman_2020",
+            "reserved_raw_from_candidates",
+            "reserved_from_candidates_unique",
         ],
-    ].rename(columns={"female_winner_2020": "winner_sex_from_cand"})
-    raw = winners.candidate_reservation_raw.astype("string").str.upper()
-    winners["candidate_reserved"] = raw.str.contains(r"WOMAN|W$", regex=True).astype(
-        "Int32"
+    ].rename(columns={"winner_woman_2020": "winner_woman_from_candidates_2020"})
+    raw = winners.reserved_raw_from_candidates.astype("string").str.upper()
+    winners["reserved_woman_from_candidates"] = raw.str.contains(
+        r"WOMAN|W$", regex=True
+    ).astype("Int32")
+    winners["reserved_caste_from_candidates"] = raw.str.extract(
+        r"^(GEN|OBC|SC|ST)", expand=False
     )
-    winners["candidate_caste"] = raw.str.extract(r"^(GEN|OBC|SC|ST)", expand=False)
     latest = sources[2020]
     latest = latest.loc[
         ~latest.match_key.duplicated(keep=False),
-        ["match_key", "female_reserved", "caste_category"],
+        ["match_key", "reserved_woman", "reserved_caste"],
     ]
     winners = winners.merge(latest, on="match_key", how="left", validate="one_to_one")
-    winners["reservation_gender_conflict"] = winners.candidate_reserved.astype(
+    winners["reserved_woman_conflict"] = winners.reserved_woman_from_candidates.astype(
         "Int32"
-    ).ne(winners.female_reserved.astype("Int32"))
-    winners["reservation_caste_conflict"] = winners.candidate_caste.astype("string").ne(
-        winners.caste_category.astype("string")
-    )
-    return winners.drop(columns=["female_reserved", "caste_category"])
+    ).ne(winners.reserved_woman.astype("Int32"))
+    winners["reserved_caste_conflict"] = winners.reserved_caste_from_candidates.astype(
+        "string"
+    ).ne(winners.reserved_caste.astype("string"))
+    return winners.drop(columns=["reserved_woman", "reserved_caste"])
 
 
 def prepare_source(frame, year):
@@ -53,9 +56,9 @@ def prepare_source(frame, year):
             "district_std",
             "samiti_std",
             "gp_std",
-            "female_reserved",
-            "caste_category",
-            "winner_female",
+            "reserved_woman",
+            "reserved_caste",
+            "winner_woman",
             "winner_name",
             "source_id",
         ]
@@ -98,15 +101,14 @@ def build_panel(sources, winners, waves):
             validate="many_to_one",
         )
     for year in waves:
-        frame[f"treat_{year}"] = frame[f"female_reserved_{year}"].astype("Int32")
+        frame[f"treat_{year}"] = frame[f"reserved_woman_{year}"].astype("Int32")
     if len(waves) == 2:
         frame["case"] = frame[f"treat_{waves[0]}"].astype("string").fillna(
             "NA"
         ) + frame[f"treat_{last}"].astype("string").fillna("NA")
-    for year in waves:
-        frame[f"female_winner_{year}"] = frame[
-            "winner_sex_from_cand" if year == 2020 else f"winner_female_{year}"
-        ].astype("Int32")
+    # No merged outcome column: winner_woman_<year> is the source's own record
+    # (none for 2020) and winner_woman_from_candidates_2020 is read from the
+    # 2020 candidate records. An analysis that wants one series combines them.
     if len(waves) == 4:
         treatment = [frame[f"treat_{y}"] for y in YEARS[:-1]]
         frame["never_treated"] = (
@@ -125,7 +127,7 @@ def build_panel(sources, winners, waves):
     for year in waves:
         for caste in ("obc", "sc", "st"):
             frame[f"{caste}_{year}"] = (
-                frame[f"caste_category_{year}"]
+                frame[f"reserved_caste_{year}"]
                 .astype("string")
                 .eq(caste.upper())
                 .astype("Int32")
@@ -148,11 +150,12 @@ def build():
     winners = winner_attributes(sources)
     for waves in [(2005, 2010), (2010, 2015), (2015, 2020), YEARS]:
         frame = build_panel(sources, winners, waves)
+        # the per-wave 1/0 columns, e.g. reserved_woman_2015, winner_woman_2010
         numeric_fields = [
             c
             for c in frame
-            if c.startswith(
-                ("female_reserved_", "winner_female_", "winner_sex_from_cand")
+            if re.fullmatch(
+                r"(reserved_woman|winner_woman|winner_woman_from_candidates)_\d{4}", c
             )
         ]
         save(

@@ -58,7 +58,7 @@ def add_geography(frame):
 
 def read_election(year):
     frame = pd.read_parquet(DATA / f"source_{year}_std.parquet")
-    for column in ["year", "winner_female", "female_reserved"]:
+    for column in ["year", "winner_woman", "reserved_woman"]:
         frame[column] = frame[column].astype("Int32")
     frame["source_row"] = np.arange(1, len(frame) + 1, dtype=np.int32)
     frame["source_id"] = f"source_{year}:" + frame.source_row.astype(str)

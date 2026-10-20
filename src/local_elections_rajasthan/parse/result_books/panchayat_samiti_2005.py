@@ -82,11 +82,11 @@ COLUMN_BOUNDS = (
     ("serial", 50, 72),
     ("district_raw", 72, 123),
     ("samiti_raw", 123, 185),
-    ("reservation_raw", 185, 212),
+    ("reserved_raw", 185, 212),
     ("winner_name", 212, 320),
     ("party_raw", 320, 359),
-    ("winner_sex_raw", 359, 410),
-    ("winner_category_raw", 410, 440),
+    ("winner_woman_raw", 359, 410),
+    ("winner_caste_raw", 410, 440),
     ("result_raw", 440, 500),
     ("margin_raw", 500, 545),
     ("remark_raw", 545, 595),
@@ -98,20 +98,20 @@ OUTPUT_COLUMNS = [
     "samiti_raw",
     "ward_no",
     "ward_no_inferred",
-    "reservation_raw",
-    "reservation",
-    "caste_category",
-    "female_reserved",
-    "reservation_body_control_agree",
+    "reserved_raw",
+    "reserved_code",
+    "reserved_caste",
+    "reserved_woman",
+    "reserved_body_control_agree",
     "seat_filled",
     "winner_name",
     "winner_name_missing",
-    "winner_sex_raw",
-    "winner_female",
-    "winner_category_raw",
-    "winner_category",
-    "winner_caste_category",
-    "winner_category_sex_agree",
+    "winner_woman_raw",
+    "winner_woman",
+    "winner_caste_raw",
+    "winner_caste_code",
+    "winner_caste",
+    "winner_caste_woman_agree",
     "party_raw",
     "party",
     "votes_secured",
@@ -123,8 +123,8 @@ OUTPUT_COLUMNS = [
     "source_page",
 ]
 NULLABLE_INTEGER_COLUMNS = [
-    "winner_female",
-    "winner_category_sex_agree",
+    "winner_woman",
+    "winner_caste_woman_agree",
     "votes_secured",
     "margin",
     "margin_below_votes",
@@ -167,7 +167,7 @@ def parse_page(page):
     for words in source_lines(page):
         raw = common.cells(words, COLUMN_BOUNDS)
         serial = int(raw["serial"])
-        reservation = raw["reservation_raw"].replace(" ", "")
+        reservation = raw["reserved_raw"].replace(" ", "")
         vacancy = (
             "".join(
                 word["text"]
@@ -177,13 +177,13 @@ def parse_page(page):
             == "VACANT"
         )
 
-        required = ["district_raw", "samiti_raw", "reservation_raw"]
+        required = ["district_raw", "samiti_raw", "reserved_raw"]
         if not vacancy:
             required.extend(
                 [
                     "party_raw",
-                    "winner_sex_raw",
-                    "winner_category_raw",
+                    "winner_woman_raw",
+                    "winner_caste_raw",
                     "result_raw",
                 ]
             )
@@ -200,13 +200,13 @@ def parse_page(page):
             if 440 <= word["x0"] < 545
         ]
         if vacancy:
-            winner_category = None
+            winner_caste_code = None
             uncontested = 0
             votes = None
             margin = None
             remark = "VACANT"
         else:
-            winner_category = raw["winner_category_raw"].replace(" ", "")
+            winner_caste_code = raw["winner_caste_raw"].replace(" ", "")
             uncontested = int(result_tokens == ["UN-CONTESTED"])
             if not uncontested and (
                 len(result_tokens) != 2
@@ -220,12 +220,12 @@ def parse_page(page):
             margin = None if uncontested else int(result_tokens[1])
             remark = raw["remark_raw"] or None
 
-        winner_female = None if vacancy else int(raw["winner_sex_raw"] == "FEMALE")
+        winner_woman = None if vacancy else int(raw["winner_woman_raw"] == "FEMALE")
         party = None if vacancy else raw["party_raw"].replace("CPI M", "CPI(M)")
         category_sex_agree = (
             None
             if vacancy
-            else int(winner_female == int(winner_category.endswith("W")))
+            else int(winner_woman == int(winner_caste_code.endswith("W")))
         )
         rows.append(
             {
@@ -233,26 +233,24 @@ def parse_page(page):
                 "serial": serial,
                 "district_raw": raw["district_raw"],
                 "samiti_raw": raw["samiti_raw"],
-                "reservation_raw": raw["reservation_raw"],
-                "reservation": reservation,
-                "caste_category": reservation.removesuffix("W"),
-                "female_reserved": int(reservation.endswith("W")),
-                "reservation_body_control_agree": int(serial != 4126),
+                "reserved_raw": raw["reserved_raw"],
+                "reserved_code": reservation,
+                "reserved_caste": reservation.removesuffix("W"),
+                "reserved_woman": int(reservation.endswith("W")),
+                "reserved_body_control_agree": int(serial != 4126),
                 "seat_filled": int(not vacancy),
                 "winner_name": (
                     None if vacancy or not raw["winner_name"] else raw["winner_name"]
                 ),
                 "winner_name_missing": int(not vacancy and not raw["winner_name"]),
-                "winner_sex_raw": None if vacancy else raw["winner_sex_raw"],
-                "winner_female": winner_female,
-                "winner_category_raw": (
-                    None if vacancy else raw["winner_category_raw"]
+                "winner_woman_raw": None if vacancy else raw["winner_woman_raw"],
+                "winner_woman": winner_woman,
+                "winner_caste_raw": (None if vacancy else raw["winner_caste_raw"]),
+                "winner_caste_code": winner_caste_code,
+                "winner_caste": (
+                    None if vacancy else winner_caste_code.removesuffix("W")
                 ),
-                "winner_category": winner_category,
-                "winner_caste_category": (
-                    None if vacancy else winner_category.removesuffix("W")
-                ),
-                "winner_category_sex_agree": category_sex_agree,
+                "winner_caste_woman_agree": category_sex_agree,
                 "party_raw": None if vacancy else raw["party_raw"],
                 "party": party,
                 "votes_secured": votes,
@@ -315,16 +313,16 @@ def validate(rows):
     if len({row["district_raw"] for row in rows}) != EXPECTED_DISTRICTS:
         raise SystemExit("district count differs from the publication's 32")
 
-    reservations = collections.Counter(row["reservation"] for row in rows)
+    reservations = collections.Counter(row["reserved_code"] for row in rows)
     if dict(reservations) != EXPECTED_RESERVATIONS:
         raise SystemExit(
-            f"reservation totals are {dict(reservations)}, "
+            f"reserved_code totals are {dict(reservations)}, "
             f"expected {EXPECTED_RESERVATIONS}"
         )
-    castes = collections.Counter(row["caste_category"] for row in rows)
+    castes = collections.Counter(row["reserved_caste"] for row in rows)
     if dict(castes) != EXPECTED_CASTES:
         raise SystemExit(f"caste totals are {dict(castes)}, expected {EXPECTED_CASTES}")
-    if sum(row["female_reserved"] for row in rows) != EXPECTED_WOMEN_RESERVED:
+    if sum(row["reserved_woman"] for row in rows) != EXPECTED_WOMEN_RESERVED:
         raise SystemExit("women-reserved total differs from the roster's 1,738")
     reservation_control_conflicts = [
         (
@@ -333,14 +331,14 @@ def validate(rows):
             row["district_raw"],
             row["samiti_raw"],
             row["ward_no"],
-            row["reservation"],
+            row["reserved_code"],
         )
         for row in rows
-        if not row["reservation_body_control_agree"]
+        if not row["reserved_body_control_agree"]
     ]
     if reservation_control_conflicts != [EXPECTED_RESERVATION_CONTROL_CONFLICT]:
         raise SystemExit(
-            "reservation/body-control conflicts are "
+            "reserved_code/body-control conflicts are "
             f"{reservation_control_conflicts}, expected "
             f"{[EXPECTED_RESERVATION_CONTROL_CONFLICT]}"
         )
@@ -364,7 +362,7 @@ def validate(rows):
             row["district_raw"],
             row["samiti_raw"],
             row["ward_no"],
-            row["reservation"],
+            row["reserved_code"],
         )
         for row in vacancy_rows
     ]
@@ -372,7 +370,7 @@ def validate(rows):
         raise SystemExit(f"vacant seats are {vacancies}, expected {[EXPECTED_VACANCY]}")
 
     filled = [row for row in rows if row["seat_filled"]]
-    winner_categories = collections.Counter(row["winner_category"] for row in filled)
+    winner_categories = collections.Counter(row["winner_caste_code"] for row in filled)
     if dict(winner_categories) != EXPECTED_WINNER_CATEGORIES:
         raise SystemExit(
             f"winner-category totals are {dict(winner_categories)}, "
@@ -390,7 +388,7 @@ def validate(rows):
     conflicts = [
         (row["serial"], row["source_page"])
         for row in filled
-        if not row["winner_category_sex_agree"]
+        if not row["winner_caste_woman_agree"]
     ]
     if conflicts:
         raise SystemExit(f"winner sex/category conflicts: {conflicts[:5]}")

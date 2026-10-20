@@ -18,18 +18,18 @@ and `Un Contested` instead of a margin; both facts are retained.
 | `ward_no_raw` | Ward number exactly as printed. |
 | `ward_no` | Usable ward number inferred from row order within district. |
 | `ward_no_inferred` | 1 when `ward_no` differs from the printed value. |
-| `reservation_raw` | Printed ward category. |
-| `reservation` | `GEN`, `GENW`, `SC`, `SCW`, `ST`, `STW`, `OBC`, or `OBCW`. |
-| `caste_category` | `reservation` with a final `W` removed. |
-| `female_reserved` | 1 when `reservation` ends in `W`. |
+| `reserved_raw` | Printed ward category. |
+| `reserved_code` | `GEN`, `GENW`, `SC`, `SCW`, `ST`, `STW`, `OBC`, or `OBCW`. |
+| `reserved_caste` | `reserved_code` with a final `W` removed. |
+| `reserved_woman` | 1 when `reserved_code` ends in `W`. |
 | `seat_filled` | 1 for every row in this publication. |
 | `winner_name` | Printed elected-member name, including positioned wrapped-name text. |
-| `winner_sex_raw` | Printed `Male` or `Female`. |
-| `winner_female` | 1 for `Female`, 0 for `Male`. |
-| `winner_category_raw` | Printed elected-member category. |
-| `winner_category` | Compact elected-member category. |
-| `winner_caste_category` | `winner_category` with a final `W` removed. |
-| `winner_category_sex_agree` | Whether a winner category ending in `W` agrees with printed sex. |
+| `winner_woman_raw` | Printed `Male` or `Female`. |
+| `winner_woman` | 1 for `Female`, 0 for `Male`. |
+| `winner_caste_raw` | Printed elected-member category. |
+| `winner_caste_code` | Compact elected-member category. |
+| `winner_caste` | `winner_caste_code` with a final `W` removed. |
+| `winner_caste_woman_agree` | Whether a winner category ending in `W` agrees with printed sex. |
 | `party_raw` | Printed party label. |
 | `party` | Party with `CPI M` normalized to `CPI(M)`. |
 | `votes_secured` | Printed winner votes, including zero for uncontested winners. |

@@ -74,11 +74,11 @@ CATEGORIES = {"GEN", "SC", "ST", "OBC"}
 COLUMN_BOUNDS = (
     ("district_raw", 60, 135),
     ("ward_no", 135, 165),
-    ("reservation_raw", 165, 205),
+    ("reserved_raw", 165, 205),
     ("winner_name", 205, 300),
     ("party_raw", 300, 330),
-    ("winner_sex_raw", 330, 375),
-    ("winner_category_raw", 375, 445),
+    ("winner_woman_raw", 330, 375),
+    ("winner_caste_raw", 375, 445),
     ("votes_raw", 445, 474),
     ("margin_raw", 474, 518),
     ("remark_raw", 518, 570),
@@ -91,18 +91,18 @@ OUTPUT_COLUMNS = [
     "ward_no_raw",
     "ward_no",
     "ward_no_inferred",
-    "reservation_raw",
-    "reservation",
-    "caste_category",
-    "female_reserved",
+    "reserved_raw",
+    "reserved_code",
+    "reserved_caste",
+    "reserved_woman",
     "seat_filled",
     "winner_name",
-    "winner_sex_raw",
-    "winner_female",
-    "winner_category_raw",
-    "winner_category",
-    "winner_caste_category",
-    "winner_category_sex_agree",
+    "winner_woman_raw",
+    "winner_woman",
+    "winner_caste_raw",
+    "winner_caste_code",
+    "winner_caste",
+    "winner_caste_woman_agree",
     "party_raw",
     "party",
     "votes_secured",
@@ -153,11 +153,11 @@ def parse_page(page, artifacts=frozenset()):
             name
             for name in (
                 "district_raw",
-                "reservation_raw",
+                "reserved_raw",
                 "winner_name",
                 "party_raw",
-                "winner_sex_raw",
-                "winner_category_raw",
+                "winner_woman_raw",
+                "winner_caste_raw",
                 "votes_raw",
                 "margin_raw",
             )
@@ -170,8 +170,8 @@ def parse_page(page, artifacts=frozenset()):
             )
 
         ward_no = int(ward_word["text"])
-        reservation = raw["reservation_raw"].replace(" ", "")
-        winner_category = raw["winner_category_raw"].replace(" ", "")
+        reservation = raw["reserved_raw"].replace(" ", "")
+        winner_caste_code = raw["winner_caste_raw"].replace(" ", "")
         uncontested = raw["margin_raw"].replace(" ", "").lower() == "uncontested"
         if uncontested:
             if raw["votes_raw"] != "0":
@@ -190,20 +190,20 @@ def parse_page(page, artifacts=frozenset()):
                 "ward_no_raw": ward_no,
                 "ward_no": ward_no,
                 "ward_no_inferred": 0,
-                "reservation_raw": raw["reservation_raw"],
-                "reservation": reservation,
-                "caste_category": reservation.removesuffix("W"),
-                "female_reserved": int(reservation.endswith("W")),
+                "reserved_raw": raw["reserved_raw"],
+                "reserved_code": reservation,
+                "reserved_caste": reservation.removesuffix("W"),
+                "reserved_woman": int(reservation.endswith("W")),
                 "seat_filled": 1,
                 "winner_name": raw["winner_name"],
-                "winner_sex_raw": raw["winner_sex_raw"],
-                "winner_female": int(raw["winner_sex_raw"] == "Female"),
-                "winner_category_raw": raw["winner_category_raw"],
-                "winner_category": winner_category,
-                "winner_caste_category": winner_category.removesuffix("W"),
-                "winner_category_sex_agree": int(
-                    not winner_category.endswith("W")
-                    or raw["winner_sex_raw"] == "Female"
+                "winner_woman_raw": raw["winner_woman_raw"],
+                "winner_woman": int(raw["winner_woman_raw"] == "Female"),
+                "winner_caste_raw": raw["winner_caste_raw"],
+                "winner_caste_code": winner_caste_code,
+                "winner_caste": winner_caste_code.removesuffix("W"),
+                "winner_caste_woman_agree": int(
+                    not winner_caste_code.endswith("W")
+                    or raw["winner_woman_raw"] == "Female"
                 ),
                 "party_raw": raw["party_raw"],
                 "party": common.normalize_party(raw["party_raw"]),
@@ -326,23 +326,23 @@ def validate(rows):
             f"expected {EXPECTED_DISTRICT_RECODE_COUNTS}"
         )
 
-    reservations = collections.Counter(row["reservation"] for row in rows)
+    reservations = collections.Counter(row["reserved_code"] for row in rows)
     if dict(reservations) != EXPECTED_RESERVATIONS:
         raise SystemExit(
-            f"reservation totals are {dict(reservations)}, "
+            f"reserved_code totals are {dict(reservations)}, "
             f"expected {EXPECTED_RESERVATIONS}"
         )
     if not set(reservations) <= RESERVATIONS:
-        raise SystemExit("reservation contains an unrecognized value")
+        raise SystemExit("reserved_code contains an unrecognized value")
     winner_controls = collections.Counter(
-        (row["winner_sex_raw"], row["winner_caste_category"]) for row in rows
+        (row["winner_woman_raw"], row["winner_caste"]) for row in rows
     )
     if dict(winner_controls) != EXPECTED_WINNER_SEX_CATEGORY:
         raise SystemExit(
             f"winner sex/category totals are {dict(winner_controls)}, "
             f"expected {EXPECTED_WINNER_SEX_CATEGORY}"
         )
-    if {row["winner_caste_category"] for row in rows} != CATEGORIES:
+    if {row["winner_caste"] for row in rows} != CATEGORIES:
         raise SystemExit("winner category contains an unrecognized value")
 
     parties = collections.Counter(row["party"] for row in rows)
@@ -359,7 +359,7 @@ def validate(rows):
     conflicts = [
         row
         for row in rows
-        if row["winner_category_sex_agree"] == 0 or row["margin_below_votes"] == 0
+        if row["winner_caste_woman_agree"] == 0 or row["margin_below_votes"] == 0
     ]
     if conflicts:
         details = [
@@ -367,8 +367,8 @@ def validate(rows):
                 row["source_page"],
                 row["district_raw"],
                 row["ward_no"],
-                row["winner_sex_raw"],
-                row["winner_category"],
+                row["winner_woman_raw"],
+                row["winner_caste_code"],
                 row["votes_secured"],
                 row["margin"],
             )

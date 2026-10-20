@@ -153,7 +153,7 @@ def verify():
             save(
                 standardize(year),
                 name,
-                integer=["year", "winner_female", "female_reserved"],
+                integer=["year", "winner_woman", "reserved_woman"],
                 directory=out,
             )
             same_values(pq.read_table(DATA / name), pq.read_table(out / name), name)
