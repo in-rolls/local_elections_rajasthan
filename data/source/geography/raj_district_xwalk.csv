@@ -1,0 +1,75 @@
+elex_district_raw,shrug_district,note
+AJMER,ajmer,exact
+Ajmer,ajmer,exact
+ALWAR,alwar,exact
+Alwar,alwar,exact
+BANSWARA,banswara,exact
+Banswara,banswara,exact
+BARAN,baran,exact
+Baran,baran,exact
+BARMER,barmer,exact
+Barmer,barmer,exact
+BHARATPUR,bharatpur,exact
+Bharatpur,bharatpur,exact
+BHILWARA,bhilwara,exact
+Bhilwara,bhilwara,exact
+BIKANER,bikaner,exact
+Bikaner,bikaner,exact
+BUNDI,bundi,exact
+Bundi,bundi,exact
+CHURU,churu,exact
+Churu,churu,exact
+DAUSA,dausa,exact
+Dausa,dausa,exact
+GANGANAGAR,ganganagar,exact
+Ganganagar,ganganagar,exact
+HANUMANGARH,hanumangarh,exact
+Hanumangarh,hanumangarh,exact
+JAIPUR,jaipur,exact
+Jaipur,jaipur,exact
+JAISALMER,jaisalmer,exact
+Jaisalmer,jaisalmer,exact
+JHALAWAR,jhalawar,exact
+Jhalawar,jhalawar,exact
+JODHPUR,jodhpur,exact
+Jodhpur,jodhpur,exact
+KARAULI,karauli,exact
+Karauli,karauli,exact
+KOTA,kota,exact
+Kota,kota,exact
+NAGAUR,nagaur,exact
+Nagaur,nagaur,exact
+PALI,pali,exact
+Pali,pali,exact
+RAJSAMAND,rajsamand,exact
+Rajsamand,rajsamand,exact
+SIKAR,sikar,exact
+Sikar,sikar,exact
+SIROHI,sirohi,exact
+Sirohi,sirohi,exact
+TONK,tonk,exact
+Tonk,tonk,exact
+UDAIPUR,udaipur,exact
+Udaipur,udaipur,exact
+PRATAPGARH,pratapgarh,exact
+Pratapgarh,pratapgarh,exact
+DUNGARPUR,dungarpur,exact
+Dungarpur,dungarpur,exact
+CHITTORGARH,chittaurgarh,spelling: o vs au
+Chittorgarh,chittaurgarh,spelling: o vs au
+DHOLPUR,dhaulpur,spelling: o vs au
+Dholpur,dhaulpur,spelling: o vs au
+JALORE,jalor,spelling: e suffix
+Jalore,jalor,spelling: e suffix
+JHUNJHUNU,jhunjhunun,spelling: n suffix
+Jhunjhunu,jhunjhunun,spelling: n suffix
+S. MADHOPUR,sawai madhopur,abbreviation
+S.MADHOPUR,sawai madhopur,abbreviation
+S. Madhopur,sawai madhopur,abbreviation
+BANSW ARA,banswara,OCR space
+P ALI,pali,OCR space
+KOT A,kota,OCR space
+PRA T APGARH,pratapgarh,OCR space
+BHARA TPUR,bharatpur,OCR space
+ANUMANGAR,hanumangarh,typo: missing H prefix
+DUNGERPUR,dungarpur,typo: e vs a

@@ -1,0 +1,629 @@
+elex_district,elex_samiti,lgd_district,lgd_block_name,lgd_block_code,match_type
+ajmer,ARAI,Ajmer,Arain,1149,spelling
+ajmer,ARAIN,Ajmer,Arain,1149,spelling
+ajmer,BHINAI,Ajmer,Bhinay,1150,spelling
+ajmer,BHINAY,Ajmer,Bhinay,1150,exact
+ajmer,JAW AJA,Ajmer,Jawaja,1151,ocr_space
+ajmer,JAWAJA,Ajmer,Jawaja,1151,exact
+ajmer,KEKRI,Ajmer,Kekri,1152,exact
+ajmer,KISHANGARH,Ajmer,Kishangarh (Silora),1153,exact
+ajmer,MASUDA,Ajmer,Masooda,1154,spelling
+ajmer,PEESANGAN,Ajmer,Pisangan,1155,spelling
+ajmer,PISANGAN,Ajmer,Pisangan,1155,exact
+ajmer,SHRINAGAR,Ajmer,Srinagar,1156,spelling
+ajmer,SRINAGAR,Ajmer,Srinagar,1156,exact
+ajmer,SARWAD,Ajmer,Sawar,295478,spelling
+ajmer,SARW AD,Ajmer,Sawar,295478,ocr_space
+ajmer,SAWAR,Ajmer,Sawar,295478,exact
+ajmer,AJMER RURAL,Ajmer,Ajmer Rural,295190,new_block
+ajmer,AJMERRURAL,Ajmer,Ajmer Rural,295190,new_block
+ajmer,KISHANGARH (SILORA),Ajmer,Kishangarh (Silora),1153,lgd_style
+ajmer,MASOODA,Ajmer,Masooda,1154,lgd_style
+alwar,BANSUR,Alwar,Bansur,1157,exact
+alwar,BEHROR,Alwar,Behror,1158,exact
+alwar,KA THUMAR,Alwar,Kathumar,1159,ocr_space
+alwar,KATHUMAR,Alwar,Kathumar,1159,exact
+alwar,KISHANGARH BAS,Alwar,Kishangarh Bas,1160,exact
+alwar,KISHANGARHBAS,Alwar,Kishangarh Bas,1160,spelling
+alwar,KOTKASIM,Alwar,Kotkasim,1161,exact
+alwar,LAXMANGARH,Alwar,Laxmangarh,1162,exact
+alwar,MANDAWAR,Alwar,Mandawar,1163,exact
+alwar,MUNDAWAR,Alwar,Mandawar,1163,spelling
+alwar,NEEMRANA,Alwar,Neemrana,1164,exact
+alwar,RAJGARH,Alwar,Rajgarh,1165,exact
+alwar,RAMGARH,Alwar,Ramgarh,1166,exact
+alwar,RAINI,Alwar,Reni,1167,spelling
+alwar,REINI,Alwar,Reni,1167,spelling
+alwar,RENI,Alwar,Reni,1167,exact
+alwar,THANAGAZI,Alwar,Thanagazi,1168,exact
+alwar,TIJARA,Alwar,Tijara,1169,exact
+alwar,UMRAIN,Alwar,Umren,1170,spelling
+alwar,UMREN,Alwar,Umren,1170,exact
+alwar,GOVINDGARH,Alwar,Govindgarh,295311,new_block
+alwar,MALAKHEDA,Alwar,Malakheda,295372,new_block
+banswara,ANANDPURI,Banswara,Anandpuri,1171,exact
+banswara,ANADPURI,Banswara,Anandpuri,1171,spelling
+banswara,ARA THUNA,Banswara,Arthuna,262584,ocr_space
+banswara,ARATHUNA,Banswara,Arthuna,262584,new_block
+banswara,BAGIDORA,Banswara,Bagidora,1172,exact
+banswara,BANSWARA,Banswara,Banswara,1173,exact
+banswara,BANSW ARA,Banswara,Banswara,1173,ocr_space
+banswara,CHHOTI SARVAN,Banswara,Chhoti Sarwan,6835,spelling
+banswara,CHHOTISARVAN,Banswara,Chhoti Sarwan,6835,spelling
+banswara,GANGAD TALAI,Banswara,Gangar Talai,262567,spelling
+banswara,GANGADTALAI,Banswara,Gangar Talai,262567,new_block
+banswara,GADHI,Banswara,Garhi,1174,spelling
+banswara,GARHI,Banswara,Garhi,1174,exact
+banswara,GHATOL,Banswara,Ghatol,1175,exact
+banswara,KUSHALGARH,Banswara,Kushalgarh,1176,exact
+banswara,PEEPALKHUNT,Banswara,Peepal Khoont,1177,spelling
+banswara,PIPALKHUNT,Banswara,Peepal Khoont,1177,spelling
+banswara,SAJJANGARH,Banswara,Sajjangarh,1178,exact
+banswara,TALWADA,Banswara,Talwara,262588,spelling
+banswara,TALWARA,Banswara,Talwara,262588,new_block
+baran,ANT AH,Baran,Anta,1179,ocr_space
+baran,ANT A,Baran,Anta,1179,ocr_space
+baran,ANTA,Baran,Anta,1179,exact
+baran,ATARU,Baran,Atru,1180,spelling
+baran,ATRU,Baran,Atru,1180,exact
+baran,BARAN,Baran,Baran (Full),1181,exact
+baran,CHHABRA,Baran,Chhabra,1182,exact
+baran,CHHIP ABAROD,Baran,Chhipabarod,1183,ocr_space
+baran,CHHIPABAROD,Baran,Chhipabarod,1183,exact
+baran,KISHANGANJ,Baran,Kishanganj,1184,exact
+baran,MANGROL,Baran,Mangrol,295475,new_block
+baran,SHAHABAD,Baran,Shahbad,1185,spelling
+baran,SHAHBAD,Baran,Shahbad,1185,exact
+baran,BARAN (FULL),Baran,Baran (Full),1181,lgd_style
+barmer,AADEL,Barmer,Aadel,295254,new_block
+barmer,BALOTRA,Barmer,Balotra,1186,exact
+barmer,BARMER,Barmer,Barmer,1187,exact
+barmer,BARMER RURAL,Barmer,Barmer Rural,295251,new_block
+barmer,BARMERRURAL,Barmer,Barmer Rural,295251,new_block
+barmer,BAITU,Barmer,Baytoo,1188,spelling
+barmer,BAYATU,Barmer,Baytoo,1188,spelling
+barmer,BAYTU,Barmer,Baytoo,1188,spelling
+barmer,BAYTOO,Barmer,Baytoo,1188,exact
+barmer,CHAUHA T AN,Barmer,Chohtan,1189,ocr_space
+barmer,CHAUHATAN,Barmer,Chohtan,1189,spelling
+barmer,CHOHT AN,Barmer,Chohtan,1189,ocr_space
+barmer,CHOHTAN,Barmer,Chohtan,1189,exact
+barmer,DHANAU,Barmer,Dhanau,262617,new_block
+barmer,DHORIMANA,Barmer,Dhorimanna,1190,spelling
+barmer,DHORIMANNA,Barmer,Dhorimanna,1190,exact
+barmer,FAGLIYA,Barmer,Fagliya,295252,new_block
+barmer,GADRAROAD,Barmer,Gadra Road,262776,new_block
+barmer,GADRA ROAD,Barmer,Gadra Road,262776,new_block
+barmer,GIDA,Barmer,Gira,262778,spelling
+barmer,GUDHAMALANI,Barmer,Gudhamalani,262692,new_block
+barmer,KALYANPUR,Barmer,Kalyanpur,262773,new_block
+barmer,PATAUDI,Barmer,Patodi,262727,spelling
+barmer,PAYALA KALAN,Barmer,Panyla Kla,295259,spelling
+barmer,PAYALAKALAN,Barmer,Panyla Kla,295259,spelling
+barmer,RAMSAR,Barmer,Ramsar,262681,new_block
+barmer,SAMDADI,Barmer,Samdari,262774,spelling
+barmer,SEDHAWA,Barmer,Sedwa,262545,spelling
+barmer,SHEO,Barmer,Sheo,1191,exact
+barmer,SHIV,Barmer,Sheo,1191,spelling
+barmer,SINDHARI,Barmer,Sindhari,1192,exact
+barmer,SIW ANA,Barmer,Siwana,1193,ocr_space
+barmer,SIWANA,Barmer,Siwana,1193,exact
+bharatpur,BAYANA,Bharatpur,Bayana,1194,exact
+bharatpur,BHUSAWAR,Bharatpur,Bhusawar,295301,new_block
+bharatpur,DEEG,Bharatpur,Deeg,1195,exact
+bharatpur,KAMAN,Bharatpur,Kaman,1196,exact
+bharatpur,KUMHER,Bharatpur,Kumher,1197,exact
+bharatpur,NADBAI,Bharatpur,Nadbai,1198,exact
+bharatpur,NAGAR,Bharatpur,Nagar Pahari,1199,alt_name
+bharatpur,P AHADI,Bharatpur,Pahari,262581,ocr_space
+bharatpur,PAHADI,Bharatpur,Pahari,262581,new_block
+bharatpur,ROOPWAS,Bharatpur,Rupbas,1200,spelling
+bharatpur,RUPBAS,Bharatpur,Rupbas,1200,exact
+bharatpur,SEW AR,Bharatpur,Sewar,1201,ocr_space
+bharatpur,SEWAR,Bharatpur,Sewar,1201,exact
+bharatpur,UCHHAIN,Bharatpur,Uchain,295303,spelling
+bharatpur,VAIR,Bharatpur,Weir,1202,spelling
+bharatpur,WEIR,Bharatpur,Weir,1202,exact
+bharatpur,NAGAR PAHARI,Bharatpur,Nagar Pahari,1199,lgd_style
+bhilwara,ASIND,Bhilwara,Asind,1203,exact
+bhilwara,BADNOR,Bhilwara,Badnor,295444,new_block
+bhilwara,BANERA,Bhilwara,Banera,1204,exact
+bhilwara,BIJAULIYA,Bhilwara,Bijoliya,262081,spelling
+bhilwara,HURDA,Bhilwara,Hurda,1205,exact
+bhilwara,HURDA MANDAL,Bhilwara,Hurda,1205,spelling
+bhilwara,HURDAMANDAL,Bhilwara,Hurda,1205,spelling
+bhilwara,JAHAZPUR,Bhilwara,Jahazpur,1206,exact
+bhilwara,KAREDA,Bhilwara,Kareda,295453,new_block
+bhilwara,KOTRI,Bhilwara,Kotri,1207,exact
+bhilwara,MANDAL,Bhilwara,Mandal,1208,exact
+bhilwara,MANDALGARH,Bhilwara,Mandalgarh,1209,exact
+bhilwara,P AHADI,Bhilwara,Mandalgarh,1209,spelling
+bhilwara,RAIPUR,Bhilwara,Raipur,1210,exact
+bhilwara,SAHADA,Bhilwara,Sahara,1211,spelling
+bhilwara,SAHARA,Bhilwara,Sahara,1211,exact
+bhilwara,SHAHPURA,Bhilwara,Shahpura,1212,exact
+bhilwara,SUWANA,Bhilwara,Suwana,1213,exact
+bikaner,BAJJU (BAJJU KHALSA),Bikaner,Bajju Khalsa,295166,new_block
+bikaner,BIKANER,Bikaner,Bikaner,1214,exact
+bikaner,DUNGARGARH,Bikaner,Sri Dungargarh,1218,spelling
+bikaner,KHAJUW ALA,Bikaner,Khajuwala,6898,ocr_space
+bikaner,KHAJUWALA,Bikaner,Khajuwala,6898,new_block
+bikaner,KOLAYAT,Bikaner,Kolayat,1215,exact
+bikaner,LOONKARANSAR,Bikaner,Lunkaransar,1216,spelling
+bikaner,LUNKARANSAR,Bikaner,Lunkaransar,1216,exact
+bikaner,NOKHA,Bikaner,Nokha,1217,exact
+bikaner,P ANCHU,Bikaner,Panchoo,262410,ocr_space
+bikaner,PANCHU,Bikaner,Panchoo,262410,new_block
+bikaner,PUGAL,Bikaner,Poogal,295168,spelling
+bikaner,SRI DUNGARGARH,Bikaner,Sri Dungargarh,1218,lgd_style
+bundi,BUNDI,Bundi,Bundi,257862,exact
+bundi,HINDOLI,Bundi,Hindoli,1219,exact
+bundi,K. PATAN,Bundi,Keshoraipatan,1220,spelling
+bundi,K.PATAN,Bundi,Keshoraipatan,1220,spelling
+bundi,KESHORAI PATAN,Bundi,Keshoraipatan,1220,spelling
+bundi,KESHORAIPATAN,Bundi,Keshoraipatan,1220,exact
+bundi,NAINW A,Bundi,Nainwa,1221,ocr_space
+bundi,NAINWA,Bundi,Nainwa,1221,exact
+bundi,T ALERA,Bundi,Talera,1222,ocr_space
+bundi,TALERA,Bundi,Talera,1222,exact
+chittorgarh,ARNOD,Chittorgarh,Arnod,1223,exact
+chittorgarh,BADI SADRI,Chittorgarh,Bari Sadri,1224,spelling
+chittorgarh,BARISADRI,Chittorgarh,Bari Sadri,1224,exact
+chittorgarh,BEGUN,Chittorgarh,Begun,1225,exact
+chittorgarh,BHADESAR,Chittorgarh,Bhadesar,1226,exact
+chittorgarh,BHENSRODGARH,Chittorgarh,Bhainsrorgarh,1227,spelling
+chittorgarh,BHAINSRORGARH,Chittorgarh,Bhainsrorgarh,1227,exact
+chittorgarh,BHOP ALSAGAR,Chittorgarh,Bhopalsagar,1228,ocr_space
+chittorgarh,BHOPALSAGAR,Chittorgarh,Bhopalsagar,1228,exact
+chittorgarh,BHUPAL SAGAR,Chittorgarh,Bhopalsagar,1228,spelling
+chittorgarh,CHHITORGARH,Chittorgarh,Chittorgarh,1230,spelling
+chittorgarh,CHHOTISADRI,Chittorgarh,Chhoti Sadri,1229,spelling
+chittorgarh,CHHOTI SADARI,Chittorgarh,Chhoti Sadri,1229,spelling
+chittorgarh,CHOTI SADRI,Chittorgarh,Chhoti Sadri,1229,spelling
+chittorgarh,CHITTORGARH,Chittorgarh,Chittorgarh,1230,exact
+chittorgarh,DOONGL A,Chittorgarh,Dungla,1231,ocr_space
+chittorgarh,DOONGLA,Chittorgarh,Dungla,1231,spelling
+chittorgarh,DUNGL A,Chittorgarh,Dungla,1231,ocr_space
+chittorgarh,DUNGLA,Chittorgarh,Dungla,1231,exact
+chittorgarh,GANGRAR,Chittorgarh,Gangrar,1232,exact
+chittorgarh,KAP ASAN,Chittorgarh,Kapasan,1233,ocr_space
+chittorgarh,KAPASAN,Chittorgarh,Kapasan,1233,exact
+chittorgarh,NIMBAHERA,Chittorgarh,Nimbahera,1234,exact
+chittorgarh,PRATAPGARH,Chittorgarh,Pratapgarh,1235,exact
+chittorgarh,RASHMI,Chittorgarh,Rashmi,1236,exact
+chittorgarh,BARI SADRI,Chittorgarh,Bari Sadri,1224,lgd_style
+chittaurgarh,ARNOD,Chittorgarh,Arnod,1223,dist_variant
+chittaurgarh,BADI SADRI,Chittorgarh,Bari Sadri,1224,dist_variant
+chittaurgarh,BARISADRI,Chittorgarh,Bari Sadri,1224,dist_variant
+chittaurgarh,BEGUN,Chittorgarh,Begun,1225,dist_variant
+chittaurgarh,BHADESAR,Chittorgarh,Bhadesar,1226,dist_variant
+chittaurgarh,BHENSRODGARH,Chittorgarh,Bhainsrorgarh,1227,dist_variant
+chittaurgarh,BHAINSRORGARH,Chittorgarh,Bhainsrorgarh,1227,dist_variant
+chittaurgarh,BHOP ALSAGAR,Chittorgarh,Bhopalsagar,1228,dist_variant
+chittaurgarh,BHOPALSAGAR,Chittorgarh,Bhopalsagar,1228,dist_variant
+chittaurgarh,BHUPAL SAGAR,Chittorgarh,Bhopalsagar,1228,dist_variant
+chittaurgarh,CHHITORGARH,Chittorgarh,Chittorgarh,1230,dist_variant
+chittaurgarh,CHHOTISADRI,Chittorgarh,Chhoti Sadri,1229,dist_variant
+chittaurgarh,CHHOTI SADARI,Chittorgarh,Chhoti Sadri,1229,dist_variant
+chittaurgarh,CHOTI SADRI,Chittorgarh,Chhoti Sadri,1229,dist_variant
+chittaurgarh,CHITTORGARH,Chittorgarh,Chittorgarh,1230,dist_variant
+chittaurgarh,DOONGL A,Chittorgarh,Dungla,1231,dist_variant
+chittaurgarh,DOONGLA,Chittorgarh,Dungla,1231,dist_variant
+chittaurgarh,DUNGL A,Chittorgarh,Dungla,1231,dist_variant
+chittaurgarh,DUNGLA,Chittorgarh,Dungla,1231,dist_variant
+chittaurgarh,GANGRAR,Chittorgarh,Gangrar,1232,dist_variant
+chittaurgarh,KAP ASAN,Chittorgarh,Kapasan,1233,dist_variant
+chittaurgarh,KAPASAN,Chittorgarh,Kapasan,1233,dist_variant
+chittaurgarh,NIMBAHERA,Chittorgarh,Nimbahera,1234,dist_variant
+chittaurgarh,PRATAPGARH,Chittorgarh,Pratapgarh,1235,dist_variant
+chittaurgarh,RASHMI,Chittorgarh,Rashmi,1236,dist_variant
+chittaurgarh,BARI SADRI,Chittorgarh,Bari Sadri,1224,lgd_style
+churu,BIDASAR,Churu,Bidasar,262145,new_block
+churu,CHURU,Churu,Churu,1237,exact
+churu,RAJGARH,Churu,Rajgarh,1238,exact
+churu,RATANGARH,Churu,Ratangarh,1239,exact
+churu,SARDAR SHAHAR,Churu,Sardarshahar,1240,spelling
+churu,SARDARSHAHAR,Churu,Sardarshahar,1240,exact
+churu,SUJANGARH,Churu,Sujangarh,1241,exact
+churu,T ARANAGAR,Churu,Taranagar,1242,ocr_space
+churu,TARANAGAR,Churu,Taranagar,1242,exact
+dausa,BAIJUPADA,Dausa,Baijupada,295151,new_block
+dausa,BANDIKUI,Dausa,Bandikui,1243,exact
+dausa,BASWA,Dausa,Baswa,295152,new_block
+dausa,DAUSA,Dausa,Dausa,1244,exact
+dausa,LALSOT,Dausa,Lalsot,1245,exact
+dausa,LAWAN,Dausa,Lawan,262601,new_block
+dausa,MAHUW A,Dausa,Mahwa,1246,ocr_space
+dausa,MAHUWA,Dausa,Mahwa,1246,spelling
+dausa,MAHWA,Dausa,Mahwa,1246,exact
+dausa,NANGAL RAJAWATAN,Dausa,Nangal Rajawatan,295150,new_block
+dausa,NANGALRAJAWATAN,Dausa,Nangal Rajawatan,295150,new_block
+dausa,RAMGARH PACHWARA,Dausa,Ramgarh Pachwara,295066,new_block
+dausa,RAMGARHPACHWARA,Dausa,Ramgarh Pachwara,295066,new_block
+dausa,SIKANDRA,Dausa,Sikandara,295153,spelling
+dausa,SIKRAI,Dausa,Sikrai,1247,exact
+dholpur,BARI,Dholpur,Bari,1248,exact
+dholpur,BASERI,Dholpur,Baseri,1249,exact
+dholpur,DHOLPUR,Dholpur,Dhaulpur,1250,spelling
+dholpur,RAJAKHERA,Dholpur,Rajakhera,1251,exact
+dholpur,SAIP AU,Dholpur,Saipau,262816,ocr_space
+dholpur,SAIPAU,Dholpur,Saipau,262816,new_block
+dholpur,SARMATHURA,Dholpur,Saramathura,295306,spelling
+dhaulpur,BARI,Dholpur,Bari,1248,dist_variant
+dhaulpur,BASERI,Dholpur,Baseri,1249,dist_variant
+dhaulpur,DHOLPUR,Dholpur,Dhaulpur,1250,dist_variant
+dhaulpur,DHAULPUR,Dholpur,Dhaulpur,1250,dist_variant
+dhaulpur,RAJAKHERA,Dholpur,Rajakhera,1251,dist_variant
+dhaulpur,SAIP AU,Dholpur,Saipau,262816,dist_variant
+dhaulpur,SAIPAU,Dholpur,Saipau,262816,dist_variant
+dhaulpur,SARMATHURA,Dholpur,Saramathura,295306,dist_variant
+dungarpur,ASPUR,Dungarpur,Aspur,1252,exact
+dungarpur,BICHHIW ARA,Dungarpur,Bichiwara,1253,ocr_space
+dungarpur,BICHHIWARA,Dungarpur,Bichiwara,1253,spelling
+dungarpur,BICHCHIWARA,Dungarpur,Bichiwara,1253,spelling
+dungarpur,BICHIW ARA,Dungarpur,Bichiwara,1253,ocr_space
+dungarpur,BICHIWARA,Dungarpur,Bichiwara,1253,exact
+dungarpur,CHIKHALI,Dungarpur,Chikhali,262113,new_block
+dungarpur,DOVADA,Dungarpur,Dovada,262207,new_block
+dungarpur,DUNGARPUR,Dungarpur,Dungarpur,1254,exact
+dungarpur,DUNGERPUR,Dungarpur,Dungarpur,1254,spelling
+dungarpur,GALIYA KOT,Dungarpur,Galiyakoat,262105,spelling
+dungarpur,GALIYAKOT,Dungarpur,Galiyakoat,262105,new_block
+dungarpur,JOTHALI,Dungarpur,Jothari,262679,spelling
+dungarpur,SABLA,Dungarpur,Sabla,262099,new_block
+dungarpur,SAGW ARA,Dungarpur,Sagwara,1255,ocr_space
+dungarpur,SAGWARA,Dungarpur,Sagwara,1255,exact
+dungarpur,SIMALWARA,Dungarpur,Simalwara,1256,exact
+ganganagar,ANUPGARH,Ganganagar,Anupgarh,1257,exact
+ganganagar,ANOOPGARH,Ganganagar,Anupgarh,1257,spelling
+ganganagar,GANGANAGAR,Ganganagar,Ganganagar,1258,exact
+ganganagar,GHADSANA,Ganganagar,Gharsana,6902,spelling
+ganganagar,KARANPUR,Ganganagar,Karanpur,1259,exact
+ganganagar,P ADAMPUR,Ganganagar,Padampur,1260,ocr_space
+ganganagar,PADAMPUR,Ganganagar,Padampur,1260,exact
+ganganagar,RAISNGHNAGAR,Ganganagar,Raisinghnagar,1261,spelling
+ganganagar,RAISINGHNAGAR,Ganganagar,Raisinghnagar,1261,exact
+ganganagar,SADULSAHAR,Ganganagar,Sadulshahar,1262,spelling
+ganganagar,SADULSHAHAR,Ganganagar,Sadulshahar,1262,exact
+ganganagar,SHRI VIJAYNAGAR,Ganganagar,Vijainagar,262741,spelling
+ganganagar,SHRIVIJAYNAGAR,Ganganagar,Vijainagar,262741,new_block
+ganganagar,SRI GANGANAGAR,Ganganagar,Ganganagar,1258,spelling
+ganganagar,SRIGANGANAGAR,Ganganagar,Ganganagar,1258,spelling
+ganganagar,SURA TGARH,Ganganagar,Suratgarh,1263,ocr_space
+ganganagar,SURATGARH,Ganganagar,Suratgarh,1263,exact
+hanumangarh,BHADRA,Hanumangarh,Bhadra,1264,exact
+hanumangarh,H BHADRA,Hanumangarh,Bhadra,1264,ocr_space
+hanumangarh,H HANUMANGARH,Hanumangarh,Hanumangarh,1265,ocr_space
+hanumangarh,HANUMANGARH,Hanumangarh,Hanumangarh,1265,exact
+hanumangarh,H NOHAR,Hanumangarh,Nohar,1266,ocr_space
+hanumangarh,NOHAR,Hanumangarh,Nohar,1266,exact
+hanumangarh,H PILIBANGA,Hanumangarh,Pilibanga,6842,ocr_space
+hanumangarh,PILIBANGA,Hanumangarh,Pilibanga,6842,new_block
+hanumangarh,H RAWATSAR,Hanumangarh,Rawatsar,6845,ocr_space
+hanumangarh,RAWATSAR,Hanumangarh,Rawatsar,6845,new_block
+hanumangarh,H SANGARIYA,Hanumangarh,Sangaria,6843,ocr_space
+hanumangarh,SANGARIYA,Hanumangarh,Sangaria,6843,spelling
+hanumangarh,H TIBBI,Hanumangarh,Tibbi,6844,ocr_space
+hanumangarh,TIBI,Hanumangarh,Tibbi,6844,spelling
+hanumangarh,TIBBI,Hanumangarh,Tibbi,6844,new_block
+jaipur,AMER,Jaipur,Amber,1267,alt_name
+jaipur,AMBER,Jaipur,Amber,1267,exact
+jaipur,AANDHII,Jaipur,Andhi,295307,spelling
+jaipur,AANDHI,Jaipur,Andhi,295307,spelling
+jaipur,BASSI,Jaipur,Bassi,1268,exact
+jaipur,CHAKSU,Jaipur,Chaksu,1269,exact
+jaipur,DUDU,Jaipur,Dudu,1270,exact
+jaipur,GOVINDGARH,Jaipur,Govindgarh,1271,exact
+jaipur,JALASU,Jaipur,Jalsu,262103,spelling
+jaipur,JALSU,Jaipur,Jalsu,262103,new_block
+jaipur,JAMW ARAMGARH,Jaipur,Jamwa Ramgarh,1272,ocr_space
+jaipur,JAMWA RAMGARH,Jaipur,Jamwa Ramgarh,1272,exact
+jaipur,JAMWARAMGARH,Jaipur,Jamwa Ramgarh,1272,spelling
+jaipur,JHOTW ARA,Jaipur,Jhotwara,1273,ocr_space
+jaipur,JHOTWARA,Jaipur,Jhotwara,1273,exact
+jaipur,JOBNER,Jaipur,Jobner,295302,new_block
+jaipur,KISHANGARH RENWAL,Jaipur,Kishangarh Renwal,295304,new_block
+jaipur,KISHANGARHRENWAL,Jaipur,Kishangarh Renwal,295304,new_block
+jaipur,KOTKHAWADA,Jaipur,Kotkhawada,295415,new_block
+jaipur,KOTPUTLI,Jaipur,Kotputli,1274,exact
+jaipur,MADHORAJPUR,Jaipur,Madhorajpura,295308,spelling
+jaipur,MOZAMABAD,Jaipur,Mauzamabad,295299,spelling
+jaipur,PAWATA,Jaipur,Paota,262104,spelling
+jaipur,PHAGI,Jaipur,Phagi,1275,exact
+jaipur,SAHAPURA,Jaipur,Shahpura,1278,spelling
+jaipur,SAMBHAR,Jaipur,Sambhar,1276,exact
+jaipur,SAMBHER,Jaipur,Sambhar,1276,spelling
+jaipur,SAMBHARLAKE,Jaipur,Sambhar,1276,spelling
+jaipur,SANGANER,Jaipur,Sanganer,1277,exact
+jaipur,SHAHPURA,Jaipur,Shahpura,1278,exact
+jaipur,TUNGA,Jaipur,Tunga,295305,new_block
+jaipur,VIRA TNAGAR,Jaipur,Viratnagar,1279,ocr_space
+jaipur,VIRATNAGAR,Jaipur,Viratnagar,1279,exact
+jaisalmer,BHANIYANA,Jaisalmer,Bhaniyana,295290,new_block
+jaisalmer,FATEHGARH,Jaisalmer,Fathegarh,295289,spelling
+jaisalmer,JAISALMER,Jaisalmer,Jaisalmer,1280,exact
+jaisalmer,MOHANGARH,Jaisalmer,Mohangarh,295287,new_block
+jaisalmer,NACHNA,Jaisalmer,Nachana,295288,spelling
+jaisalmer,SAM,Jaisalmer,Sam,1281,exact
+jaisalmer,SANKDA,Jaisalmer,Sankra,1282,spelling
+jaisalmer,SANKARA,Jaisalmer,Sankra,1282,spelling
+jaisalmer,SANKRA,Jaisalmer,Sankra,1282,exact
+jalore,AHORE,Jalore,Ahore,1283,exact
+jalore,BAGODA,Jalore,Bagoda,295292,new_block
+jalore,BHEENMAL,Jalore,Bhinmal,1284,spelling
+jalore,BHINMAL,Jalore,Bhinmal,1284,exact
+jalore,CHITALWANA,Jalore,Chitalwana,6907,new_block
+jalore,JALORE,Jalore,Jalore,1285,exact
+jalore,JASW ANTPURA,Jalore,Jaswantpura,1286,ocr_space
+jalore,JASWANTPURA,Jalore,Jaswantpura,1286,exact
+jalore,RANIW ARA,Jalore,Raniwara,1287,ocr_space
+jalore,RANIWARA,Jalore,Raniwara,1287,exact
+jalore,SANCHORE,Jalore,Sanchore,1288,exact
+jalore,SARNAU,Jalore,Sarnau,295294,new_block
+jalore,SAYALA,Jalore,Sayla,1289,spelling
+jalore,SAYLA,Jalore,Sayla,1289,exact
+jalor,AHORE,Jalore,Ahore,1283,dist_variant
+jalor,BAGODA,Jalore,Bagoda,295292,dist_variant
+jalor,BHEENMAL,Jalore,Bhinmal,1284,dist_variant
+jalor,BHINMAL,Jalore,Bhinmal,1284,dist_variant
+jalor,CHITALWANA,Jalore,Chitalwana,6907,dist_variant
+jalor,JALORE,Jalore,Jalore,1285,dist_variant
+jalor,JALOR,Jalore,Jalore,1285,dist_variant
+jalor,JASW ANTPURA,Jalore,Jaswantpura,1286,dist_variant
+jalor,JASWANTPURA,Jalore,Jaswantpura,1286,dist_variant
+jalor,RANIW ARA,Jalore,Raniwara,1287,dist_variant
+jalor,RANIWARA,Jalore,Raniwara,1287,dist_variant
+jalor,SANCHORE,Jalore,Sanchore,1288,dist_variant
+jalor,SARNAU,Jalore,Sarnau,295294,dist_variant
+jalor,SAYALA,Jalore,Sayla,1289,dist_variant
+jalor,SAYLA,Jalore,Sayla,1289,dist_variant
+jhalawar,AKALERA,Jhalawar,Aklera,262180,spelling
+jhalawar,AKLERA,Jhalawar,Aklera,262180,new_block
+jhalawar,BAKANI,Jhalawar,Bakani,1290,exact
+jhalawar,BHAVANI MANDI,Jhalawar,Bhawani Mandi,262161,spelling
+jhalawar,BHAVANIMANDI,Jhalawar,Bhawani Mandi,262161,new_block
+jhalawar,DAG,Jhalawar,Dag,1291,exact
+jhalawar,DUG,Jhalawar,Dag,1291,spelling
+jhalawar,JHALRAP A T AN,Jhalawar,Jhalrapatan,1292,ocr_space
+jhalawar,JHALRAPATAN,Jhalawar,Jhalrapatan,1292,exact
+jhalawar,KHANPUR,Jhalawar,Khanpur,1293,exact
+jhalawar,MANOHAR THANA,Jhalawar,Manoharthana,1294,spelling
+jhalawar,MANOHARTHANA,Jhalawar,Manoharthana,1294,exact
+jhalawar,PIDAWA,Jhalawar,Pirawa (Sunel),1295,spelling
+jhalawar,PIRAWA,Jhalawar,Pirawa (Sunel),1295,exact
+jhalawar,PIRAWA (SUNEL),Jhalawar,Pirawa (Sunel),1295,lgd_style
+jhunjhunu,ALSISAR,Jhunjhunu,Alsisar,1296,exact
+jhunjhunu,BUHANA,Jhunjhunu,Buhana,1297,exact
+jhunjhunu,CHIRAWA,Jhunjhunu,Chirawa,1298,exact
+jhunjhunu,JHUNJHUNU,Jhunjhunu,Jhunjhunu,1299,exact
+jhunjhunu,KHETRI,Jhunjhunu,Khetri,1300,exact
+jhunjhunu,MANDAWA,Jhunjhunu,Mandawa,295393,new_block
+jhunjhunu,NAW ALGARH,Jhunjhunu,Nawalgarh,1301,ocr_space
+jhunjhunu,NAWALGARH,Jhunjhunu,Nawalgarh,1301,exact
+jhunjhunu,PILANI,Jhunjhunu,Pilani,295394,new_block
+jhunjhunu,SINGHANA,Jhunjhunu,Singhana,295392,new_block
+jhunjhunu,SURAJGARH,Jhunjhunu,Surajgarh,1302,exact
+jhunjhunu,UDAIPURWATI,Jhunjhunu,Udaipurwati,1303,exact
+jhunjhunun,ALSISAR,Jhunjhunu,Alsisar,1296,dist_variant
+jhunjhunun,BUHANA,Jhunjhunu,Buhana,1297,dist_variant
+jhunjhunun,CHIRAWA,Jhunjhunu,Chirawa,1298,dist_variant
+jhunjhunun,JHUNJHUNU,Jhunjhunu,Jhunjhunu,1299,dist_variant
+jhunjhunun,JHUNJHUNUN,Jhunjhunu,Jhunjhunu,1299,dist_variant
+jhunjhunun,KHETRI,Jhunjhunu,Khetri,1300,dist_variant
+jhunjhunun,MANDAWA,Jhunjhunu,Mandawa,295393,dist_variant
+jhunjhunun,NAW ALGARH,Jhunjhunu,Nawalgarh,1301,dist_variant
+jhunjhunun,NAWALGARH,Jhunjhunu,Nawalgarh,1301,dist_variant
+jhunjhunun,PILANI,Jhunjhunu,Pilani,295394,dist_variant
+jhunjhunun,SINGHANA,Jhunjhunu,Singhana,295392,dist_variant
+jhunjhunun,SURAJGARH,Jhunjhunu,Surajgarh,1302,dist_variant
+jhunjhunun,UDAIPURWATI,Jhunjhunu,Udaipurwati,1303,dist_variant
+jodhpur,AAU,Jodhpur,Aau,295387,new_block
+jodhpur,BALESAR,Jodhpur,Balesar,1304,exact
+jodhpur,BAP,Jodhpur,Bap,1305,exact
+jodhpur,BAPINI,Jodhpur,Bapini,262760,new_block
+jodhpur,BAWARI,Jodhpur,Bawadi,6901,spelling
+jodhpur,BHOP ALGARH,Jodhpur,Bhopalgarh,1306,ocr_space
+jodhpur,BHOPALGARH,Jodhpur,Bhopalgarh,1306,exact
+jodhpur,BILARA,Jodhpur,Bilara,1307,exact
+jodhpur,CHAMU,Jodhpur,Chamu,295379,new_block
+jodhpur,DECHU,Jodhpur,Dechu,262719,new_block
+jodhpur,DHAVA,Jodhpur,Dhawa,295376,spelling
+jodhpur,GHANTIYALI,Jodhpur,Ghantiyali,295378,new_block
+jodhpur,KERU,Jodhpur,Keru,295381,new_block
+jodhpur,LOHAWAT,Jodhpur,Lohawat,262762,new_block
+jodhpur,LUNI,Jodhpur,Luni,1308,exact
+jodhpur,MANDOR,Jodhpur,Mandor,1309,exact
+jodhpur,MANDORE,Jodhpur,Mandor,1309,spelling
+jodhpur,OSIAN,Jodhpur,Osian,1310,exact
+jodhpur,OSIYAN,Jodhpur,Osian,1310,spelling
+jodhpur,PHALODI,Jodhpur,Phalodi,1311,exact
+jodhpur,PIPAR SAHAR,Jodhpur,Peepad Sahar,262755,spelling
+jodhpur,PIPAR SHAHAR,Jodhpur,Peepad Sahar,262755,spelling
+jodhpur,PIPARSHAHAR,Jodhpur,Peepad Sahar,262755,new_block
+jodhpur,SEKHALA,Jodhpur,Sekhala,262801,new_block
+jodhpur,SHERGARH,Jodhpur,Shergarh,1312,exact
+jodhpur,TINW ARI,Jodhpur,Tinwari,262759,ocr_space
+jodhpur,TINWARI,Jodhpur,Tinwari,262759,new_block
+karauli,HINDAUN,Karauli,Hindaun,1313,exact
+karauli,KARAULI,Karauli,Karauli,1314,exact
+karauli,KAURALI,Karauli,Karauli,1314,spelling
+karauli,MANDRAYAL,Karauli,Mandrayal,262184,new_block
+karauli,MASALPUR,Karauli,Masalpur,295309,new_block
+karauli,NADOTI,Karauli,Nadauti,1315,spelling
+karauli,SAPOTRA,Karauli,Sapotra,1316,exact
+karauli,SHRIMHAVEERJI,Karauli,Shri Mahaveer Ji,295250,new_block
+karauli,TODABHIM,Karauli,Todabhim,1317,exact
+karauli,NADAUTI,Karauli,Nadauti,1315,lgd_style
+kota,ITAWA,Kota,Itawa,1318,exact
+kota,KHERABAD,Kota,Khairabad,1319,spelling
+kota,KHAIRABAD,Kota,Khairabad,1319,exact
+kota,LADPURA,Kota,Ladpura,1320,exact
+kota,SANGOD,Kota,Sangod,1321,exact
+kota,SULTANPUR,Kota,Sultanpur,1322,exact
+nagaur,BHAIRUNDA,Nagaur,Bherunda,295486,spelling
+nagaur,DEEDW ANA,Nagaur,Didwana,1324,ocr_space
+nagaur,DEEDWANA,Nagaur,Didwana,1324,spelling
+nagaur,DEGANA,Nagaur,Degana,1323,exact
+nagaur,DIDW ANA,Nagaur,Didwana,1324,ocr_space
+nagaur,DIDWANA,Nagaur,Didwana,1324,exact
+nagaur,JAYAL,Nagaur,Jayal,1325,exact
+nagaur,KHINW ASAR,Nagaur,Khinvsar,262085,ocr_space
+nagaur,KHINWASAR,Nagaur,Khinvsar,262085,spelling
+nagaur,KUCHAMAN,Nagaur,Kuchaman City,1326,spelling
+nagaur,KUCHAMANCITY,Nagaur,Kuchaman City,1326,exact
+nagaur,LADNU,Nagaur,Ladnu,1327,exact
+nagaur,LADNUN,Nagaur,Ladnu,1327,spelling
+nagaur,MAKRANA,Nagaur,Makrana,1328,exact
+nagaur,MERTA,Nagaur,Merta,1329,exact
+nagaur,MOULASAR,Nagaur,Molasar,262369,spelling
+nagaur,MUNDAWA,Nagaur,Mundwa,1330,spelling
+nagaur,MUNDW A,Nagaur,Mundwa,1330,ocr_space
+nagaur,MUNDWA,Nagaur,Mundwa,1330,exact
+nagaur,NAGAUR,Nagaur,Nagaur,1331,exact
+nagaur,NAVAN,Nagaur,Nawa,262096,spelling
+nagaur,PARBATSAR,Nagaur,Parbatsar,1332,exact
+nagaur,RIYAN,Nagaur,Riyan Badi,1333,spelling
+nagaur,KUCHAMAN CITY,Nagaur,Kuchaman City,1326,lgd_style
+nagaur,RIYAN BADI,Nagaur,Riyan Badi,1333,lgd_style
+pali,BALI,Pali,Bali,1334,exact
+pali,DESURI,Pali,Desuri,1335,exact
+pali,JAIT ARAN,Pali,Jaitaran,1336,ocr_space
+pali,JAITARAN,Pali,Jaitaran,1336,exact
+pali,KHARCHI (M.JUNC),Pali,Kharchi(Mar.Jun),1337,spelling
+pali,MARWAR Jn.,Pali,Kharchi(Mar.Jun),1337,alt_name
+pali,MARWAR JN.,Pali,Kharchi(Mar.Jun),1337,alt_name
+pali,MARWAR JUN,Pali,Kharchi(Mar.Jun),1337,alt_name
+pali,MARWARJUNCTION,Pali,Kharchi(Mar.Jun),1337,alt_name
+pali,P ALI,Pali,Pali,1338,ocr_space
+pali,PALI,Pali,Pali,1338,exact
+pali,RAIPUR,Pali,Raipur,1339,exact
+pali,RANI,Pali,Rani Station,1340,spelling
+pali,RANI STATION,Pali,Rani Station,1340,exact
+pali,ROHAT,Pali,Rohat,1341,exact
+pali,SOJAT,Pali,Sojat,1342,exact
+pali,SOJAT CITY,Pali,Sojat,1342,spelling
+pali,SUMERPUR,Pali,Sumerpur,1343,exact
+pali,KHARCHI(MAR.JUN),Pali,Kharchi(Mar.Jun),1337,lgd_style
+pratapgarh,ARNOD,Pratapgarh,Arnod,1223,exact
+pratapgarh,CHHOTISADRI,Pratapgarh,Chhoti Sadri,1229,spelling
+pratapgarh,CHOTI SADRI,Pratapgarh,Chhoti Sadri,1229,spelling
+pratapgarh,DALOT,Pratapgarh,Dalot,295390,new_block
+pratapgarh,DHAMOTAR,Pratapgarh,Dhamotar,295424,new_block
+pratapgarh,DHARIAW AD,Pratapgarh,Dhariawad,1377,ocr_space
+pratapgarh,DHARIAWAD,Pratapgarh,Dhariawad,1377,exact
+pratapgarh,DHRIABAD,Pratapgarh,Dhariawad,1377,spelling
+pratapgarh,PEEP ALKHOONT,Pratapgarh,Peepal Khoont,1177,ocr_space
+pratapgarh,PEEPALKHOONT,Pratapgarh,Peepal Khoont,1177,spelling
+pratapgarh,PIP ALKHUNT,Pratapgarh,Peepal Khoont,1177,ocr_space
+pratapgarh,PIPALKHUNT,Pratapgarh,Peepal Khoont,1177,spelling
+pratapgarh,PRA T APGARH,Pratapgarh,Pratapgarh,1235,ocr_space
+pratapgarh,PRATAPGARH,Pratapgarh,Pratapgarh,1235,exact
+pratapgarh,SUHAGPURA,Pratapgarh,Suhagpura,295389,new_block
+rajsamand,AMET,Rajsamand,Amet,1344,exact
+rajsamand,BHIM,Rajsamand,Bhim,1345,exact
+rajsamand,DELVADA,Rajsamand,Delwada,295391,spelling
+rajsamand,DEOGARH,Rajsamand,Deogarh,1346,exact
+rajsamand,KHAMNOR,Rajsamand,Khamnor,1347,exact
+rajsamand,KHAMNORE,Rajsamand,Khamnor,1347,spelling
+rajsamand,KUMBHALGARH,Rajsamand,Kumbhalgarh,1348,exact
+rajsamand,RAILMAGRA,Rajsamand,Railmagra,1349,exact
+rajsamand,RAJSAMAND,Rajsamand,Rajsamand,1350,exact
+sawaimadhopur,BAMANW AS,Sawai Madhopur,Bamanwas,1351,ocr_space
+sawaimadhopur,BAMANWAS,Sawai Madhopur,Bamanwas,1351,exact
+sawaimadhopur,BONLI,Sawai Madhopur,Bonli,1352,exact
+sawaimadhopur,CHOUTH KA BARWADA,Sawai Madhopur,Chauth Ka Barwara,262680,spelling
+sawaimadhopur,CHOUTHKABARWADA,Sawai Madhopur,Chauth Ka Barwara,262680,new_block
+sawaimadhopur,GANGAPUR,Sawai Madhopur,Gangapur City,1353,spelling
+sawaimadhopur,GANGAPURCITY,Sawai Madhopur,Gangapur City,1353,spelling
+sawaimadhopur,KHANDAR,Sawai Madhopur,Khandar,1354,exact
+sawaimadhopur,MALARNA DUNGAR,Sawai Madhopur,Malarna Dungar,295310,new_block
+sawaimadhopur,MALARNADUNGAR,Sawai Madhopur,Malarna Dungar,295310,new_block
+sawaimadhopur,S. MADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,spelling
+sawaimadhopur,S.MADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,spelling
+sawaimadhopur,SAWAI MADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,exact
+sawaimadhopur,SAWAIMADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,spelling
+sawaimadhopur,GANGAPUR CITY,Sawai Madhopur,Gangapur City,1353,lgd_style
+sawai madhopur,BAMANW AS,Sawai Madhopur,Bamanwas,1351,dist_variant
+sawai madhopur,BAMANWAS,Sawai Madhopur,Bamanwas,1351,dist_variant
+sawai madhopur,BONLI,Sawai Madhopur,Bonli,1352,dist_variant
+sawai madhopur,CHOUTH KA BARWADA,Sawai Madhopur,Chauth Ka Barwara,262680,dist_variant
+sawai madhopur,CHOUTHKABARWADA,Sawai Madhopur,Chauth Ka Barwara,262680,dist_variant
+sawai madhopur,GANGAPUR,Sawai Madhopur,Gangapur City,1353,dist_variant
+sawai madhopur,GANGAPURCITY,Sawai Madhopur,Gangapur City,1353,dist_variant
+sawai madhopur,KHANDAR,Sawai Madhopur,Khandar,1354,dist_variant
+sawai madhopur,MALARNA DUNGAR,Sawai Madhopur,Malarna Dungar,295310,dist_variant
+sawai madhopur,MALARNADUNGAR,Sawai Madhopur,Malarna Dungar,295310,dist_variant
+sawai madhopur,S. MADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,dist_variant
+sawai madhopur,S.MADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,dist_variant
+sawai madhopur,SAWAI MADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,dist_variant
+sawai madhopur,SAWAIMADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,dist_variant
+sawai madhopur,GANGAPUR CITY,Sawai Madhopur,Gangapur City,1353,lgd_style
+sikar,AJITGARH,Sikar,Ajeetgarh,295265,spelling
+sikar,DANT ARAMGARH,Sikar,Danta Ramgarh,1356,ocr_space
+sikar,DANTA RAMGARH,Sikar,Danta Ramgarh,1356,exact
+sikar,DANTARAMGARH,Sikar,Danta Ramgarh,1356,spelling
+sikar,DHOD,Sikar,Dhod,1357,exact
+sikar,DHOND,Sikar,Dhod,1357,spelling
+sikar,FATEHPUR,Sikar,Fatehpur,1358,exact
+sikar,KHANDELA,Sikar,Khandela,1359,exact
+sikar,LACHHMANGARH,Sikar,Lachhmangarh,1360,exact
+sikar,LAXMANGARH,Sikar,Lachhmangarh,1360,spelling
+sikar,NECHWA,Sikar,Nechwa,295268,new_block
+sikar,NEEM KA THANA,Sikar,Neem Ka Thana,1361,exact
+sikar,NEEMKA THANA,Sikar,Neem Ka Thana,1361,spelling
+sikar,NEEMKATHANA,Sikar,Neem Ka Thana,1361,spelling
+sikar,PALSANA,Sikar,Palsana,295269,new_block
+sikar,PATAN,Sikar,Patan,262226,new_block
+sikar,PIPRALI,Sikar,Piprali,1362,exact
+sikar,SRIMADHOPUR,Sikar,Sri Madhopur,1363,spelling
+sikar,SRI MADHOPUR,Sikar,Sri Madhopur,1363,lgd_style
+sirohi,ABU ROAD,Sirohi,Abu Road,1364,exact
+sirohi,ABUROAD,Sirohi,Abu Road,1364,spelling
+sirohi,PINDW ARA,Sirohi,Pindwara,1365,ocr_space
+sirohi,PINDWARA,Sirohi,Pindwara,1365,exact
+sirohi,REODAR,Sirohi,Reodar,1366,exact
+sirohi,SHEOGANJ,Sirohi,Sheoganj,1367,exact
+sirohi,SHIVGANJ,Sirohi,Sheoganj,1367,spelling
+sirohi,SIROHI,Sirohi,Sirohi,1368,exact
+tonk,DEOLI,Tonk,Deoli,1369,exact
+tonk,MALPURA,Tonk,Malpura,1370,exact
+tonk,NEWAI,Tonk,Newai,1371,spelling
+tonk,NIW AI,Tonk,Newai,1371,ocr_space
+tonk,NIWAI,Tonk,Newai,1371,spelling
+tonk,PIPLU,Tonk,Peeplu,295476,spelling
+tonk,TODARAISINGH,Tonk,Todaraisingh,1372,exact
+tonk,TONK,Tonk,Tonk,1373,exact
+tonk,UNIARA,Tonk,Uniara,1374,exact
+tonk,UNIYARA,Tonk,Uniara,1374,spelling
+udaipur,BADGAON,Udaipur,Bargaon,1375,spelling
+udaipur,BARGAON,Udaipur,Bargaon,1375,exact
+udaipur,BHINDER,Udaipur,Bhinder,1376,exact
+udaipur,BHINDAR,Udaipur,Bhinder,1376,spelling
+udaipur,DHARIYAWAD,Udaipur,Dhariawad,1377,spelling
+udaipur,GIRW A,Udaipur,Girwa,1378,ocr_space
+udaipur,GIRWA,Udaipur,Girwa,1378,exact
+udaipur,GOGUNDA,Udaipur,Gogunda,1379,exact
+udaipur,HRUSHABHDEV,Udaipur,Rishbhdeo,262235,spelling
+udaipur,JAYSAMAND,Udaipur,Jaisamand,295185,spelling
+udaipur,JHADOL,Udaipur,Jhadol,1380,exact
+udaipur,JHALLARA,Udaipur,Jhallara,262257,new_block
+udaipur,KHERW ADA,Udaipur,Kherwara,1381,ocr_space
+udaipur,KHERW ARA,Udaipur,Kherwara,1381,ocr_space
+udaipur,KHERWADA,Udaipur,Kherwara,1381,spelling
+udaipur,KHERWARA,Udaipur,Kherwara,1381,exact
+udaipur,KOTDA,Udaipur,Kotra,1382,spelling
+udaipur,KOTRA,Udaipur,Kotra,1382,exact
+udaipur,KURABAD,Udaipur,Kurabad,262276,new_block
+udaipur,LASADIA,Udaipur,Lasadiya,6846,spelling
+udaipur,LASADIYA,Udaipur,Lasadiya,6846,new_block
+udaipur,MAVLI,Udaipur,Mavli,1383,exact
+udaipur,MAWALI,Udaipur,Mavli,1383,spelling
+udaipur,NAYAGAON,Udaipur,Nayagaon,295178,new_block
+udaipur,PHALASIY A,Udaipur,Phalasiya,262252,ocr_space
+udaipur,PHALASIYA,Udaipur,Phalasiya,262252,new_block
+udaipur,SALUMBER,Udaipur,Salumbar,1384,spelling
+udaipur,SALUMBAR,Udaipur,Salumbar,1384,exact
+udaipur,SARADA,Udaipur,Sarada,1385,exact
+udaipur,SAYARA,Udaipur,Sayra,262243,spelling
+udaipur,SEMARI,Udaipur,Semari,262269,new_block
+udaipur,VALLABHNAGAR,Udaipur,Vallabhnagar,295182,new_block

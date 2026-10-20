@@ -1,0 +1,227 @@
+elex_district,elex_samiti,lgd_district,lgd_block_name,lgd_block_code,match_type
+ajmer,BHINAY,Ajmer,Bhinay,1150,exact
+ajmer,JAWAJA,Ajmer,Jawaja,1151,exact
+ajmer,KEKRI,Ajmer,Kekri,1152,exact
+ajmer,SRINAGAR,Ajmer,Srinagar,1156,exact
+alwar,BANSUR,Alwar,Bansur,1157,exact
+alwar,BEHROR,Alwar,Behror,1158,exact
+alwar,KATHUMAR,Alwar,Kathumar,1159,exact
+alwar,KISHANGARH BAS,Alwar,Kishangarh Bas,1160,exact
+alwar,KOTKASIM,Alwar,Kotkasim,1161,exact
+alwar,LAXMANGARH,Alwar,Laxmangarh,1162,exact
+alwar,MANDAWAR,Alwar,Mandawar,1163,exact
+alwar,NEEMRANA,Alwar,Neemrana,1164,exact
+alwar,RAJGARH,Alwar,Rajgarh,1165,exact
+alwar,RAMGARH,Alwar,Ramgarh,1166,exact
+alwar,THANAGAZI,Alwar,Thanagazi,1168,exact
+alwar,TIJARA,Alwar,Tijara,1169,exact
+alwar,UMREN,Alwar,Umren,1170,exact
+banswara,ANANDPURI,Banswara,Anandpuri,1171,exact
+banswara,BAGIDORA,Banswara,Bagidora,1172,exact
+banswara,GARHI,Banswara,Garhi,1174,exact
+banswara,GHATOL,Banswara,Ghatol,1175,exact
+banswara,KUSHALGARH,Banswara,Kushalgarh,1176,exact
+banswara,SAJJANGARH,Banswara,Sajjangarh,1178,exact
+barmer,BALOTRA,Barmer,Balotra,1186,exact
+barmer,BARMER,Barmer,Barmer,1187,exact
+barmer,BAYTOO,Barmer,Baytoo,1188,exact
+barmer,CHOHTAN,Barmer,Chohtan,1189,exact
+barmer,DHORIMANNA,Barmer,Dhorimanna,1190,exact
+barmer,SHEO,Barmer,Sheo,1191,exact
+barmer,SINDHARI,Barmer,Sindhari,1192,exact
+barmer,SIWANA,Barmer,Siwana,1193,exact
+bharatpur,BAYANA,Bharatpur,Bayana,1194,exact
+bharatpur,DEEG,Bharatpur,Deeg,1195,exact
+bharatpur,KAMAN,Bharatpur,Kaman,1196,exact
+bharatpur,KUMHER,Bharatpur,Kumher,1197,exact
+bharatpur,NADBAI,Bharatpur,Nadbai,1198,exact
+bharatpur,RUPBAS,Bharatpur,Rupbas,1200,exact
+bharatpur,SEWAR,Bharatpur,Sewar,1201,exact
+bharatpur,WEIR,Bharatpur,Weir,1202,exact
+bhilwara,ASIND,Bhilwara,Asind,1203,exact
+bhilwara,BANERA,Bhilwara,Banera,1204,exact
+bhilwara,HURDA,Bhilwara,Hurda,1205,exact
+bhilwara,JAHAZPUR,Bhilwara,Jahazpur,1206,exact
+bhilwara,KOTRI,Bhilwara,Kotri,1207,exact
+bhilwara,MANDAL,Bhilwara,Mandal,1208,exact
+bhilwara,MANDALGARH,Bhilwara,Mandalgarh,1209,exact
+bhilwara,RAIPUR,Bhilwara,Raipur,1210,exact
+bhilwara,SAHARA,Bhilwara,Sahara,1211,exact
+bhilwara,SHAHPURA,Bhilwara,Shahpura,1212,exact
+bhilwara,SUWANA,Bhilwara,Suwana,1213,exact
+bikaner,BIKANER,Bikaner,Bikaner,1214,exact
+bikaner,KOLAYAT,Bikaner,Kolayat,1215,exact
+bikaner,LUNKARANSAR,Bikaner,Lunkaransar,1216,exact
+bikaner,NOKHA,Bikaner,Nokha,1217,exact
+bundi,HINDOLI,Bundi,Hindoli,1219,exact
+bundi,KESHORAI PATAN,Bundi,Keshoraipatan,1220,exact
+bundi,NAINWA,Bundi,Nainwa,1221,exact
+bundi,TALERA,Bundi,Talera,1222,exact
+chittorgarh,BARISADRI,Chittorgarh,Bari Sadri,1224,exact
+chittorgarh,BEGUN,Chittorgarh,Begun,1225,exact
+chittorgarh,BHADESAR,Chittorgarh,Bhadesar,1226,exact
+chittorgarh,BHAINSRORGARH,Chittorgarh,Bhainsrorgarh,1227,exact
+chittorgarh,BHOPALSAGAR,Chittorgarh,Bhopalsagar,1228,exact
+chittorgarh,DUNGLA,Chittorgarh,Dungla,1231,exact
+chittorgarh,GANGRAR,Chittorgarh,Gangrar,1232,exact
+chittorgarh,KAPASAN,Chittorgarh,Kapasan,1233,exact
+chittorgarh,NIMBAHERA,Chittorgarh,Nimbahera,1234,exact
+chittorgarh,RASHMI,Chittorgarh,Rashmi,1236,exact
+churu,CHURU,Churu,Churu,1237,exact
+churu,RAJGARH,Churu,Rajgarh,1238,exact
+churu,RATANGARH,Churu,Ratangarh,1239,exact
+churu,SARDAR SHAHAR,Churu,Sardarshahar,1240,exact
+churu,SUJANGARH,Churu,Sujangarh,1241,exact
+churu,TARANAGAR,Churu,Taranagar,1242,exact
+dausa,BANDIKUI,Dausa,Bandikui,1243,exact
+dausa,DAUSA,Dausa,Dausa,1244,exact
+dausa,LALSOT,Dausa,Lalsot,1245,exact
+dausa,MAHWA,Dausa,Mahwa,1246,exact
+dausa,SIKRAI,Dausa,Sikrai,1247,exact
+dholpur,BARI,Dholpur,Bari,1248,exact
+dholpur,BASERI,Dholpur,Baseri,1249,exact
+dholpur,RAJAKHERA,Dholpur,Rajakhera,1251,exact
+dungarpur,ASPUR,Dungarpur,Aspur,1252,exact
+dungarpur,DUNGARPUR,Dungarpur,Dungarpur,1254,exact
+dungarpur,SAGWARA,Dungarpur,Sagwara,1255,exact
+dungarpur,SIMALWARA,Dungarpur,Simalwara,1256,exact
+ganganagar,ANUPGARH,Ganganagar,Anupgarh,1257,exact
+ganganagar,GANGANAGAR,Ganganagar,Ganganagar,1258,exact
+ganganagar,KARANPUR,Ganganagar,Karanpur,1259,exact
+ganganagar,PADAMPUR,Ganganagar,Padampur,1260,exact
+ganganagar,RAISINGHNAGAR,Ganganagar,Raisinghnagar,1261,exact
+ganganagar,SADULSHAHAR,Ganganagar,Sadulshahar,1262,exact
+ganganagar,SURATGARH,Ganganagar,Suratgarh,1263,exact
+hanumangarh,BHADRA,Hanumangarh,Bhadra,1264,exact
+hanumangarh,HANUMANGARH,Hanumangarh,Hanumangarh,1265,exact
+hanumangarh,NOHAR,Hanumangarh,Nohar,1266,exact
+jaipur,AMBER,Jaipur,Amber,1267,exact
+jaipur,BASSI,Jaipur,Bassi,1268,exact
+jaipur,CHAKSU,Jaipur,Chaksu,1269,exact
+jaipur,DUDU,Jaipur,Dudu,1270,exact
+jaipur,GOVINDGARH,Jaipur,Govindgarh,1271,exact
+jaipur,JAMWA RAMGARH,Jaipur,Jamwa Ramgarh,1272,exact
+jaipur,JHOTWARA,Jaipur,Jhotwara,1273,exact
+jaipur,KOTPUTLI,Jaipur,Kotputli,1274,exact
+jaipur,PHAGI,Jaipur,Phagi,1275,exact
+jaipur,SANGANER,Jaipur,Sanganer,1277,exact
+jaipur,SHAHPURA,Jaipur,Shahpura,1278,exact
+jaipur,VIRATNAGAR,Jaipur,Viratnagar,1279,exact
+jaisalmer,JAISALMER,Jaisalmer,Jaisalmer,1280,exact
+jaisalmer,SAM,Jaisalmer,Sam,1281,exact
+jaisalmer,SANKRA,Jaisalmer,Sankra,1282,exact
+jalore,AHORE,Jalore,Ahore,1283,exact
+jalore,BHINMAL,Jalore,Bhinmal,1284,exact
+jalore,JALORE,Jalore,Jalore,1285,exact
+jalore,JASWANTPURA,Jalore,Jaswantpura,1286,exact
+jalore,RANIWARA,Jalore,Raniwara,1287,exact
+jalore,SANCHORE,Jalore,Sanchore,1288,exact
+jalore,SAYLA,Jalore,Sayla,1289,exact
+jhalawar,BAKANI,Jhalawar,Bakani,1290,exact
+jhalawar,DAG,Jhalawar,Dag,1291,exact
+jhalawar,JHALRAPATAN,Jhalawar,Jhalrapatan,1292,exact
+jhalawar,KHANPUR,Jhalawar,Khanpur,1293,exact
+jhalawar,MANOHAR THANA,Jhalawar,Manoharthana,1294,exact
+jhunjhunu,ALSISAR,Jhunjhunu,Alsisar,1296,exact
+jhunjhunu,BUHANA,Jhunjhunu,Buhana,1297,exact
+jhunjhunu,CHIRAWA,Jhunjhunu,Chirawa,1298,exact
+jhunjhunu,JHUNJHUNU,Jhunjhunu,Jhunjhunu,1299,exact
+jhunjhunu,KHETRI,Jhunjhunu,Khetri,1300,exact
+jhunjhunu,NAWALGARH,Jhunjhunu,Nawalgarh,1301,exact
+jhunjhunu,SURAJGARH,Jhunjhunu,Surajgarh,1302,exact
+jhunjhunu,UDAIPURWATI,Jhunjhunu,Udaipurwati,1303,exact
+jodhpur,BALESAR,Jodhpur,Balesar,1304,exact
+jodhpur,BAP,Jodhpur,Bap,1305,exact
+jodhpur,BHOPALGARH,Jodhpur,Bhopalgarh,1306,exact
+jodhpur,BILARA,Jodhpur,Bilara,1307,exact
+jodhpur,LUNI,Jodhpur,Luni,1308,exact
+jodhpur,MANDOR,Jodhpur,Mandor,1309,exact
+jodhpur,OSIAN,Jodhpur,Osian,1310,exact
+jodhpur,PHALODI,Jodhpur,Phalodi,1311,exact
+jodhpur,SHERGARH,Jodhpur,Shergarh,1312,exact
+karauli,HINDAUN,Karauli,Hindaun,1313,exact
+karauli,KARAULI,Karauli,Karauli,1314,exact
+karauli,SAPOTRA,Karauli,Sapotra,1316,exact
+karauli,TODABHIM,Karauli,Todabhim,1317,exact
+kota,ITAWA,Kota,Itawa,1318,exact
+kota,KHAIRABAD,Kota,Khairabad,1319,exact
+kota,LADPURA,Kota,Ladpura,1320,exact
+kota,SANGOD,Kota,Sangod,1321,exact
+kota,SULTANPUR,Kota,Sultanpur,1322,exact
+nagaur,DEGANA,Nagaur,Degana,1323,exact
+nagaur,DIDWANA,Nagaur,Didwana,1324,exact
+nagaur,JAYAL,Nagaur,Jayal,1325,exact
+nagaur,KUCHAMANCITY,Nagaur,Kuchaman City,1326,exact
+nagaur,LADNU,Nagaur,Ladnu,1327,exact
+nagaur,MAKRANA,Nagaur,Makrana,1328,exact
+nagaur,MERTA,Nagaur,Merta,1329,exact
+nagaur,NAGAUR,Nagaur,Nagaur,1331,exact
+nagaur,PARBATSAR,Nagaur,Parbatsar,1332,exact
+pali,BALI,Pali,Bali,1334,exact
+pali,DESURI,Pali,Desuri,1335,exact
+pali,JAITARAN,Pali,Jaitaran,1336,exact
+pali,PALI,Pali,Pali,1338,exact
+pali,RAIPUR,Pali,Raipur,1339,exact
+pali,ROHAT,Pali,Rohat,1341,exact
+pali,SOJAT,Pali,Sojat,1342,exact
+pali,SUMERPUR,Pali,Sumerpur,1343,exact
+pratapgarh,ARNOD,Pratapgarh,Arnod,1223,exact
+pratapgarh,CHHOTISADRI,Pratapgarh,Chhoti Sadri,1229,exact
+pratapgarh,DHARIAWAD,Pratapgarh,Dhariawad,1377,exact
+pratapgarh,PEEPALKHOONT,Pratapgarh,Peepal Khoont,1177,exact
+pratapgarh,PRATAPGARH,Pratapgarh,Pratapgarh,1235,exact
+rajsamand,AMET,Rajsamand,Amet,1344,exact
+rajsamand,BHIM,Rajsamand,Bhim,1345,exact
+rajsamand,DEOGARH,Rajsamand,Deogarh,1346,exact
+rajsamand,KHAMNOR,Rajsamand,Khamnor,1347,exact
+rajsamand,KUMBHALGARH,Rajsamand,Kumbhalgarh,1348,exact
+rajsamand,RAILMAGRA,Rajsamand,Railmagra,1349,exact
+rajsamand,RAJSAMAND,Rajsamand,Rajsamand,1350,exact
+sawaimadhopur,BAMANWAS,Sawai Madhopur,Bamanwas,1351,exact
+sawaimadhopur,BONLI,Sawai Madhopur,Bonli,1352,exact
+sawaimadhopur,KHANDAR,Sawai Madhopur,Khandar,1354,exact
+sawaimadhopur,SAWAI MADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,exact
+sikar,DANTA RAMGARH,Sikar,Danta Ramgarh,1356,exact
+sikar,FATEHPUR,Sikar,Fatehpur,1358,exact
+sikar,KHANDELA,Sikar,Khandela,1359,exact
+sikar,NEEMKATHANA,Sikar,Neem Ka Thana,1361,exact
+sikar,PIPRALI,Sikar,Piprali,1362,exact
+sikar,SRIMADHOPUR,Sikar,Sri Madhopur,1363,exact
+sirohi,ABUROAD,Sirohi,Abu Road,1364,exact
+sirohi,PINDWARA,Sirohi,Pindwara,1365,exact
+sirohi,REODAR,Sirohi,Reodar,1366,exact
+sirohi,SHEOGANJ,Sirohi,Sheoganj,1367,exact
+sirohi,SIROHI,Sirohi,Sirohi,1368,exact
+tonk,DEOLI,Tonk,Deoli,1369,exact
+tonk,MALPURA,Tonk,Malpura,1370,exact
+tonk,TODARAISINGH,Tonk,Todaraisingh,1372,exact
+tonk,TONK,Tonk,Tonk,1373,exact
+tonk,UNIARA,Tonk,Uniara,1374,exact
+udaipur,BARGAON,Udaipur,Bargaon,1375,exact
+udaipur,GIRWA,Udaipur,Girwa,1378,exact
+udaipur,GOGUNDA,Udaipur,Gogunda,1379,exact
+udaipur,JHADOL,Udaipur,Jhadol,1380,exact
+udaipur,KHERWARA,Udaipur,Kherwara,1381,exact
+udaipur,KOTRA,Udaipur,Kotra,1382,exact
+udaipur,MAVLI,Udaipur,Mavli,1383,exact
+udaipur,SALUMBAR,Udaipur,Salumbar,1384,exact
+udaipur,SARADA,Udaipur,Sarada,1385,exact
+ajmer,ARAI,Ajmer,Arain,1149,manual
+ajmer,KISHANGARH,Ajmer,Kishangarh (Silora),1153,manual
+ajmer,MASUDA,Ajmer,Masooda,1154,manual
+ajmer,PEESANGAN,Ajmer,Pisangan,1155,manual
+alwar,RAINI,Alwar,Reni,1167,manual
+bharatpur,NAGAR,Bharatpur,Nagar Pahari,1199,manual
+bikaner,DUNGARGARH,Bikaner,Sri Dungargarh,1218,manual
+chittorgarh,CHHITORGARH,Chittorgarh,Chittorgarh,1230,manual
+dholpur,DHOLPUR,Dholpur,Dhaulpur,1250,manual
+dungarpur,BICHHIWARA,Dungarpur,Bichiwara,1253,manual
+jhalawar,PIRAWA,Jhalawar,Pirawa (Sunel),1295,manual
+karauli,NADOTI,Karauli,Nadauti,1315,manual
+nagaur,MUNDAWA,Nagaur,Mundwa,1330,manual
+nagaur,RIYAN,Nagaur,Riyan Badi,1333,manual
+pali,MARWAR JUN,Pali,Kharchi(Mar.Junction),1337,manual
+sawaimadhopur,GANGAPUR,Sawai Madhopur,Gangapur City,1353,manual
+sikar,DHOND,Sikar,Dhod,1357,manual
+tonk,NIWAI,Tonk,Newai,1371,manual
+udaipur,BHINDAR,Udaipur,Bhinder,1376,manual
