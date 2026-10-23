@@ -12,9 +12,11 @@ import pyarrow.parquet as pq
 from rapidfuzz import process
 from rapidfuzz.distance import Jaro
 
-from local_elections_rajasthan.paths import DATA, ROOT
+from local_elections_rajasthan.paths import GEOGRAPHY, RELEASE, TABLES, table
 
-PRODUCTS = Path(os.environ.get("ELECTION_PRODUCTS_DIR", DATA / "elections"))
+# Where the election products are written; `release verify` points this at a
+# scratch directory to rebuild them beside the published copies.
+PRODUCTS = Path(os.environ.get("ELECTION_PRODUCTS_DIR", RELEASE))
 
 
 def require(condition, message):
@@ -38,12 +40,12 @@ def match_key(frame, columns):
 
 
 def add_geography(frame):
-    districts = pd.read_csv(ROOT / "data/source/geography/raj_district_xwalk.csv")
+    districts = pd.read_csv(GEOGRAPHY / "raj_district_xwalk.csv")
     districts = districts[["elex_district_raw", "shrug_district"]].rename(
         columns={"elex_district_raw": "district_raw", "shrug_district": "district_std"}
     )
     districts["district_std"] = districts.district_std.str.upper()
-    samitis = pd.read_csv(ROOT / "data/source/geography/raj_samiti_std.csv")
+    samitis = pd.read_csv(GEOGRAPHY / "raj_samiti_std.csv")
     frame = frame.merge(
         districts, on="district_raw", how="left", validate="many_to_one"
     )
@@ -57,7 +59,7 @@ def add_geography(frame):
 
 
 def read_election(year):
-    frame = pd.read_parquet(DATA / f"source_{year}_std.parquet")
+    frame = pd.read_parquet(table(f"sarpanch_{year}"))
     for column in ["year", "winner_woman", "reserved_woman"]:
         frame[column] = frame[column].astype("Int32")
     frame["source_row"] = np.arange(1, len(frame) + 1, dtype=np.int32)
@@ -65,7 +67,9 @@ def read_election(year):
     return add_geography(frame)
 
 
-def save(frame, name, integer=(), numeric=(), boolean=(), directory=PRODUCTS):
+def save(frame, key, integer=(), numeric=(), boolean=(), directory=PRODUCTS):
+    """Write a table by its key in paths.TABLES, under `directory`."""
+    name = TABLES[key]
     types = []
     for c in frame:
         dtype = (
@@ -83,7 +87,7 @@ def save(frame, name, integer=(), numeric=(), boolean=(), directory=PRODUCTS):
         )
         types.append((c, dtype))
     table = pa.Table.from_pandas(frame, schema=pa.schema(types), preserve_index=False)
-    directory.mkdir(parents=True, exist_ok=True)
+    (directory / name).parent.mkdir(parents=True, exist_ok=True)
     pq.write_table(table, directory / name, compression="zstd")
     print(f"{name}: {len(frame):,} rows", flush=True)
 

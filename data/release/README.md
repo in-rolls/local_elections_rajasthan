@@ -1,9 +1,11 @@
 # Website collection columns
 
-The four files retain the original collector's column names, including spelling
-variants. Every field is a string. Empty strings remain empty; percentages and
+The four 2020–2022 website tables (`sarpanch_candidates`, `sarpanch_winners`,
+`ward_member_winners`, `nomination_stats`) retain the original collector's
+column names, including spelling variants. Every field is a string. Empty strings remain empty; percentages and
 counts are not parsed or validated by the offline converter. See
-[`MANIFEST.json`](MANIFEST.json) for each file's exact column set.
+[`scrape_conversion.json`](../build/scrape_conversion.json) for each file's exact
+column set.
 
 ## Shared location and election fields
 

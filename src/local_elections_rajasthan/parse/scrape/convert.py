@@ -10,11 +10,11 @@ from pathlib import Path
 import pyarrow as pa
 import pyarrow.parquet as pq
 
-from local_elections_rajasthan.paths import ROOT
+from local_elections_rajasthan.paths import BUILD, RELEASE, SCRAPE
 
 CONTRACTS = {
     "ContestingSarpanch.csv.gz": {
-        "output": "ContestingSarpanch.parquet",
+        "output": "sarpanch_candidates.parquet",
         "columns": [
             "ElectionType",
             "ElectionDuration",
@@ -40,7 +40,7 @@ CONTRACTS = {
         ],
     },
     "StatsNomination.csv.gz": {
-        "output": "StatsNomination.parquet",
+        "output": "nomination_stats.parquet",
         "columns": [
             "ElectionType",
             "ElectionDuration",
@@ -57,7 +57,7 @@ CONTRACTS = {
         ],
     },
     "WinnerSarpanch.csv.gz": {
-        "output": "WinnerSarpanch.parquet",
+        "output": "sarpanch_winners.parquet",
         "columns": [
             "ElectionType",
             "ElectionDuration",
@@ -83,7 +83,7 @@ CONTRACTS = {
         ],
     },
     "WarnWinningPanch.csv.gz": {
-        "output": "WarnWinningPanch.parquet",
+        "output": "ward_member_winners.parquet",
         "columns": [
             "ElectionType",
             "ElectionDuration",
@@ -130,7 +130,9 @@ def read_source(path, columns):
     )
 
 
-def convert(data, out, check=False, contracts=CONTRACTS):
+def convert(data, out, check=False, contracts=CONTRACTS, record=None):
+    """Convert each scrape CSV in `data` to Parquet in `out`; the conversion
+    record goes to `record` (default data/build/scrape_conversion.json)."""
     manifest = {"format_version": 1, "files": []}
     out.mkdir(parents=True, exist_ok=True)
     for name, spec in contracts.items():
@@ -158,7 +160,7 @@ def convert(data, out, check=False, contracts=CONTRACTS):
             }
         )
         print(f"{target.name}: {table.num_rows:,} rows")
-    path = out / "MANIFEST.json"
+    path = record or BUILD / "scrape_conversion.json"
     if check:
         if json.loads(path.read_text()) != manifest:
             raise ValueError(f"{path}: manifest differs from source")
@@ -170,8 +172,8 @@ def convert(data, out, check=False, contracts=CONTRACTS):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--data", type=Path, default=ROOT / "data")
-    parser.add_argument("--out", type=Path, default=ROOT / "data/fin/scrape_2020_2022")
+    parser.add_argument("--data", type=Path, default=SCRAPE)
+    parser.add_argument("--out", type=Path, default=RELEASE)
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
     try:

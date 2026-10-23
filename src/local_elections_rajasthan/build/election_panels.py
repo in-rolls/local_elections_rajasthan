@@ -12,12 +12,13 @@ from local_elections_rajasthan.build.common import (
     read_election,
     save,
 )
+from local_elections_rajasthan.paths import TABLES
 
 YEARS = (2005, 2010, 2015, 2020)
 
 
 def winner_attributes(sources):
-    winners = pd.read_parquet(PRODUCTS / "winners_2020_events.parquet")
+    winners = pd.read_parquet(PRODUCTS / TABLES["sarpanch_winner_events_2020"])
     winners = winners.loc[
         winners.winner_key_unique & winners.gp_event_unique,
         [
@@ -142,7 +143,7 @@ def build_panel(sources, winners, waves):
 
 def build():
     sources = {year: read_election(year) for year in YEARS}
-    save(pd.concat(sources.values(), ignore_index=True), "source_records.parquet")
+    save(pd.concat(sources.values(), ignore_index=True), "sarpanch_source_records")
     sources = {
         year: frame.loc[frame.gp_std.notna() & frame.gp_std.ne("")].copy()
         for year, frame in sources.items()
@@ -160,7 +161,7 @@ def build():
         ]
         save(
             frame,
-            f"raj_{waves[0] % 100:02d}_{waves[-1] % 100:02d}.parquet",
+            f"sarpanch_links_{waves[0]}_{waves[-1]}",
             integer=numeric_fields,
         )
 

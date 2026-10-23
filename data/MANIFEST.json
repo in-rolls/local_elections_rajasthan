@@ -1,9 +1,182 @@
 {
-  "elections/candidates_2020_events.parquet": {
-    "sha256": "4aa2048966c407208f13a7035f2f0a967d652c4403ab71bffae1afcece2118e0",
+  "linkage/gp_lgd_crosswalk.parquet": {
+    "sha256": "5acbd60af860d19d63ee9f59de72a475e7fec32d49c86a0305db7db770ffb180",
+    "rows": 5219,
+    "cols": 9,
+    "bytes": 110348,
+    "columns": [
+      "match_key",
+      "lgd_gp_code",
+      "lgd_gp_name",
+      "lgd_block_code",
+      "lgd_block_name",
+      "lgd_district",
+      "match_type",
+      "match_distance",
+      "match_confidence"
+    ]
+  },
+  "nomination_stats.parquet": {
+    "sha256": "da2218869427f865e359d775d645d9b9bd8c2491fd5ff092806b310bd4334119",
+    "rows": 13473,
+    "cols": 12,
+    "bytes": 141139,
+    "columns": [
+      "ElectionType",
+      "ElectionDuration",
+      "District",
+      "PanchayatSamiti",
+      "SrNo",
+      "GramPanchayat",
+      "NominationTotalNoOfNominationFilled",
+      "NominationCandidate",
+      "ValidlyNominatedCandidate",
+      "Withdrawal",
+      "Unopposed",
+      "Contestants"
+    ]
+  },
+  "2005/panchayat_samiti_results.parquet": {
+    "sha256": "2144f9a89b40e0ab239ccde1076b7d33262648c7ffe2ee1c7fc68db36d8c3112",
+    "rows": 5257,
+    "cols": 29,
+    "bytes": 134080,
+    "columns": [
+      "year",
+      "serial",
+      "district_raw",
+      "samiti_raw",
+      "ward_no",
+      "ward_no_inferred",
+      "reserved_raw",
+      "reserved_code",
+      "reserved_caste",
+      "reserved_woman",
+      "reserved_body_control_agree",
+      "seat_filled",
+      "winner_name",
+      "winner_name_missing",
+      "winner_woman_raw",
+      "winner_woman",
+      "winner_caste_raw",
+      "winner_caste_code",
+      "winner_caste",
+      "winner_caste_woman_agree",
+      "party_raw",
+      "party",
+      "votes_secured",
+      "margin",
+      "margin_below_votes",
+      "elected_uncontested",
+      "remark_raw",
+      "source_path",
+      "source_page"
+    ]
+  },
+  "2010/panchayat_samiti_results.parquet": {
+    "sha256": "2954cad29082e309ac5e435b04b403d6c879efaafea64994a886bc26c06bc87a",
+    "rows": 5273,
+    "cols": 19,
+    "bytes": 98004,
+    "columns": [
+      "year",
+      "serial",
+      "district_raw",
+      "samiti_raw",
+      "ward_no_raw",
+      "ward_no",
+      "reserved_raw",
+      "reserved_caste",
+      "reserved_woman",
+      "winner_name",
+      "winner_woman_raw",
+      "winner_woman",
+      "winner_caste_raw",
+      "winner_caste_code",
+      "winner_caste",
+      "winner_caste_woman_agree",
+      "party_raw",
+      "source_path",
+      "source_page"
+    ]
+  },
+  "2005/sarpanch_results.parquet": {
+    "sha256": "bae4ca5e76815d6ee5f36c830f649abebf8128e42aba3a1a3e985d06b724e165",
+    "rows": 9178,
+    "cols": 10,
+    "bytes": 185853,
+    "columns": [
+      "year",
+      "district_raw",
+      "samiti_raw",
+      "gp_raw",
+      "gp_std",
+      "winner_name",
+      "winner_woman",
+      "reserved_woman",
+      "reserved_caste",
+      "reserved_raw"
+    ]
+  },
+  "2010/sarpanch_results.parquet": {
+    "sha256": "7973ba96c001cc88e3188220ae1c3f83b5fdb740cc4d14886d220561fb58441f",
+    "rows": 9166,
+    "cols": 10,
+    "bytes": 194168,
+    "columns": [
+      "year",
+      "district_raw",
+      "samiti_raw",
+      "gp_raw",
+      "gp_std",
+      "winner_name",
+      "winner_woman",
+      "reserved_woman",
+      "reserved_caste",
+      "reserved_raw"
+    ]
+  },
+  "2015/sarpanch_results.parquet": {
+    "sha256": "e029fb871e69bea01032b2bd446310b831f40631b94f5c57e1cf6b190ad6eb9f",
+    "rows": 9862,
+    "cols": 10,
+    "bytes": 215898,
+    "columns": [
+      "year",
+      "district_raw",
+      "samiti_raw",
+      "gp_raw",
+      "gp_std",
+      "winner_name",
+      "winner_woman",
+      "reserved_woman",
+      "reserved_caste",
+      "reserved_raw"
+    ]
+  },
+  "2020/sarpanch_reservations.parquet": {
+    "sha256": "76cd596506c8de77dd8fda6cb9b77726b3037317bd71aaa44e9ff7d1fdb1d0a1",
+    "rows": 11314,
+    "cols": 10,
+    "bytes": 169821,
+    "columns": [
+      "year",
+      "district_raw",
+      "samiti_raw",
+      "gp_raw",
+      "gp_std",
+      "winner_name",
+      "winner_woman",
+      "reserved_woman",
+      "reserved_caste",
+      "reserved_raw"
+    ]
+  },
+  "2020/sarpanch_candidate_events.parquet": {
+    "sha256": "e364f39f6dc5fa7d9c72a0a18194b528c4a986e1afe1c6e76ab79aeca12a06e8",
     "rows": 67689,
     "cols": 36,
-    "bytes": 2089049,
+    "bytes": 2087261,
     "columns": [
       "election_type",
       "election_duration",
@@ -43,24 +216,36 @@
       "source_id"
     ]
   },
-  "elections/gp_lgd_crosswalk.parquet": {
-    "sha256": "b2a87dd960845f575de246c3e4bc46ce4034f598903d02568324a4d177a6cef6",
-    "rows": 5219,
-    "cols": 9,
-    "bytes": 156341,
+  "sarpanch_candidates.parquet": {
+    "sha256": "385cf12352831697da2b2e274fa21029126d75b48bc198227f82b45a62e76167",
+    "rows": 68202,
+    "cols": 21,
+    "bytes": 1672409,
     "columns": [
-      "match_key",
-      "lgd_gp_code",
-      "lgd_gp_name",
-      "lgd_block_code",
-      "lgd_block_name",
-      "lgd_district",
-      "match_type",
-      "match_distance",
-      "match_confidence"
+      "ElectionType",
+      "ElectionDuration",
+      "District",
+      "PanchayatSamiti",
+      "SrNo",
+      "NameOfGramPanchayat",
+      "CategoryOfGramPanchayat",
+      "ContestingCandidateSerialNo",
+      "NameOfContestingCandidate",
+      "FatherHusbandOfContestingCandidate",
+      "Gender",
+      "MartialStatus",
+      "CategoryOfCandidate",
+      "EducationStatus",
+      "ContestingCandidateOccupation",
+      "Age",
+      "TotalValueOfCapitalAssets",
+      "ChildrenBefore27111995",
+      "ChildrenOnOrAfter28111995",
+      "MobileNo",
+      "EmailAddress"
     ]
   },
-  "elections/raj_05_10.parquet": {
+  "linkage/sarpanch_2005_2010.parquet": {
     "sha256": "f7ea772b3b32f820749c2c41a38a980d081c20528e84a468a573e730ee1d00b6",
     "rows": 7667,
     "cols": 27,
@@ -95,7 +280,7 @@
       "source_id_2010"
     ]
   },
-  "elections/raj_05_20.parquet": {
+  "linkage/sarpanch_2005_2020.parquet": {
     "sha256": "edf689fefe23ad1f75313b3cdaef113456f83e791f4cc0c2a483b59f0df2b08b",
     "rows": 5334,
     "cols": 63,
@@ -166,7 +351,7 @@
       "source_id_2020"
     ]
   },
-  "elections/raj_10_15.parquet": {
+  "linkage/sarpanch_2010_2015.parquet": {
     "sha256": "3a2fd87de0e8e7dbb425f06343e8eb00b620be8c785a80e0212963f43c634d18",
     "rows": 7447,
     "cols": 27,
@@ -201,7 +386,7 @@
       "source_id_2015"
     ]
   },
-  "elections/raj_15_20.parquet": {
+  "linkage/sarpanch_2015_2020.parquet": {
     "sha256": "1f5b9835f8e990730a6ee707a89c537b7d2e0281a9b6ea48c283ecc012e5e618",
     "rows": 7882,
     "cols": 35,
@@ -244,7 +429,7 @@
       "source_id_2020"
     ]
   },
-  "elections/source_records.parquet": {
+  "sarpanch_source_records.parquet": {
     "sha256": "0b1c9997f26b4ad0fe62aa639d9692b24cb117dbfda73f7002b4dd5a4e40c855",
     "rows": 39520,
     "cols": 15,
@@ -267,11 +452,11 @@
       "match_key"
     ]
   },
-  "elections/winners_2020_events.parquet": {
-    "sha256": "c193288222a808e974622d3bb05715326f91082d8449f43214221b85ea640fde",
+  "2020/sarpanch_winner_events.parquet": {
+    "sha256": "9160c54fe5b57581d41138ef0a61c742e61d0cd9f3c51383f9e7ff951ec1545c",
     "rows": 11300,
     "cols": 42,
-    "bytes": 884005,
+    "bytes": 883700,
     "columns": [
       "election_type",
       "election_duration",
@@ -317,147 +502,66 @@
       "source_id"
     ]
   },
-  "panchayat_samiti_2005_std.parquet": {
-    "sha256": "9d0526e0578cb1eea54387bb01221460e5856da62d06f806ae166cdf05e034b8",
-    "rows": 5257,
-    "cols": 29,
-    "bytes": 134095,
+  "sarpanch_winners.parquet": {
+    "sha256": "0d87b3fcba53c9f5f6a0bf7df1d438e9d5d67675f7525e936bd503101af0efab",
+    "rows": 11432,
+    "cols": 21,
+    "bytes": 488629,
     "columns": [
-      "year",
-      "serial",
-      "district_raw",
-      "samiti_raw",
-      "ward_no",
-      "ward_no_inferred",
-      "reserved_raw",
-      "reserved_code",
-      "reserved_caste",
-      "reserved_woman",
-      "reserved_body_control_agree",
-      "seat_filled",
-      "winner_name",
-      "winner_name_missing",
-      "winner_woman_raw",
-      "winner_woman",
-      "winner_caste_raw",
-      "winner_caste_code",
-      "winner_caste",
-      "winner_caste_woman_agree",
-      "party_raw",
-      "party",
-      "votes_secured",
-      "margin",
-      "margin_below_votes",
-      "elected_uncontested",
-      "remark_raw",
-      "source_path",
-      "source_page"
+      "ElectionType",
+      "ElectionDuration",
+      "District",
+      "PanchayatSamiti",
+      "SrNo",
+      "NameOfGramPanchyat",
+      "CategoryOfGramPanchyat",
+      "TotalNoOfContestingCandidate",
+      "ElectedUnoppose",
+      "TotalElectorateVotes",
+      "TotalPolledVotes",
+      "RejectedVotes",
+      "TotalValidVotes",
+      "PollPercent",
+      "WinnerCandidateName",
+      "ViewPledge",
+      "VoteSecureByWinner",
+      "RunnerupCandidateName",
+      "VoteSecureByRunnerup",
+      "TotalNoOfNOTACount",
+      "TenderedVotes"
     ]
   },
-  "panchayat_samiti_2010_std.parquet": {
-    "sha256": "1ce2c710d95886d4c6edadc620732abe18b3823af544cacb81232a757c8c6f4c",
-    "rows": 5273,
-    "cols": 19,
-    "bytes": 98019,
+  "ward_member_winners.parquet": {
+    "sha256": "5dd8d727833d3b24c00ab07f12d24d933ec74c4c2d10321b31d29b410d309176",
+    "rows": 110296,
+    "cols": 18,
+    "bytes": 1776784,
     "columns": [
-      "year",
-      "serial",
-      "district_raw",
-      "samiti_raw",
-      "ward_no_raw",
-      "ward_no",
-      "reserved_raw",
-      "reserved_caste",
-      "reserved_woman",
-      "winner_name",
-      "winner_woman_raw",
-      "winner_woman",
-      "winner_caste_raw",
-      "winner_caste_code",
-      "winner_caste",
-      "winner_caste_woman_agree",
-      "party_raw",
-      "source_path",
-      "source_page"
+      "ElectionType",
+      "ElectionDuration",
+      "District",
+      "PanchayatSamiti",
+      "SrNo",
+      "Grampanchayat",
+      "WardNo",
+      "NameOfVillage",
+      "CategoryOfWard",
+      "NameOfCandidate",
+      "TotalNoOfVotes",
+      "VotesPolled",
+      "PollPercent",
+      "WhetherElectedUnoppose",
+      "CategoryOfWinningCandidate",
+      "RemarkIfAny",
+      "WinnerVotes",
+      "LooserVotes"
     ]
   },
-  "source_2005_std.parquet": {
-    "sha256": "bae4ca5e76815d6ee5f36c830f649abebf8128e42aba3a1a3e985d06b724e165",
-    "rows": 9178,
-    "cols": 10,
-    "bytes": 185853,
-    "columns": [
-      "year",
-      "district_raw",
-      "samiti_raw",
-      "gp_raw",
-      "gp_std",
-      "winner_name",
-      "winner_woman",
-      "reserved_woman",
-      "reserved_caste",
-      "reserved_raw"
-    ]
-  },
-  "source_2010_std.parquet": {
-    "sha256": "7973ba96c001cc88e3188220ae1c3f83b5fdb740cc4d14886d220561fb58441f",
-    "rows": 9166,
-    "cols": 10,
-    "bytes": 194168,
-    "columns": [
-      "year",
-      "district_raw",
-      "samiti_raw",
-      "gp_raw",
-      "gp_std",
-      "winner_name",
-      "winner_woman",
-      "reserved_woman",
-      "reserved_caste",
-      "reserved_raw"
-    ]
-  },
-  "source_2015_std.parquet": {
-    "sha256": "e029fb871e69bea01032b2bd446310b831f40631b94f5c57e1cf6b190ad6eb9f",
-    "rows": 9862,
-    "cols": 10,
-    "bytes": 215898,
-    "columns": [
-      "year",
-      "district_raw",
-      "samiti_raw",
-      "gp_raw",
-      "gp_std",
-      "winner_name",
-      "winner_woman",
-      "reserved_woman",
-      "reserved_caste",
-      "reserved_raw"
-    ]
-  },
-  "source_2020_std.parquet": {
-    "sha256": "76cd596506c8de77dd8fda6cb9b77726b3037317bd71aaa44e9ff7d1fdb1d0a1",
-    "rows": 11314,
-    "cols": 10,
-    "bytes": 169821,
-    "columns": [
-      "year",
-      "district_raw",
-      "samiti_raw",
-      "gp_raw",
-      "gp_std",
-      "winner_name",
-      "winner_woman",
-      "reserved_woman",
-      "reserved_caste",
-      "reserved_raw"
-    ]
-  },
-  "zila_parishad_2005_std.parquet": {
-    "sha256": "122644a3a956022283a92a374a2fe017b7a9c15393ad730e81a52a720aff8157",
+  "2005/zila_parishad_results.parquet": {
+    "sha256": "5da355e18af9f6b3562f924f87b76b2993d69549bde0807c01124bcf40c7b2b0",
     "rows": 1008,
     "cols": 30,
-    "bytes": 43634,
+    "bytes": 43613,
     "columns": [
       "year",
       "district_serial_raw",
@@ -491,11 +595,11 @@
       "source_page"
     ]
   },
-  "zila_parishad_2010_std.parquet": {
-    "sha256": "0b5abfbd85f9fb156fc93e2937460f57ef632012bc00cecba17cef180ebe236c",
+  "2010/zila_parishad_results.parquet": {
+    "sha256": "90a66cd554d20e26bbeadafc9f5f6866a43b5d15d05def785c8cddf260b1cd68",
     "rows": 1013,
     "cols": 28,
-    "bytes": 42157,
+    "bytes": 42136,
     "columns": [
       "year",
       "district_raw",

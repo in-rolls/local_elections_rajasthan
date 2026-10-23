@@ -17,50 +17,59 @@ import pyarrow.parquet as pq
 from local_elections_rajasthan.build.common import save
 from local_elections_rajasthan.build.standardize_sources import standardize
 from local_elections_rajasthan.parse.scrape.convert import convert
-from local_elections_rajasthan.paths import DATA, ROOT
+from local_elections_rajasthan.paths import (
+    GEOGRAPHY,
+    MANIFEST,
+    RELEASE,
+    ROOT,
+    SCRAPE,
+    TABLES,
+    table,
+)
+
+
+def describe(key):
+    path = table(key)
+    parquet = pq.ParquetFile(path)
+    with path.open("rb") as stream:
+        digest = hashlib.file_digest(stream, "sha256").hexdigest()
+    return {
+        "sha256": digest,
+        "rows": parquet.metadata.num_rows,
+        "cols": parquet.metadata.num_columns,
+        "bytes": path.stat().st_size,
+        "columns": parquet.schema_arrow.names,
+    }
 
 
 def build():
-    schema = {}
-    paths = sorted([*DATA.glob("*_std.parquet"), *DATA.glob("elections/*.parquet")])
-    for path in paths:
-        parquet = pq.ParquetFile(path)
-        with path.open("rb") as stream:
-            digest = hashlib.file_digest(stream, "sha256").hexdigest()
-        schema[path.relative_to(DATA).as_posix()] = {
-            "sha256": digest,
-            "rows": parquet.metadata.num_rows,
-            "cols": parquet.metadata.num_columns,
-            "bytes": path.stat().st_size,
-            "columns": parquet.schema_arrow.names,
-        }
-    (DATA / "SCHEMA.json").write_text(json.dumps(schema, indent=2) + "\n")
-    (DATA / "CHECKSUMS.sha256").write_text(
-        "".join(f"{entry['sha256']}  {name}\n" for name, entry in schema.items())
-    )
+    """Record every published table in data/MANIFEST.json, keyed by its path
+    under data/release/."""
+    manifest = {TABLES[key]: describe(key) for key in sorted(TABLES)}
+    MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
 
 
 UNITS = {
-    "source_2005_std.parquet": "Gram Panchayat seat",
-    "source_2010_std.parquet": "Gram Panchayat seat",
-    "source_2015_std.parquet": "Gram Panchayat seat",
-    "source_2020_std.parquet": "Gram Panchayat reservation record",
-    "panchayat_samiti_2005_std.parquet": "Panchayat Samiti member seat",
-    "panchayat_samiti_2010_std.parquet": "Panchayat Samiti member ward",
-    "zila_parishad_2005_std.parquet": "Zila Parishad member ward",
-    "zila_parishad_2010_std.parquet": "Zila Parishad member ward",
-    "ContestingSarpanch.parquet": "Contesting Sarpanch candidate",
-    "StatsNomination.parquet": "Gram Panchayat nomination-statistics record",
-    "WinnerSarpanch.parquet": "Sarpanch winner record",
-    "WarnWinningPanch.parquet": "Ward-winning Panch record",
-    "source_records.parquet": "Source record with reviewed geography and identity",
-    "candidates_2020_events.parquet": "Candidate in a 2020 general-election phase",
-    "winners_2020_events.parquet": "Winner in a 2020 general-election phase",
-    "raj_05_10.parquet": "Unambiguous GP link between 2005 and 2010",
-    "raj_10_15.parquet": "Unambiguous GP link between 2010 and 2015",
-    "raj_15_20.parquet": "Unambiguous GP link between 2015 and 2020",
-    "raj_05_20.parquet": "Unambiguous GP link across all four years",
-    "gp_lgd_crosswalk.parquet": "Accepted election match key to LGD GP link",
+    "sarpanch_2005": "Gram Panchayat seat",
+    "sarpanch_2010": "Gram Panchayat seat",
+    "sarpanch_2015": "Gram Panchayat seat",
+    "sarpanch_2020": "Gram Panchayat reservation record",
+    "panchayat_samiti_2005": "Panchayat Samiti member seat",
+    "panchayat_samiti_2010": "Panchayat Samiti member ward",
+    "zila_parishad_2005": "Zila Parishad member ward",
+    "zila_parishad_2010": "Zila Parishad member ward",
+    "sarpanch_candidates": "Contesting Sarpanch candidate",
+    "nomination_stats": "Gram Panchayat nomination-statistics record",
+    "sarpanch_winners": "Sarpanch winner record",
+    "ward_member_winners": "Ward-winning Panch record",
+    "sarpanch_source_records": "Source record with reviewed geography and identity",
+    "sarpanch_candidate_events_2020": "Candidate in a 2020 general-election phase",
+    "sarpanch_winner_events_2020": "Winner in a 2020 general-election phase",
+    "sarpanch_links_2005_2010": "Unambiguous GP link between 2005 and 2010",
+    "sarpanch_links_2010_2015": "Unambiguous GP link between 2010 and 2015",
+    "sarpanch_links_2015_2020": "Unambiguous GP link between 2015 and 2020",
+    "sarpanch_links_2005_2020": "Unambiguous GP link across all four years",
+    "gp_lgd_crosswalk": "Accepted election match key to LGD GP link",
 }
 
 
@@ -71,11 +80,12 @@ def summary():
         "| File | Rows | Each row represents |",
         "| --- | ---: | --- |",
     ]
-    for path in sorted(DATA.rglob("*.parquet")):
-        name = path.relative_to(ROOT).as_posix()
+    for key in sorted(TABLES, key=TABLES.get):
+        path = table(key)
         rows = pq.ParquetFile(path).metadata.num_rows
         lines.append(
-            f"| [{path.relative_to(DATA)}]({name}) | {rows:,} | {UNITS[path.name]} |"
+            f"| [{TABLES[key]}]({path.relative_to(ROOT).as_posix()}) "
+            f"| {rows:,} | {UNITS[key]} |"
         )
     lines.extend(["", "<!-- datasets:end -->"])
     readme = ROOT / "README.md"
@@ -112,28 +122,27 @@ def same_values(expected, actual, name):
         )
 
 
+# What candidate_events, election_panels and geographic_bridge write.
+PRODUCTS = [
+    "sarpanch_source_records",
+    "sarpanch_candidate_events_2020",
+    "sarpanch_winner_events_2020",
+    "sarpanch_links_2005_2010",
+    "sarpanch_links_2010_2015",
+    "sarpanch_links_2015_2020",
+    "sarpanch_links_2005_2020",
+    "gp_lgd_crosswalk",
+]
+
+
 def verify():
-    schema = json.loads((DATA / "SCHEMA.json").read_text())
-    paths = sorted([*DATA.glob("*_std.parquet"), *DATA.glob("elections/*.parquet")])
-    if set(schema) != {p.relative_to(DATA).as_posix() for p in paths}:
+    manifest = json.loads(MANIFEST.read_text())
+    if set(manifest) != set(TABLES.values()):
         raise ValueError("Published file inventory changed")
-    checksums = []
-    for path in paths:
-        entry = schema[path.relative_to(DATA).as_posix()]
-        parquet = pq.ParquetFile(path)
-        digest = hashlib.sha256(path.read_bytes()).hexdigest()
-        if entry != dict(
-            sha256=digest,
-            rows=parquet.metadata.num_rows,
-            cols=parquet.metadata.num_columns,
-            bytes=path.stat().st_size,
-            columns=parquet.schema_arrow.names,
-        ):
-            raise ValueError(f"{path}: metadata differs")
-        checksums.append(f"{digest}  {path.relative_to(DATA).as_posix()}\n")
-    if (DATA / "CHECKSUMS.sha256").read_text() != "".join(checksums):
-        raise ValueError("Published checksums differ")
-    geography = ROOT / "data/source/geography"
+    for key in TABLES:
+        if manifest[TABLES[key]] != describe(key):
+            raise ValueError(f"{table(key)}: metadata differs")
+    geography = GEOGRAPHY
     manifest = json.loads((geography / "MANIFEST.json").read_text())
     if {p.name for p in geography.glob("*.csv")} != {
         e["file"] for e in manifest["files"]
@@ -145,25 +154,27 @@ def verify():
             != entry["sha256"]
         ):
             raise ValueError(f"Geographic input changed: {entry['file']}")
-    convert(ROOT / "data", DATA / "scrape_2020_2022", check=True)
+    convert(SCRAPE, RELEASE, check=True)
     with tempfile.TemporaryDirectory(prefix="rajasthan-verify-") as temp:
         out = Path(temp)
         for year in (2005, 2010, 2015, 2020):
-            name = f"source_{year}_std.parquet"
+            key = f"sarpanch_{year}"
             save(
                 standardize(year),
-                name,
+                key,
                 integer=["year", "winner_woman", "reserved_woman"],
                 directory=out,
             )
-            same_values(pq.read_table(DATA / name), pq.read_table(out / name), name)
+            same_values(
+                pq.read_table(table(key)), pq.read_table(out / TABLES[key]), key
+            )
         for book in (
             "panchayat_samiti_2005",
             "panchayat_samiti_2010",
             "zila_parishad_2005",
             "zila_parishad_2010",
         ):
-            name = f"{book}_std.parquet"
+            name = f"{book}.parquet"
             subprocess.run(
                 [
                     sys.executable,
@@ -174,7 +185,7 @@ def verify():
                 ],
                 check=True,
             )
-            same_values(pq.read_table(DATA / name), pq.read_table(out / name), name)
+            same_values(pq.read_table(table(book)), pq.read_table(out / name), name)
         env = {**os.environ, "ELECTION_PRODUCTS_DIR": str(out / "elections")}
         for stage in ("candidate_events", "election_panels", "geographic_bridge"):
             subprocess.run(
@@ -182,11 +193,11 @@ def verify():
                 env=env,
                 check=True,
             )
-        for path in sorted((DATA / "elections").glob("*.parquet")):
+        for key in PRODUCTS:
             same_values(
-                pq.read_table(path),
-                pq.read_table(out / "elections" / path.name),
-                path.name,
+                pq.read_table(table(key)),
+                pq.read_table(out / "elections" / TABLES[key]),
+                key,
             )
     print("All 20 published tables reproduce from retained sources.")
 

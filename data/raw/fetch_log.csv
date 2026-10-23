@@ -1,0 +1,53 @@
+path,url,sha256,bytes,fetched_at_utc,method,source
+data/raw/municipal/2020_50-Municipal General Election Book.pdf,,6cece453be6e4880de675d2a297452b27a5fb62877e27f3e4f6ac9d473de3136,58239403,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/2020_6-Municipal General Election Book.pdf,,b027ad149d4a1abd6a0e4e4a8e54d9efd15367188d77a444d48b636b0ece83b5,30970957,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/2020_municipal.pdf,,263247c712776ddcb65a4429154210f0baba9e928c6947b529cdcf817d50f1e6,58275512,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/municipal_2004.docx,,f802942801f9b96e6ae1589858b551bbfb7bb4843b865e02af74b7698f6fe152,97627,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/municipal_2004.pdf,,31ce7bc2f3312c6dd926f12af0c5b20b635d919695b319509f6ef9917ad2c00d,175191,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/municipal_2005_06.pdf,,e84bd06610b400f3ba6f7194c399975b22bafcbef45b0aad59adf80a844bdf72,27298727,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/municipal_2009.pdf,,5b9ace186064d12b3c51412c6c840d16f7915ff3af489d619da074926f8823a2,390939,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/municipal_2014.pdf,,3f829d73c881ad966b7bc10a94e784e600fb64239a0a116a3cdb2c7cb08dc932,45719979,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/municipal_2019.pdf,,222a21562668275b40e0e228918c452da4a290df73a55adcc753189e475a7cdc,3484707,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/municipal_2020.txt,,2e18dcfe620821acf0aa1b4b247ac6ead992e9848d8d04ad1adb13ffba33bfe1,45186,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/municipal_2021,,f4ab6859fc2917593de95d2762466ddcec1a58448dde26bbcd9c8c0aa6c39d77,225592,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/municipal_2021-compressed.pdf,,ebb6d2d9c985abc9bcfdbb7f867d46e70c6c32f06b2ef560ccae0a9d07187427,97628941,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/municipal_chairperson_2004.pdf,,e35a97fc0f2ab209cb5054c591f5b834390229b1be71a23bc3ee448f2819f677,18996,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/municipal_deputy_chairperson_2004.pdf,,f8371801334c22dc5f7fdf3b78b39f046c75acace10114a492c572d5ad4219f9,18870,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/rajasthan_municipal_2009.csv,,fd745bf62f9123012f2dcab5a0d6567fc2fecee38a44e52aa9578b8e07f418bb,87676,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/rajasthan_municipal_2019.csv,,fd43e74418f435af331254d14080a7c00d38ecbd097e566f9a51902cb83e4093,162955,,unknown,held by the project before this repository; origin not recorded
+data/raw/municipal/rajasthan_municipal_2019_education_winning.csv,,e0add677ce2f99eb743f78803ebba7507daa116cf8c317722d392553a035d9fa,124355,,unknown,held by the project before this repository; origin not recorded
+data/raw/panchayat_samiti/2000_elected_up_pradhans_nearest_rival.pdf,,96aa48c4c2307dd72c7476355a62bd86c28cae61b651efc8847d38a175bb1fa8,35114,,unknown,held by the project before this repository; origin not recorded
+data/raw/panchayat_samiti/List of Elected Pradhans and Nearest Rival_2000.pdf,,f10a5c57ea04889be246899462044fbd16030bc3802576351480852950af5970,36843,,unknown,held by the project before this repository; origin not recorded
+data/raw/panchayat_samiti/panchayat_2000_pradhans.docx,,91a37b1cf67333d32c47821749b573bb6badc05d202a0a6d30f1da2365b95acf,79867,,unknown,held by the project before this repository; origin not recorded
+data/raw/panchayat_samiti/panchayat_2000_pradhans.pdf,,11101ec774fd0bee003e5b42dcee2b43f56e7517e94586a911930e4f0c86cb09,1346631,,unknown,held by the project before this repository; origin not recorded
+data/raw/panchayat_samiti/panchayat_samiti_2005.pdf,,ef08fe1925432f9f644c9a53ce13803521d095448c98855a1feb0425e7af881e,771584,,unknown,held by the project before this repository; origin not recorded
+data/raw/panchayat_samiti/panchayat_samiti_2010.pdf,,e88f62d7e7172612310c66e73d90b475c2fb48494c57906fea6153dbce8c14c7,1640967,,unknown,held by the project before this repository; origin not recorded
+data/raw/panchayat_samiti/panchayat_samiti_2015-compressed.pdf,,04ccceada4f64f3d8f9d5a6b2d4882a4f9f4860d52c91b59ff3ade5664a9c3db,29152753,,unknown,held by the project before this repository; origin not recorded
+data/raw/panchayat_samiti/rajasthan_2000_panchayat_pradhan.csv,,d6c8d6105e4ee36073ac9633d65e94097d0bee1668fe35e426bc619142560e20,13352,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/background/2000_district_wise_sarpanch_women.pdf,,b4b91b26e0c5bdc71155196436aeade1f8bc466caad6a99c351fc042b10fcfd8,15244,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/background/2010_sarpanch.pdf,,9377c81ca335aba5717c73b1ee49be118233194bdee4500d40f5207e7c4694b1,3618499,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/background/pdfs/panchayat_2005.pdf,,00f45ffad9090868662db4da84cf484813fc9c06491ea80e13272020aaaea40d,884694,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/background/pdfs/panchayat_2010.pdf,,85012c741fc19a69b8c1c6f28b7a119e35b24ac2cd0dd78332d052a01659f1cc,1201993,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/background/pdfs/panchayat_2015.pdf,,76528c4b104bd9026bcffddba2ab4a8016fc8eb2907e297e867ea1e47c8e4d85,22044681,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/background/pdfs/panchayat_2020_Part-I-compressed.pdf,,6f0652027f2e5404304246cbd4276b6f314072cd37c6999252ba62218ea9360e,61771294,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/background/pdfs/panchayat_2020_Part-II.pdf,,49379088afd1ea39a1e15e6d947b7ebebf91f539ad5acf1bd781479eb692ea23,18072467,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/background/pdfs/rajsec_laws.pdf,,0862427bdd2e02e0fca988f21288e111e4a786cf0ae702c00f227472df3b94da,2340535,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/background/sarpanch_2005.xlsx,,f272ff38e0afe0e825e8d64b1344e4f3252c14c99cb79f5cebf69967829b22e1,639916,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/background/sarpanch_2010.xlsx,,84e732a447b4c03738d677bc19491b7e2349d942c3a5be3c79d49700408f6205,641988,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/background/sarpanch_2015.xlsx,,7b332ad17ce7302cd855ac32ea3c0b68fff4f448179c5215968057fa256568ed,681054,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/sarpanch_2005.csv,,642c992acc6aa6f81dcfdfbe630a71b017aff551736c435e3ac839bbd85e2c92,763360,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/sarpanch_2010.csv,,84c9ed22680e75ac5e06f05fcc93e57bc38cc6d835e5cb22887e9d5f982089db,722131,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/sarpanch_2015.csv,,cffa013832efa807b67ee8fe6d42ef4511a3d29f2e48243e1af8707ffeaf7c79,868043,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/sarpanch_2020_clean.csv,,0f13bc76ea6d5203a55bb42d858fc832852136f18afd0cc7baf6fd66422f0449,410724,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/sp_05_10_15_best.csv,,0891709660dce42909a3a6e129c5bcdc1abd9b911a0a8ec68bfff00b3a24cd2c,2977047,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/sp_2005_2010.csv,,e529bc06d7fa14eeb6dbf3e9bcce109045e40ee2ade215e414330190e24b6d93,2052802,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/sp_2005_2010_fin.csv,,cb4a9ecff76c449ea6b34384e1f42a2b6217b935a4aa100e2af75277076a0743,2174472,,unknown,held by the project before this repository; origin not recorded
+data/raw/sarpanch/sp_205_2010_2015_fin.csv,,e2188b2384b5aea0cb675b47d09cb906c3e9c916c03238b2ea99b492a8ed8fb4,3006609,,unknown,held by the project before this repository; origin not recorded
+data/raw/sec_scrape/ContestingSarpanch.csv.gz,,d0360d37c63c5f0984fd25e5695af9c7958797ff435da8d1a0aefae9d7dcc889,2138924,,unknown,"sec.rajasthan.gov.in, compiled by the 2023 scraper (data/search_log/scrape_2023-01-03.log); requests not recorded"
+data/raw/sec_scrape/StatsNomination.csv.gz,,28919f7dd41a1709379713fd6549f34c02a48f346d6ec6ff928494364bf3084a,152577,,unknown,"sec.rajasthan.gov.in, compiled by the 2023 scraper (data/search_log/scrape_2023-01-03.log); requests not recorded"
+data/raw/sec_scrape/WarnWinningPanch.csv.gz,,0d9d385b09cae7b27fec230dac801f7345d0781ec0456747d09daf0920b9a5f1,2685722,,unknown,"sec.rajasthan.gov.in, compiled by the 2023 scraper (data/search_log/scrape_2023-01-03.log); requests not recorded"
+data/raw/sec_scrape/WinnerSarpanch.csv.gz,,34c6092ac0b2dc0d2bbfcf2e7b77f16cc1436aa8bf0144f163093e4e070a5aa2,531974,,unknown,"sec.rajasthan.gov.in, compiled by the 2023 scraper (data/search_log/scrape_2023-01-03.log); requests not recorded"
+data/raw/zila_parishad/zila_parishad_2005.pdf,,66c69e85b27b2ef39f7548c4d95d1640d76ec44349300a6837f8670b499f74dc,384116,,unknown,held by the project before this repository; origin not recorded
+data/raw/zila_parishad/zila_parishad_2010.pdf,,4399f7b9943ff6f71b3c728c21a2161696675fcbf17d47138af1938ca10a0272,1711045,,unknown,held by the project before this repository; origin not recorded
+data/raw/zila_parishad/zila_parishad_2015.pdf,,de2d3b4eeba00b4f70eb133f614f0075118afb929366ebcdff39387266ed74b0,29834008,,unknown,held by the project before this repository; origin not recorded
+data/raw/zila_parishad/zila_parishad_2020.pdf,,805c3f92cefaedb22e711f2db9c4d916d9025447321c58379e3ded945ca3937a,90689892,,unknown,held by the project before this repository; origin not recorded

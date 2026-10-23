@@ -6,7 +6,7 @@ import string
 import pandas as pd
 
 from local_elections_rajasthan.build.common import latin_ascii, save
-from local_elections_rajasthan.paths import DATA, ROOT
+from local_elections_rajasthan.paths import MANUAL, RAW, RELEASE
 
 
 def reservation(value):
@@ -36,14 +36,17 @@ def normalize_gp(value):
     )
 
 
+# 2020's file arrived already named as cleaned.
+SUFFIX = {2020: "_clean"}
+
+
 def standardize(year):
-    filename = (
-        f"sarpanch_{year}"
-        + ("_manual_sex" if year == 2015 else "_clean" if year == 2020 else "")
-        + ".csv"
-    )
+    # 2015's winner sex was coded by hand from names, so that year's input is
+    # the hand-coded copy in data/manual/; the others are as received.
     source = pd.read_csv(
-        ROOT / "data/source/sarpanch" / filename,
+        MANUAL / "sarpanch/sarpanch_2015_manual_sex.csv"
+        if year == 2015
+        else RAW / "sarpanch" / f"sarpanch_{year}{SUFFIX.get(year, '')}.csv",
         keep_default_na=False,
         na_values=["", "NA"],
     )
@@ -100,9 +103,9 @@ def main():
     for year in (2005, 2010, 2015, 2020):
         save(
             standardize(year),
-            f"source_{year}_std.parquet",
+            f"sarpanch_{year}",
             integer=["year", "winner_woman", "reserved_woman"],
-            directory=DATA,
+            directory=RELEASE,
         )
 
 

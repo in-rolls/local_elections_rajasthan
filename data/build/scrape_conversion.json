@@ -2,7 +2,7 @@
   "format_version": 1,
   "files": [
     {
-      "file": "ContestingSarpanch.parquet",
+      "file": "sarpanch_candidates.parquet",
       "sha256": "385cf12352831697da2b2e274fa21029126d75b48bc198227f82b45a62e76167",
       "rows": 68202,
       "source": "ContestingSarpanch.csv.gz",
@@ -33,7 +33,7 @@
       "column_type": "string"
     },
     {
-      "file": "StatsNomination.parquet",
+      "file": "nomination_stats.parquet",
       "sha256": "da2218869427f865e359d775d645d9b9bd8c2491fd5ff092806b310bd4334119",
       "rows": 13473,
       "source": "StatsNomination.csv.gz",
@@ -55,7 +55,7 @@
       "column_type": "string"
     },
     {
-      "file": "WinnerSarpanch.parquet",
+      "file": "sarpanch_winners.parquet",
       "sha256": "0d87b3fcba53c9f5f6a0bf7df1d438e9d5d67675f7525e936bd503101af0efab",
       "rows": 11432,
       "source": "WinnerSarpanch.csv.gz",
@@ -86,7 +86,7 @@
       "column_type": "string"
     },
     {
-      "file": "WarnWinningPanch.parquet",
+      "file": "ward_member_winners.parquet",
       "sha256": "5dd8d727833d3b24c00ab07f12d24d933ec74c4c2d10321b31d29b410d309176",
       "rows": 110296,
       "source": "WarnWinningPanch.csv.gz",

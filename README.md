@@ -6,36 +6,36 @@ Seat reservations and election results for Rajasthan's rural local governments. 
 
 ## Data
 
-The eight standardized files are under [`data/fin/`](data/fin/). [SCHEMA.json](data/fin/SCHEMA.json) records their row counts and columns; [CHECKSUMS.sha256](data/fin/CHECKSUMS.sha256) verifies their bytes.
+The published tables are under [`data/release/`](data/release/), in the folders of the in-rolls [layout standard](https://github.com/in-rolls/local_elections/blob/main/docs/layout.md): one folder per election, `linkage/` for GP links across elections, and the 2020–2022 website tables, which span several elections, directly in `release/`. [MANIFEST.json](data/MANIFEST.json) records each table's sha256, row count and columns.
 
 <!-- datasets:start -->
 
 | File | Rows | Each row represents |
 | --- | ---: | --- |
-| [elections/candidates_2020_events.parquet](data/fin/elections/candidates_2020_events.parquet) | 67,689 | Candidate in a 2020 general-election phase |
-| [elections/gp_lgd_crosswalk.parquet](data/fin/elections/gp_lgd_crosswalk.parquet) | 5,219 | Accepted election match key to LGD GP link |
-| [elections/raj_05_10.parquet](data/fin/elections/raj_05_10.parquet) | 7,667 | Unambiguous GP link between 2005 and 2010 |
-| [elections/raj_05_20.parquet](data/fin/elections/raj_05_20.parquet) | 5,334 | Unambiguous GP link across all four years |
-| [elections/raj_10_15.parquet](data/fin/elections/raj_10_15.parquet) | 7,447 | Unambiguous GP link between 2010 and 2015 |
-| [elections/raj_15_20.parquet](data/fin/elections/raj_15_20.parquet) | 7,882 | Unambiguous GP link between 2015 and 2020 |
-| [elections/source_records.parquet](data/fin/elections/source_records.parquet) | 39,520 | Source record with reviewed geography and identity |
-| [elections/winners_2020_events.parquet](data/fin/elections/winners_2020_events.parquet) | 11,300 | Winner in a 2020 general-election phase |
-| [panchayat_samiti_2005_std.parquet](data/fin/panchayat_samiti_2005_std.parquet) | 5,257 | Panchayat Samiti member seat |
-| [panchayat_samiti_2010_std.parquet](data/fin/panchayat_samiti_2010_std.parquet) | 5,273 | Panchayat Samiti member ward |
-| [scrape_2020_2022/ContestingSarpanch.parquet](data/fin/scrape_2020_2022/ContestingSarpanch.parquet) | 68,202 | Contesting Sarpanch candidate |
-| [scrape_2020_2022/StatsNomination.parquet](data/fin/scrape_2020_2022/StatsNomination.parquet) | 13,473 | Gram Panchayat nomination-statistics record |
-| [scrape_2020_2022/WarnWinningPanch.parquet](data/fin/scrape_2020_2022/WarnWinningPanch.parquet) | 110,296 | Ward-winning Panch record |
-| [scrape_2020_2022/WinnerSarpanch.parquet](data/fin/scrape_2020_2022/WinnerSarpanch.parquet) | 11,432 | Sarpanch winner record |
-| [source_2005_std.parquet](data/fin/source_2005_std.parquet) | 9,178 | Gram Panchayat seat |
-| [source_2010_std.parquet](data/fin/source_2010_std.parquet) | 9,166 | Gram Panchayat seat |
-| [source_2015_std.parquet](data/fin/source_2015_std.parquet) | 9,862 | Gram Panchayat seat |
-| [source_2020_std.parquet](data/fin/source_2020_std.parquet) | 11,314 | Gram Panchayat reservation record |
-| [zila_parishad_2005_std.parquet](data/fin/zila_parishad_2005_std.parquet) | 1,008 | Zila Parishad member ward |
-| [zila_parishad_2010_std.parquet](data/fin/zila_parishad_2010_std.parquet) | 1,013 | Zila Parishad member ward |
+| [2005/panchayat_samiti_results.parquet](data/release/2005/panchayat_samiti_results.parquet) | 5,257 | Panchayat Samiti member seat |
+| [2005/sarpanch_results.parquet](data/release/2005/sarpanch_results.parquet) | 9,178 | Gram Panchayat seat |
+| [2005/zila_parishad_results.parquet](data/release/2005/zila_parishad_results.parquet) | 1,008 | Zila Parishad member ward |
+| [2010/panchayat_samiti_results.parquet](data/release/2010/panchayat_samiti_results.parquet) | 5,273 | Panchayat Samiti member ward |
+| [2010/sarpanch_results.parquet](data/release/2010/sarpanch_results.parquet) | 9,166 | Gram Panchayat seat |
+| [2010/zila_parishad_results.parquet](data/release/2010/zila_parishad_results.parquet) | 1,013 | Zila Parishad member ward |
+| [2015/sarpanch_results.parquet](data/release/2015/sarpanch_results.parquet) | 9,862 | Gram Panchayat seat |
+| [2020/sarpanch_candidate_events.parquet](data/release/2020/sarpanch_candidate_events.parquet) | 67,689 | Candidate in a 2020 general-election phase |
+| [2020/sarpanch_reservations.parquet](data/release/2020/sarpanch_reservations.parquet) | 11,314 | Gram Panchayat reservation record |
+| [2020/sarpanch_winner_events.parquet](data/release/2020/sarpanch_winner_events.parquet) | 11,300 | Winner in a 2020 general-election phase |
+| [linkage/gp_lgd_crosswalk.parquet](data/release/linkage/gp_lgd_crosswalk.parquet) | 5,219 | Accepted election match key to LGD GP link |
+| [linkage/sarpanch_2005_2010.parquet](data/release/linkage/sarpanch_2005_2010.parquet) | 7,667 | Unambiguous GP link between 2005 and 2010 |
+| [linkage/sarpanch_2005_2020.parquet](data/release/linkage/sarpanch_2005_2020.parquet) | 5,334 | Unambiguous GP link across all four years |
+| [linkage/sarpanch_2010_2015.parquet](data/release/linkage/sarpanch_2010_2015.parquet) | 7,447 | Unambiguous GP link between 2010 and 2015 |
+| [linkage/sarpanch_2015_2020.parquet](data/release/linkage/sarpanch_2015_2020.parquet) | 7,882 | Unambiguous GP link between 2015 and 2020 |
+| [nomination_stats.parquet](data/release/nomination_stats.parquet) | 13,473 | Gram Panchayat nomination-statistics record |
+| [sarpanch_candidates.parquet](data/release/sarpanch_candidates.parquet) | 68,202 | Contesting Sarpanch candidate |
+| [sarpanch_source_records.parquet](data/release/sarpanch_source_records.parquet) | 39,520 | Source record with reviewed geography and identity |
+| [sarpanch_winners.parquet](data/release/sarpanch_winners.parquet) | 11,432 | Sarpanch winner record |
+| [ward_member_winners.parquet](data/release/ward_member_winners.parquet) | 110,296 | Ward-winning Panch record |
 
 <!-- datasets:end -->
 
-The separate website collection is available as Parquet under [`data/fin/scrape_2020_2022/`](data/fin/scrape_2020_2022/). Its [manifest](data/fin/scrape_2020_2022/MANIFEST.json) records source and output hashes. The DOI [10.7910/DVN/6YPB5C](https://doi.org/10.7910/DVN/6YPB5C) identifies this deposited 2020–2022 collection, not the subsequently added 2005–2020 standardized files.
+The separate website collection is available as Parquet in `data/release/` (`sarpanch_candidates`, `sarpanch_winners`, `ward_member_winners`, `nomination_stats`; their row IDs in the 2020 event tables read `sarpanch_candidates:<row>` and `sarpanch_winners:<row>`). Its [conversion record](data/build/scrape_conversion.json) gives source and output hashes. The DOI [10.7910/DVN/6YPB5C](https://doi.org/10.7910/DVN/6YPB5C) identifies this deposited 2020–2022 collection, not the subsequently added 2005–2020 standardized files.
 
 The original four `*.csv.gz` files remain under [`data/`](data/). The spelling `WarnWinningPanch` is the original filename. All cells, repeated rows, and empty strings are retained in these four Parquet exports; numeric-looking values remain strings.
 
@@ -58,9 +58,9 @@ Winner characteristics and seat reservations describe different attributes. Wome
 
 Member-seat files have additional source, vote, party, ward, and validation fields. Their complete dictionaries document all recodes and exceptions:
 
-- Panchayat Samiti: [2005](data/fin/panchayat_samiti_2005_DICTIONARY.md), [2010](data/fin/panchayat_samiti_2010_DICTIONARY.md).
-- Zila Parishad: [2005](data/fin/zila_parishad_2005_DICTIONARY.md), [2010](data/fin/zila_parishad_2010_DICTIONARY.md).
-- Website collection: [column definitions](data/fin/scrape_2020_2022/DICTIONARY.md) and [exact column lists](data/fin/scrape_2020_2022/MANIFEST.json).
+- Panchayat Samiti: [2005](data/release/2005/panchayat_samiti_results_dictionary.md), [2010](data/release/2010/panchayat_samiti_results_dictionary.md).
+- Zila Parishad: [2005](data/release/2005/zila_parishad_results_dictionary.md), [2010](data/release/2010/zila_parishad_results_dictionary.md).
+- Website collection: [column definitions](data/release/README.md) and [exact column lists](data/build/scrape_conversion.json).
 
 ## Coverage and known gaps
 
@@ -68,9 +68,9 @@ The Gram Panchayat files contain changing rosters across years. They do not prov
 
 Missing source sex and reservation labels remain missing in the standardized files; they are not coded as male or unreserved.
 
-The saved, manually reviewed linkages `sp_2005_2010_manually_reviewed.csv` and `sp_05_10_15_20_best_manual.csv` under `data/source/sarpanch/` preserve the historical links used by `quota`. The latter was transferred without changes from that study. These are historical research inputs, not newly validated statewide panels; the consuming study applies its own exclusions.
+The saved, manually reviewed linkages `sp_2005_2010_manually_reviewed.csv` and `sp_05_10_15_20_best_manual.csv` under `data/manual/sarpanch/` preserve the historical links used by `quota`. The latter was transferred without changes from that study. These are historical research inputs, not newly validated statewide panels; the consuming study applies its own exclusions.
 
-The 2015 source omits winner sex. Its published coding was inferred from candidate names and manually reviewed; it is not a source-reported demographic field. Municipal publications and the 2015/2020 Panchayat Samiti and Zila Parishad books are held under `data/source/` but are outside the standardized member-seat exports.
+The 2015 source omits winner sex. Its published coding was inferred from candidate names and manually reviewed; it is not a source-reported demographic field. Municipal publications and the 2015/2020 Panchayat Samiti and Zila Parishad books are held under `data/raw/` but are outside the standardized member-seat exports.
 
 The member-seat parsers check printed statewide and body totals, retain vacant seats, and preserve raw values beside documented corrections. The 2005 Panchayat Samiti roster has one reservation-total disagreement and one filled seat with a blank winner name. Its ward numbers are inferred from source order. Both Zila Parishad books print Churu's 27 wards as 5–31; the files retain those printed values and provide an explicitly documented 1–27 sequence. See the dictionaries before using corrected or inferred fields.
 
@@ -98,7 +98,7 @@ make verify
 ```python
 import pyarrow.parquet as pq
 
-seats = pq.read_table("data/fin/source_2015_std.parquet")
+seats = pq.read_table("data/release/2015/sarpanch_results.parquet")
 print(seats.select(["district_raw", "gp_raw", "reserved_woman"]))
 ```
 
@@ -106,13 +106,13 @@ print(seats.select(["district_raw", "gp_raw", "reserved_woman"]))
 
 | Stage | Command | Inputs and outputs |
 | --- | --- | --- |
-| Extract result books | `make extract` | PDFs under `data/source/panchayat_samiti/` and `data/source/zilla_parishad/` → positioned words in `data/extracted/*_pages.jsonl` |
+| Extract result books | `make extract` | PDFs under `data/raw/panchayat_samiti/` and `data/raw/zila_parishad/` → positioned words in `data/extracted/*_pages.jsonl` |
 | Parse result books | `make parse` | Saved page extractions → four member-seat Parquets |
-| Convert website exports | `make scrape` | Four original `data/*.csv.gz` files → `data/fin/scrape_2020_2022/` |
-| Standardize GP records | `make sources` | Saved GP tables → `data/fin/source_*_std.parquet` |
-| Build election histories | `make elections` | Standardized records and website exports → `data/fin/elections/`, refreshed metadata and README inventory |
+| Convert website exports | `make scrape` | Four original `data/raw/sec_scrape/*.csv.gz` files → `data/release/` |
+| Standardize GP records | `make sources` | Saved GP tables → `data/release/<year>/sarpanch_results.parquet` (2020: `sarpanch_reservations`) |
+| Build election histories | `make elections` | Standardized records and website exports → `data/release/2020/`, `data/release/linkage/` and `sarpanch_source_records`, refreshed metadata and README inventory |
 
-The GP inputs under `data/source/sarpanch/` are `sarpanch_2005.csv`, `sarpanch_2010.csv`, `sarpanch_2015_manual_sex.csv`, and `sarpanch_2020_clean.csv`. The 2015 winner-sex coding is manual; the 2020 reservation roster supplies no winner attributes.
+The GP inputs under `data/raw/sarpanch/` are `sarpanch_2005.csv`, `sarpanch_2010.csv`, `sarpanch_2015_manual_sex.csv`, and `sarpanch_2020_clean.csv`. The 2015 winner-sex coding is manual; the 2020 reservation roster supplies no winner attributes.
 
 Extraction retains word coordinates without interpreting table columns. The 2010 Zila Parishad extraction also retains fonts so the parser can exclude the watermark layer. Parsing checks seat keys, serial or ward sequences, and printed reservation and winner totals. Aggregate controls are not added as seat observations; the member-seat dictionaries document retained contradictions.
 
@@ -128,14 +128,14 @@ The extractor accepts `--source` and `--output`; the parser accepts `--input` an
 To regenerate only the website exports into a separate directory:
 
 ```bash
-uv run python -m local_elections_rajasthan.parse.scrape.convert --out data/derived/scrape_2020_2022
+uv run python -m local_elections_rajasthan.parse.scrape.convert --out /tmp/scrape_check
 ```
 
 The website converter checks the expected headers defined in its Python module, rejects malformed or empty files, and preserves every source cell as text. Add `--check` to compare the saved exports, schemas and source hashes without rewriting them.
 
 ## Election histories and geographic links
 
-`data/fin/elections/` contains the source records, candidate and winner events, GP panels, and LGD crosswalk listed in the inventory above.
+The source records, 2020 candidate and winner events, GP panels and LGD crosswalk are listed in the inventory above.
 
 The four panels retain the existing reservation, caste-category, winner, district/samiti, and history columns. `count_treated`, `never_treated`, and `always_treated` in the four-wave panel describe **2005, 2010, and 2015**, excluding 2020. `source_id_YYYY` links each panel wave back to the original attributes in `source_records.parquet`. Source identities combine the source-file name and its one-based row number before filtering; they are stable within the pinned source edition. They do not identify a person across different editions.
 
@@ -143,7 +143,7 @@ Event identities include election type, phase, and reviewed district/samiti/GP l
 
 The GP crosswalk first uses exact normalized names within reviewed LGD blocks, then Jaro-Winkler distance at most 0.20. Tied best candidates are rejected, as are candidates with different nonempty numeric identifiers in their names, including Devanagari numerals. Multiple claims on a GP within a district/samiti retain only a unique closest match. The accepted links reproduce those transferred from `quota_raj`; the numeric guard also recognizes Devanagari digits without changing those links. The crosswalk is built on the 2005–2010 panel and propagated by `match_key`; it is not a complete statewide LGD crosswalk. Studies attach their own Census/SHRUG covariates and outcomes.
 
-`data/source/geography/` contains the exact LGD GP directory, 2024 village-to-GP mapping, and reviewed district/samiti/block crosswalks used by the producer. Its `MANIFEST.json` records each file's original path, repository commit, and SHA-256. These are attributed reference snapshots; the LGD directory's original extraction is not reconstructed here. The `raj_block_xwalk.csv` is retained as a historical reviewed input; the active bridge uses `raj_samiti_xwalk.csv`.
+`data/reference/geography/` contains the exact LGD GP directory, 2024 village-to-GP mapping, and reviewed district/samiti/block crosswalks used by the producer. Its `MANIFEST.json` records each file's original path, repository commit, and SHA-256. These are attributed reference snapshots; the LGD directory's original extraction is not reconstructed here. The `raj_block_xwalk.csv` is retained as a historical reviewed input; the active bridge uses `raj_samiti_xwalk.csv`.
 
 ```bash
 make elections

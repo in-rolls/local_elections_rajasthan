@@ -10,7 +10,7 @@ from local_elections_rajasthan.build.common import (
     normalize_string,
     save,
 )
-from local_elections_rajasthan.paths import ROOT
+from local_elections_rajasthan.paths import GEOGRAPHY, TABLES
 
 FIELDS = [
     "match_key",
@@ -143,12 +143,12 @@ def build_bridge(panel, directory, blocks):
 
 
 def build():
-    panel = pd.read_parquet(PRODUCTS / "raj_05_10.parquet")
-    directory = pd.read_csv(ROOT / "data/source/geography/lgd_raj_block_gp.csv")
-    blocks = pd.read_csv(ROOT / "data/source/geography/raj_samiti_xwalk.csv")
+    panel = pd.read_parquet(PRODUCTS / TABLES["sarpanch_links_2005_2010"])
+    directory = pd.read_csv(GEOGRAPHY / "lgd_raj_block_gp.csv")
+    blocks = pd.read_csv(GEOGRAPHY / "raj_samiti_xwalk.csv")
     save(
         build_bridge(panel, directory, blocks),
-        "gp_lgd_crosswalk.parquet",
+        "gp_lgd_crosswalk",
         numeric=["lgd_gp_code", "lgd_block_code", "match_distance"],
     )
 

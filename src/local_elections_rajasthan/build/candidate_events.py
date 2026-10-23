@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 from local_elections_rajasthan.build.common import add_geography, normalize_string, save
-from local_elections_rajasthan.paths import DATA
+from local_elections_rajasthan.paths import table
 
 CANDIDATE_NUMERIC = [
     "sr_no",
@@ -45,10 +45,8 @@ def clean_name(name):
     return re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", name).lower()
 
 
-def read_events(filename, row_column, numeric):
-    frame = pd.read_parquet(DATA / "scrape_2020_2022" / filename).rename(
-        columns=clean_name
-    )
+def read_events(key, row_column, numeric):
+    frame = pd.read_parquet(table(key)).rename(columns=clean_name)
     frame = frame.rename(columns=RAW_TO_SCHEMA)
     frame = frame.drop(columns=["mobile_no", "email_address"], errors="ignore")
     for c in frame:
@@ -95,7 +93,7 @@ def unique_key(frame, keys):
 
 
 def build():
-    primary = add_geography(pd.read_parquet(DATA / "source_2020_std.parquet"))
+    primary = add_geography(pd.read_parquet(table("sarpanch_2020")))
     primary = primary.loc[
         primary.match_key.notna() & ~primary.match_key.duplicated(keep=False),
         ["match_key", "reserved_woman", "reserved_caste", "reserved_raw"],
@@ -109,7 +107,7 @@ def build():
     candidates = add_primary(
         event_keys(
             read_events(
-                "ContestingSarpanch.parquet", "candidate_source_row", CANDIDATE_NUMERIC
+                "sarpanch_candidates", "candidate_source_row", CANDIDATE_NUMERIC
             ),
             "name_of_gram_panchayat",
         ),
@@ -155,7 +153,7 @@ def build():
     ).reset_index()
     winners = add_primary(
         event_keys(
-            read_events("WinnerSarpanch.parquet", "winner_source_row", WINNER_NUMERIC),
+            read_events("sarpanch_winners", "winner_source_row", WINNER_NUMERIC),
             "name_of_gram_panchyat",
         ),
         primary,
@@ -183,17 +181,17 @@ def build():
         reservation, on="event_key", how="left", validate="many_to_one"
     )
     candidates["source_id"] = (
-        "ContestingSarpanch:" + candidates.candidate_source_row.astype(str)
+        "sarpanch_candidates:" + candidates.candidate_source_row.astype(str)
     )
-    winners["source_id"] = "WinnerSarpanch:" + winners.winner_source_row.astype(str)
+    winners["source_id"] = "sarpanch_winners:" + winners.winner_source_row.astype(str)
     save(
         candidates,
-        "candidates_2020_events.parquet",
+        "sarpanch_candidate_events_2020",
         integer=["candidate_source_row", "primary_reserved_woman", "candidate_woman"],
     )
     save(
         winners,
-        "winners_2020_events.parquet",
+        "sarpanch_winner_events_2020",
         integer=[
             "winner_source_row",
             "primary_reserved_woman",
