@@ -7,31 +7,31 @@ from local_elections_rajasthan.build.common import add_geography, normalize_stri
 from local_elections_rajasthan.paths import table
 
 CANDIDATE_NUMERIC = [
-    "sr_no",
-    "contesting_candidate_serial_no",
-    "age",
-    "total_value_of_capital_assets",
-    "children_before27111995",
-    "children_on_or_after28111995",
+    "gp_no",
+    "candidate_serial_no",
+    "candidate_age",
+    "candidate_assets_inr",
+    "candidate_children_before_1995_11_27",
+    "candidate_children_from_1995_11_28",
 ]
 WINNER_NUMERIC = [
-    "sr_no",
-    "total_no_of_contesting_candidate",
-    "total_electorate_votes",
-    "total_polled_votes",
-    "rejected_votes",
-    "total_valid_votes",
-    "poll_percent",
-    "vote_secure_by_winner",
-    "vote_secure_by_runnerup",
-    "total_no_of_nota_count",
-    "tendered_votes",
+    "gp_no",
+    "contesting_candidates",
+    "electors",
+    "votes_polled",
+    "votes_rejected",
+    "votes_valid",
+    "turnout_pct",
+    "winner_votes",
+    "runner_up_votes",
+    "votes_nota",
+    "votes_tendered",
 ]
 
 
 def read_events(key, row_column, numeric):
     frame = pd.read_parquet(table(key))
-    frame = frame.drop(columns=["mobile_no", "email_address"], errors="ignore")
+    frame = frame.drop(columns=["candidate_mobile", "candidate_email"], errors="ignore")
     for c in frame:
         frame[c] = (
             frame[c].astype("string").str.strip().replace({"": pd.NA, "NA": pd.NA})
@@ -44,7 +44,7 @@ def read_events(key, row_column, numeric):
         & frame.election_duration.isin(["JAN-MAR 2020", "SEP-OCT 2020"])
     ]
     return frame.drop_duplicates(
-        [c for c in frame if c not in [row_column, "sr_no"]]
+        [c for c in frame if c not in [row_column, "gp_no"]]
     ).reset_index(drop=True)
 
 
@@ -92,7 +92,7 @@ def build():
             read_events(
                 "sarpanch_candidates", "candidate_source_row", CANDIDATE_NUMERIC
             ),
-            "name_of_gram_panchayat",
+            "gram_panchayat",
         ),
         primary,
     )
@@ -103,13 +103,13 @@ def build():
         candidates,
         [
             "event_key",
-            "contesting_candidate_serial_no",
-            "name_of_contesting_candidate",
-            "father_husband_of_contesting_candidate",
+            "candidate_serial_no",
+            "candidate_name",
+            "candidate_relation_name",
         ],
     )
     candidates["candidate_name_unique"] = unique_key(
-        candidates, ["event_key", "name_of_contesting_candidate"]
+        candidates, ["event_key", "candidate_name"]
     )
     candidates["candidate_woman"] = (
         candidates.candidate_woman_raw.str.strip()
@@ -119,8 +119,8 @@ def build():
     )
     sex = candidates.loc[
         candidates.candidate_key_unique & candidates.candidate_name_unique,
-        ["event_key", "name_of_contesting_candidate", "candidate_woman"],
-    ].dropna(subset=["event_key", "name_of_contesting_candidate"])
+        ["event_key", "candidate_name", "candidate_woman"],
+    ].dropna(subset=["event_key", "candidate_name"])
     grouped = candidates.groupby("event_key", dropna=False, sort=True)
     reservation = grouped.agg(
         reserved_raw_from_candidates=(
@@ -137,7 +137,7 @@ def build():
     winners = add_primary(
         event_keys(
             read_events("sarpanch_winners", "winner_source_row", WINNER_NUMERIC),
-            "name_of_gram_panchyat",
+            "gram_panchayat",
         ),
         primary,
     )
@@ -146,13 +146,13 @@ def build():
         "match_key", dropna=False
     ).event_key.transform("nunique").eq(1)
     for column, dest in [
-        ("winner_candidate_name", "winner_woman_2020"),
-        ("runnerup_candidate_name", "runner_up_woman_2020"),
+        ("winner_name", "winner_woman_2020"),
+        ("runner_up_name", "runner_up_woman_2020"),
     ]:
         winners = winners.merge(
             sex.rename(
                 columns={
-                    "name_of_contesting_candidate": column,
+                    "candidate_name": column,
                     "candidate_woman": dest,
                 }
             ),

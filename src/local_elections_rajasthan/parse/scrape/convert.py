@@ -1,9 +1,10 @@
 """Convert the four saved Rajasthan 2020-2022 scrape CSVs to Parquet.
 
-The CSV headers are the portal's CamelCase; the released columns are their
-snake_case forms (`NameOfContestingCandidate` -> `name_of_contesting_candidate`),
-with the four whose meaning NAMING.md fixes renamed to its words. The portal's
-own misspellings (`NameOfGramPanchyat`) are kept, snake-cased.
+The CSV headers are the portal's CamelCase; each released column is named here,
+once, per docs/naming.md: the seat's quota is `reserved_raw`, the person's
+printed caste and sex are `candidate_caste_raw`, `winner_caste_raw` and
+`candidate_woman_raw`, and the portal's misspellings (`NameOfGramPanchyat`,
+`MartialStatus`, `LooserVotes`) are not carried over.
 """
 
 import argparse
@@ -11,7 +12,6 @@ import csv
 import gzip
 import hashlib
 import json
-import re
 from pathlib import Path
 
 import pyarrow as pa
@@ -115,20 +115,65 @@ CONTRACTS = {
 }
 
 
-# Scraped headers, snake-cased, whose meaning NAMING.md names.
-RENAMED = {
-    "category_of_gram_panchayat": "reserved_raw",
-    "category_of_gram_panchyat": "reserved_raw",
-    "category_of_candidate": "candidate_caste_raw",
-    "gender": "candidate_woman_raw",
+# The released name of every scraped header.
+NAMES = {
+    "ElectionType": "election_type",
+    "ElectionDuration": "election_duration",
+    "District": "district",
+    "PanchayatSamiti": "panchayat_samiti",
+    "SrNo": "gp_no",
+    "NameOfGramPanchayat": "gram_panchayat",
+    "NameOfGramPanchyat": "gram_panchayat",
+    "GramPanchayat": "gram_panchayat",
+    "Grampanchayat": "gram_panchayat",
+    "CategoryOfGramPanchayat": "reserved_raw",
+    "CategoryOfGramPanchyat": "reserved_raw",
+    "CategoryOfWard": "reserved_raw",
+    "ContestingCandidateSerialNo": "candidate_serial_no",
+    "NameOfContestingCandidate": "candidate_name",
+    "FatherHusbandOfContestingCandidate": "candidate_relation_name",
+    "Gender": "candidate_woman_raw",
+    "MartialStatus": "candidate_marital_status",
+    "CategoryOfCandidate": "candidate_caste_raw",
+    "EducationStatus": "candidate_education",
+    "ContestingCandidateOccupation": "candidate_occupation",
+    "Age": "candidate_age",
+    "TotalValueOfCapitalAssets": "candidate_assets_inr",
+    "ChildrenBefore27111995": "candidate_children_before_1995_11_27",
+    "ChildrenOnOrAfter28111995": "candidate_children_from_1995_11_28",
+    "MobileNo": "candidate_mobile",
+    "EmailAddress": "candidate_email",
+    "NominationTotalNoOfNominationFilled": "nominations_filled",
+    "NominationCandidate": "nominated_candidates",
+    "ValidlyNominatedCandidate": "valid_candidates",
+    "Withdrawal": "withdrawals",
+    "Unopposed": "unopposed",
+    "Contestants": "contestants",
+    "TotalNoOfContestingCandidate": "contesting_candidates",
+    "ElectedUnoppose": "unopposed",
+    "TotalElectorateVotes": "electors",
+    "TotalPolledVotes": "votes_polled",
+    "RejectedVotes": "votes_rejected",
+    "TotalValidVotes": "votes_valid",
+    "PollPercent": "turnout_pct",
+    "WinnerCandidateName": "winner_name",
+    "ViewPledge": "winner_affidavit_url",
+    "VoteSecureByWinner": "winner_votes",
+    "RunnerupCandidateName": "runner_up_name",
+    "VoteSecureByRunnerup": "runner_up_votes",
+    "TotalNoOfNOTACount": "votes_nota",
+    "TenderedVotes": "votes_tendered",
+    "WardNo": "ward_no",
+    "NameOfVillage": "village",
+    "NameOfCandidate": "winner_name",
+    "TotalNoOfVotes": "electors",
+    "VotesPolled": "votes_polled",
+    "WhetherElectedUnoppose": "unopposed",
+    "CategoryOfWinningCandidate": "winner_caste_raw",
+    "RemarkIfAny": "remark",
+    "WinnerVotes": "winner_votes",
+    "LooserVotes": "loser_votes",
 }
-
-
-def column_name(header):
-    """The released column for a scraped header."""
-    name = re.sub(r"([A-Z]+)([A-Z][a-z])", r"\1_\2", header)
-    name = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", name).lower()
-    return RENAMED.get(name, name)
 
 
 def digest(path):
@@ -139,7 +184,7 @@ def digest(path):
 def read_source(path, columns):
     with gzip.open(path, "rt", encoding="utf-8-sig", newline="") as stream:
         reader = csv.reader(stream)
-        names = [column_name(c) for c in columns]
+        names = [NAMES[c] for c in columns]
         if next(reader, None) != columns or len(set(names)) != len(names):
             raise ValueError(f"{path}: unexpected or duplicate headers")
         rows = []
