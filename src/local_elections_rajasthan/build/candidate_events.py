@@ -1,7 +1,5 @@
 """Retain general-election events, candidate identities, and source disagreements."""
 
-import re
-
 import numpy as np
 import pandas as pd
 
@@ -31,23 +29,8 @@ WINNER_NUMERIC = [
 ]
 
 
-# The scraped headers, snake-cased, to NAMING.md's names.
-RAW_TO_SCHEMA = {
-    "category_of_gram_panchayat": "reserved_raw",  # old-name: raw header
-    "category_of_gram_panchyat": "reserved_raw",  # old-name: raw header (sic)
-    "category_of_candidate": "candidate_caste_raw",  # old-name: raw header
-    "gender": "candidate_woman_raw",  # old-name: raw header
-}
-
-
-def clean_name(name):
-    name = re.sub(r"([A-Z]+)([A-Z][a-z])", r"\1_\2", name)
-    return re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", name).lower()
-
-
 def read_events(key, row_column, numeric):
-    frame = pd.read_parquet(table(key)).rename(columns=clean_name)
-    frame = frame.rename(columns=RAW_TO_SCHEMA)
+    frame = pd.read_parquet(table(key))
     frame = frame.drop(columns=["mobile_no", "email_address"], errors="ignore")
     for c in frame:
         frame[c] = (
