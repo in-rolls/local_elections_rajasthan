@@ -16,6 +16,17 @@
       "match_confidence"
     ]
   },
+  "linkage/sarpanch_lgd.parquet": {
+    "sha256": "d9d71419eff7232ea9b25907ead01304557357f66c65956324d2778cd71f5c9d",
+    "rows": 22335,
+    "cols": 3,
+    "bytes": 135813,
+    "columns": [
+      "source_id",
+      "lgd_gp_code",
+      "lgd_basis"
+    ]
+  },
   "nomination_stats.parquet": {
     "sha256": "417950c440284617d59b7d0caa103b675f6783a390fb9b5b7fa70581f9fdff08",
     "rows": 13473,

@@ -39,6 +39,7 @@ TABLES = {
     "sarpanch_links_2015_2020": "linkage/sarpanch_2015_2020.parquet",
     "sarpanch_links_2005_2020": "linkage/sarpanch_2005_2020.parquet",
     "gp_lgd_crosswalk": "linkage/gp_lgd_crosswalk.parquet",
+    "sarpanch_lgd": "linkage/sarpanch_lgd.parquet",
 }
 
 

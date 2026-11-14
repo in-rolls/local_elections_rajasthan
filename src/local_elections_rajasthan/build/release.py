@@ -71,6 +71,7 @@ UNITS = {
     "sarpanch_links_2015_2020": "Unambiguous GP link between 2015 and 2020",
     "sarpanch_links_2005_2020": "Unambiguous GP link across all four years",
     "gp_lgd_crosswalk": "Accepted election match key to LGD GP link",
+    "sarpanch_lgd": "Sarpanch source record with an LGD GP code",
 }
 
 
@@ -133,6 +134,7 @@ PRODUCTS = [
     "sarpanch_links_2015_2020",
     "sarpanch_links_2005_2020",
     "gp_lgd_crosswalk",
+    "sarpanch_lgd",
 ]
 
 
@@ -220,7 +222,7 @@ def verify():
                 pq.read_table(out / "elections" / TABLES[key]),
                 key,
             )
-    print("All 20 published tables reproduce from retained sources.")
+    print(f"All {len(TABLES)} published tables reproduce from retained sources.")
 
 
 def main():
