@@ -11,6 +11,7 @@ import tempfile
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
 
@@ -135,6 +136,25 @@ PRODUCTS = [
 ]
 
 
+def check_geography(geography):
+    """Each crosswalk names a place once, and every block code a samiti is
+    given exists in the LGD directory.
+    """
+    keys = {
+        "raj_district_xwalk.csv": ["elex_district_raw"],
+        "raj_samiti_std.csv": ["district_std", "samiti_raw"],
+        "raj_samiti_xwalk.csv": ["elex_district", "elex_samiti"],
+        "lgd_raj_block_gp.csv": ["gp_code"],
+    }
+    frames = {name: pd.read_csv(geography / name) for name in keys}
+    for name, key in keys.items():
+        if frames[name].duplicated(key).any():
+            raise ValueError(f"{name}: {', '.join(key)} repeats")
+    samitis = frames["raj_samiti_xwalk.csv"].lgd_block_code
+    if not samitis.isin(frames["lgd_raj_block_gp.csv"].block_code).all():
+        raise ValueError("raj_samiti_xwalk.csv: block code missing from LGD")
+
+
 def verify():
     manifest = json.loads(MANIFEST.read_text())
     if set(manifest) != set(TABLES.values()):
@@ -154,6 +174,7 @@ def verify():
             != entry["sha256"]
         ):
             raise ValueError(f"Geographic input changed: {entry['file']}")
+    check_geography(geography)
     convert(SCRAPE, RELEASE, check=True)
     with tempfile.TemporaryDirectory(prefix="rajasthan-verify-") as temp:
         out = Path(temp)
