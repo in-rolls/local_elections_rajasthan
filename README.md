@@ -22,11 +22,11 @@ The published tables are under [`data/release/`](data/release/), in the folders 
 | [2020/sarpanch_candidate_events.parquet](data/release/2020/sarpanch_candidate_events.parquet) | 67,689 | Candidate in a 2020 general-election phase |
 | [2020/sarpanch_reservations.parquet](data/release/2020/sarpanch_reservations.parquet) | 11,314 | Gram Panchayat reservation record |
 | [2020/sarpanch_winner_events.parquet](data/release/2020/sarpanch_winner_events.parquet) | 11,300 | Winner in a 2020 general-election phase |
-| [linkage/gp_lgd_crosswalk.parquet](data/release/linkage/gp_lgd_crosswalk.parquet) | 5,219 | Accepted election match key to LGD GP link |
-| [linkage/sarpanch_2005_2010.parquet](data/release/linkage/sarpanch_2005_2010.parquet) | 7,667 | Unambiguous GP link between 2005 and 2010 |
-| [linkage/sarpanch_2005_2020.parquet](data/release/linkage/sarpanch_2005_2020.parquet) | 5,334 | Unambiguous GP link across all four years |
-| [linkage/sarpanch_2010_2015.parquet](data/release/linkage/sarpanch_2010_2015.parquet) | 7,447 | Unambiguous GP link between 2010 and 2015 |
-| [linkage/sarpanch_2015_2020.parquet](data/release/linkage/sarpanch_2015_2020.parquet) | 7,882 | Unambiguous GP link between 2015 and 2020 |
+| [linkage/gp_lgd_crosswalk.parquet](data/release/linkage/gp_lgd_crosswalk.parquet) | 5,626 | Accepted election match key to LGD GP link |
+| [linkage/sarpanch_2005_2010.parquet](data/release/linkage/sarpanch_2005_2010.parquet) | 8,320 | Unambiguous GP link between 2005 and 2010 |
+| [linkage/sarpanch_2005_2020.parquet](data/release/linkage/sarpanch_2005_2020.parquet) | 6,024 | Unambiguous GP link across all four years |
+| [linkage/sarpanch_2010_2015.parquet](data/release/linkage/sarpanch_2010_2015.parquet) | 7,899 | Unambiguous GP link between 2010 and 2015 |
+| [linkage/sarpanch_2015_2020.parquet](data/release/linkage/sarpanch_2015_2020.parquet) | 8,291 | Unambiguous GP link between 2015 and 2020 |
 | [nomination_stats.parquet](data/release/nomination_stats.parquet) | 13,473 | Gram Panchayat nomination-statistics record |
 | [sarpanch_candidates.parquet](data/release/sarpanch_candidates.parquet) | 68,202 | Contesting Sarpanch candidate |
 | [sarpanch_source_records.parquet](data/release/sarpanch_source_records.parquet) | 39,520 | Source record with reviewed geography and identity |
@@ -68,7 +68,7 @@ The Gram Panchayat files contain changing rosters across years. They do not prov
 
 Missing source sex and reservation labels remain missing in the standardized files; they are not coded as male or unreserved.
 
-The saved, manually reviewed linkages `sp_2005_2010_manually_reviewed.csv` and `sp_05_10_15_20_best_manual.csv` under `data/manual/sarpanch/` preserve the historical links used by `quota`. The latter was transferred without changes from that study. These are historical research inputs, not newly validated statewide panels; the consuming study applies its own exclusions.
+The cross-year links are research links between printed names, recorded pair by pair in `data/manual/crosswalks/`. They are not official identifiers and do not establish that a panchayat's boundaries are unchanged.
 
 The 2015 source omits winner sex. Its published coding was inferred from candidate names and manually reviewed; it is not a source-reported demographic field. Municipal publications and the 2015/2020 Panchayat Samiti and Zila Parishad books are held under `data/raw/` but are outside the standardized member-seat exports.
 
@@ -137,11 +137,26 @@ The website converter checks the expected headers defined in its Python module, 
 
 The source records, 2020 candidate and winner events, GP panels and LGD crosswalk are listed in the inventory above.
 
+### Seat crosswalks
+
+`data/manual/crosswalks/sarpanch_2005_2010.csv`, `sarpanch_2010_2015.csv` and `sarpanch_2015_2020.csv` are the record of which seat in one election is which seat in the next. Each row is one candidate pair: the `source_id`, printed district, samiti and gram panchayat of both seats, a `decision` (`accept` or `reject`) and its `basis`.
+
+| `basis` | Meaning | 2005–2010 | 2010–2015 | 2015–2020 |
+| --- | --- | ---: | ---: | ---: |
+| `reviewed_same_name` | Reviewed and accepted; the standardized names agree | 7,600 | 6,657 | 5,847 |
+| `reviewed_variant` | Reviewed and accepted; the names differ in spelling | 690 | 512 | 1,596 |
+| `same_standardized_name` | Not reviewed; reviewed district and samiti labels and the standardized panchayat name agree, and neither seat has a reviewed accepted pair | 106 | 760 | 886 |
+| `reviewed_rejected` | Reviewed and rejected | 1,570 | 509 | 4,705 |
+
+`review_distance` is the reviewer's own class for how far apart the two names are (0 is the same name). The reviewed rows come from the link files of the `quota` study, which this repository no longer carries separately; a pair that study both accepted and rejected is recorded as rejected.
+
+The panels read only these files. A seat accepted into more than one pair is ambiguous, and all its pairs are dropped: 8,320 of 8,396 accepted pairs remain for 2005–2010, 7,899 of 7,929 for 2010–2015 and 8,291 of 8,329 for 2015–2020. The four-wave panel chains the three. Each two-wave panel carries the pair's `link_basis` and `name_score`, the Jaro-Winkler similarity of the two printed panchayat names. `match_key` is the standardized name of the latest wave in a panel. The build fails if a crosswalk's printed names no longer equal the source records its `source_id` values point at.
+
 The four panels retain the existing reservation, caste-category, winner, district/samiti, and history columns. `count_treated`, `never_treated`, and `always_treated` in the four-wave panel describe **2005, 2010, and 2015**, excluding 2020. `source_id_YYYY` links each panel wave back to the original attributes in `source_records.parquet`. Source identities combine the source-file name and its one-based row number before filtering; they are stable within the pinned source edition. They do not identify a person across different editions.
 
 Event identities include election type, phase, and reviewed district/samiti/GP labels. Candidate serial, name, and parent/spouse name determine candidate-key ambiguity. Winner sex is joined only through a unique candidate name within the same event. The files retain uniqueness flags, original source-row numbers, reservation-source comparisons, and missing values. Contact columns are omitted. Exact duplicate records are collapsed before identity checks; the retained `source_id` refers to the first source row.
 
-The GP crosswalk first uses exact normalized names within reviewed LGD blocks, then Jaro-Winkler distance at most 0.20. Tied best candidates are rejected, as are candidates with different nonempty numeric identifiers in their names, including Devanagari numerals. Multiple claims on a GP within a district/samiti retain only a unique closest match. The accepted links reproduce those transferred from `quota_raj`; the numeric guard also recognizes Devanagari digits without changing those links. The crosswalk is built on the 2005–2010 panel and propagated by `match_key`; it is not a complete statewide LGD crosswalk. Studies attach their own Census/SHRUG covariates and outcomes.
+The GP crosswalk first uses exact normalized names within reviewed LGD blocks, then Jaro-Winkler distance at most 0.20. Tied best candidates are rejected, as are candidates with different nonempty numeric identifiers in their names, including Devanagari numerals. Multiple claims on a GP within a district/samiti retain only a unique closest match. The numeric guard also recognizes Devanagari digits. The crosswalk is built on the 2005–2010 panel and propagated by `match_key`; it is not a complete statewide LGD crosswalk. Studies attach their own Census/SHRUG covariates and outcomes.
 
 `data/reference/geography/` contains the exact LGD GP directory, 2024 village-to-GP mapping, and reviewed district/samiti/block crosswalks used by the producer. Its `MANIFEST.json` records each file's original path, repository commit, and SHA-256. These are attributed reference snapshots; the LGD directory's original extraction is not reconstructed here. The `raj_block_xwalk.csv` is retained as a historical reviewed input; the active bridge uses `raj_samiti_xwalk.csv`.
 

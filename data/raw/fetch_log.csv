@@ -39,10 +39,6 @@ data/raw/sarpanch/sarpanch_2005.csv,,642c992acc6aa6f81dcfdfbe630a71b017aff551736
 data/raw/sarpanch/sarpanch_2010.csv,,84c9ed22680e75ac5e06f05fcc93e57bc38cc6d835e5cb22887e9d5f982089db,722131,,unknown,held by the project before this repository; origin not recorded
 data/raw/sarpanch/sarpanch_2015.csv,,cffa013832efa807b67ee8fe6d42ef4511a3d29f2e48243e1af8707ffeaf7c79,868043,,unknown,held by the project before this repository; origin not recorded
 data/raw/sarpanch/sarpanch_2020_clean.csv,,0f13bc76ea6d5203a55bb42d858fc832852136f18afd0cc7baf6fd66422f0449,410724,,unknown,held by the project before this repository; origin not recorded
-data/raw/sarpanch/sp_05_10_15_best.csv,,0891709660dce42909a3a6e129c5bcdc1abd9b911a0a8ec68bfff00b3a24cd2c,2977047,,unknown,held by the project before this repository; origin not recorded
-data/raw/sarpanch/sp_2005_2010.csv,,e529bc06d7fa14eeb6dbf3e9bcce109045e40ee2ade215e414330190e24b6d93,2052802,,unknown,held by the project before this repository; origin not recorded
-data/raw/sarpanch/sp_2005_2010_fin.csv,,cb4a9ecff76c449ea6b34384e1f42a2b6217b935a4aa100e2af75277076a0743,2174472,,unknown,held by the project before this repository; origin not recorded
-data/raw/sarpanch/sp_205_2010_2015_fin.csv,,e2188b2384b5aea0cb675b47d09cb906c3e9c916c03238b2ea99b492a8ed8fb4,3006609,,unknown,held by the project before this repository; origin not recorded
 data/raw/sec_scrape/ContestingSarpanch.csv.gz,,d0360d37c63c5f0984fd25e5695af9c7958797ff435da8d1a0aefae9d7dcc889,2138924,,unknown,"sec.rajasthan.gov.in, compiled by the 2023 scraper (data/search_log/scrape_2023-01-03.log); requests not recorded"
 data/raw/sec_scrape/StatsNomination.csv.gz,,28919f7dd41a1709379713fd6549f34c02a48f346d6ec6ff928494364bf3084a,152577,,unknown,"sec.rajasthan.gov.in, compiled by the 2023 scraper (data/search_log/scrape_2023-01-03.log); requests not recorded"
 data/raw/sec_scrape/WarnWinningPanch.csv.gz,,0d9d385b09cae7b27fec230dac801f7345d0781ec0456747d09daf0920b9a5f1,2685722,,unknown,"sec.rajasthan.gov.in, compiled by the 2023 scraper (data/search_log/scrape_2023-01-03.log); requests not recorded"
