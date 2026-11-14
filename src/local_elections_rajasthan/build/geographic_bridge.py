@@ -1,8 +1,9 @@
-"""Reproduce the historical GP-to-LGD bridge within reviewed blocks."""
+"""Link 2010 panchayat names to LGD panchayats through reviewed blocks."""
 
 import re
 from itertools import pairwise
 
+import numpy as np
 import pandas as pd
 
 from local_elections_rajasthan.build.common import (
@@ -34,114 +35,118 @@ def digits(value):
     )
 
 
-def best_gp(name, candidates, threshold=0.20):
-    if candidates.empty:
-        return None
-    d = distances([name], candidates.gp_name_std, threshold)[0]
-    best = d.min()
-    if best > threshold or (d == best).sum() != 1:
-        return None
-    row = candidates.iloc[d.argmin()].copy()
-    a, b = digits(name), digits(row.gp_name_std)
-    if a and b and a != b:
-        return None
-    row["match_distance"] = best
-    return row
+def mutual_best(queries, candidates, cutoff):
+    """Index pairs that are each other's only nearest name within the cutoff.
+
+    A one-sided nearest name links a panchayat the directory lacks to its
+    closest neighbor. Requiring the directory entry to prefer the same
+    election name, with no tie on either side, removes those links. Names
+    that both carry numbers must carry the same ones.
+    """
+    if not len(queries) or not len(candidates):
+        return []
+    d = distances(queries, candidates, cutoff)
+    d[d > cutoff] = np.inf
+    a = [digits(q) for q in queries]
+    b = [digits(c) for c in candidates]
+    for i, x in enumerate(a):
+        for k, y in enumerate(b):
+            if x and y and x != y:
+                d[i, k] = np.inf
+    row, column = d.min(axis=1), d.min(axis=0)
+    pairs = []
+    for i, k in zip(*np.where(np.isfinite(d)), strict=True):
+        if (
+            d[i, k] == row[i] == column[k]
+            and (d[i] == row[i]).sum() == 1
+            and (d[:, k] == column[k]).sum() == 1
+        ):
+            pairs.append((i, k, d[i, k]))
+    return pairs
 
 
-def unique_minimum(frame, keys):
-    frame = frame.loc[
-        frame.match_distance.eq(
-            frame.groupby(keys, dropna=False).match_distance.transform("min")
-        )
-    ]
-    return frame.loc[~frame.duplicated(keys, keep=False)]
+def link(key, gp, kind, distance):
+    return dict(
+        match_key=key,
+        lgd_gp_code=gp.gp_code,
+        lgd_gp_name=gp.gp_name,
+        lgd_block_code=gp.block_code,
+        lgd_block_name=gp.block_name,
+        lgd_district=gp.zila_name,
+        match_type=kind,
+        match_distance=distance,
+        match_confidence="unique",
+    )
 
 
-def build_bridge(panel, directory, blocks):
+def build_bridge(panel, directory, blocks, cutoff=0.20):
+    """Link each 2010 panchayat name to one LGD panchayat.
+
+    First the same name in the panchayat's reviewed LGD block. Then, for the
+    rest, either the mutually nearest name in that block or the same name,
+    found once, in another block of the same election district, for
+    panchayats that changed block. A panchayat with both, or an LGD panchayat
+    claimed twice, is left unlinked.
+    """
     urban = (
         r"NAGAR PALIKA|NAGAR PANCHAYAT|MUNICIPAL|NAGARPALIKA|NAGARPANCHAYAT|"
         r"\bWARD\s*NO\b|\bWARD\s*[0-9]+\b|NAGAR PARISHAD"
     )
-    election = panel[
+    seats = panel[
         ["match_key", "district_std_2010", "samiti_std_2010", "gp_std_2010"]
     ].copy()
-    election = election.loc[
-        ~election.gp_std_2010.fillna("").str.contains(urban, case=False, regex=True)
-    ]
-    rows = election.assign(
-        district=election.district_std_2010.str.lower(),
-        samiti=election.samiti_std_2010.str.lower(),
-    )
+    seats = seats.loc[
+        seats.gp_std_2010.notna()
+        & ~seats.gp_std_2010.fillna("").str.contains(urban, case=False, regex=True)
+    ].drop_duplicates("match_key")
+    seats["district"] = seats.district_std_2010.str.lower()
+    seats["samiti"] = seats.samiti_std_2010.str.lower()
+    seats["name"] = seats.gp_std_2010.map(normalize_string)
     blocks = blocks.assign(
         district=blocks.elex_district.str.lower(), samiti=blocks.elex_samiti.str.lower()
+    )[["district", "samiti", "lgd_block_code"]].drop_duplicates()
+    seats = seats.merge(
+        blocks, on=["district", "samiti"], how="left", validate="many_to_one"
     )
-    blocks = blocks.merge(
-        rows[["district", "samiti"]].drop_duplicates(), on=["district", "samiti"]
-    )
-    rows = rows.merge(
-        blocks[["district", "samiti", "lgd_block_code", "lgd_block_name"]],
-        on=["district", "samiti"],
-        how="left",
-        validate="many_to_one",
-    )
-    rows["elex_gp_std"] = rows.gp_std_2010.map(normalize_string)
-    rows = rows.loc[rows.lgd_block_code.notna() & rows.gp_std_2010.notna()]
-    reference = directory.copy()
-    reference["gp_name_std"] = reference.gp_name.map(normalize_string)
-    exact = rows.merge(
-        reference,
-        left_on=["lgd_block_code", "elex_gp_std"],
-        right_on=["block_code", "gp_name_std"],
-        validate="many_to_many",
-    )
-    unmatched = rows.loc[~rows.match_key.isin(exact.match_key)]
-    exact = exact.assign(
-        lgd_gp_code=exact.gp_code,
-        lgd_gp_name=exact.gp_name,
-        lgd_block_name=exact.block_name,
-        lgd_district=exact.zila_name,
-        match_type="exact",
-        match_distance=0.0,
-        match_confidence="unique",
-    )[FIELDS]
-    fuzzy = []
-    for block in unmatched.lgd_block_code.unique():
-        queries = unmatched.loc[unmatched.lgd_block_code.eq(block)]
-        candidates = reference.loc[reference.block_code.eq(block)]
-        for _, query in queries.iterrows():
-            hit = best_gp(query.elex_gp_std, candidates)
-            if hit is not None:
-                fuzzy.append(
-                    dict(
-                        match_key=query.match_key,
-                        gp_std_2010=query.gp_std_2010,
-                        lgd_gp_code=hit.gp_code,
-                        lgd_gp_name=hit.gp_name,
-                        lgd_block_code=query.lgd_block_code,
-                        lgd_block_name=query.lgd_block_name,
-                        lgd_district=hit.zila_name,
-                        match_type="fuzzy",
-                        match_distance=hit.match_distance,
-                        match_confidence="unique",
-                    )
-                )
-    matches = pd.concat([exact, pd.DataFrame(fuzzy, columns=FIELDS)], ignore_index=True)
-    matches = unique_minimum(matches, ["match_key", "gp_std_2010"])
-    matches = matches.merge(
-        rows[["match_key", "district_std_2010", "samiti_std_2010"]].drop_duplicates(),
-        on="match_key",
-        validate="many_to_one",
-    )
-    matches = unique_minimum(
-        matches, ["district_std_2010", "samiti_std_2010", "lgd_gp_code"]
-    )[FIELDS]
-    result = election.merge(
-        matches, on=["match_key", "gp_std_2010"], how="left", validate="one_to_one"
-    )
-    return result.loc[result.lgd_gp_code.notna()].drop_duplicates("match_key")[
-        [c for c in FIELDS if c != "gp_std_2010"]
+    reference = directory.assign(name=directory.gp_name.map(normalize_string))
+
+    def same_name(left, right, kind):
+        left = left.loc[~left.name.duplicated(keep=False), ["match_key", "name"]]
+        right = right.loc[~right.name.duplicated(keep=False)]
+        both = left.merge(right, on="name")
+        return [link(row.match_key, row, kind, 0.0) for row in both.itertuples()]
+
+    links = []
+    for block, group in seats.groupby("lgd_block_code"):
+        gps = reference.loc[reference.block_code.eq(block)]
+        links.extend(same_name(group, gps, "exact"))
+    open_seats = seats.loc[~seats.match_key.isin({row["match_key"] for row in links})]
+    open_gps = reference.loc[
+        ~reference.gp_code.isin({row["lgd_gp_code"] for row in links})
     ]
+    proposals = []
+    for block, group in open_seats.groupby("lgd_block_code"):
+        gps = open_gps.loc[open_gps.block_code.eq(block)]
+        for i, k, distance in mutual_best(list(group.name), list(gps.name), cutoff):
+            proposals.append(
+                link(group.match_key.iloc[i], gps.iloc[k], "fuzzy", distance)
+            )
+    district_blocks = blocks.groupby("district").lgd_block_code.agg(set)
+    for district, group in open_seats.groupby("district"):
+        gps = open_gps.loc[open_gps.block_code.isin(district_blocks.get(district, ()))]
+        proposals.extend(same_name(group, gps, "exact_other_block"))
+    # A near name in the block and the same name elsewhere are rival evidence.
+    proposals = pd.DataFrame(
+        proposals, columns=[c for c in FIELDS if c != "gp_std_2010"]
+    )
+    proposals = proposals.loc[
+        ~proposals.match_key.duplicated(keep=False)
+        & ~proposals.lgd_gp_code.duplicated(keep=False)
+    ]
+    result = pd.concat([pd.DataFrame(links), proposals], ignore_index=True)
+    if result.match_key.duplicated().any() or result.lgd_gp_code.duplicated().any():
+        raise ValueError("LGD bridge is not one-to-one")
+    return result.sort_values("match_key", ignore_index=True)
 
 
 def seat_codes(records, pairs, bridge):
