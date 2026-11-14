@@ -5,7 +5,8 @@
       "source_repository": "https://github.com/in-rolls/quota_raj",
       "source_revision": "50fbe05662a8f2a84c66e5b262df4c6c0051503d",
       "source_path": "data/crosswalks/active/raj_district_xwalk.csv",
-      "sha256": "e3f58eb23b7f44be86ea25a1f6ab5c478e4d0721ccdb736f8444b2bc475244fa"
+      "sha256": "2d3f130419e1a9edb1045553e72791101481daaacd679e38abc5be5f64d24594",
+      "changes": "Column shrug_district renamed district_std; values unchanged."
     },
     {
       "file": "raj_samiti_std.csv",

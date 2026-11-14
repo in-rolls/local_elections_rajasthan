@@ -41,8 +41,8 @@ def match_key(frame, columns):
 
 def add_geography(frame):
     districts = pd.read_csv(GEOGRAPHY / "raj_district_xwalk.csv")
-    districts = districts[["elex_district_raw", "shrug_district"]].rename(
-        columns={"elex_district_raw": "district_raw", "shrug_district": "district_std"}
+    districts = districts[["elex_district_raw", "district_std"]].rename(
+        columns={"elex_district_raw": "district_raw"}
     )
     districts["district_std"] = districts.district_std.str.upper()
     samitis = pd.read_csv(GEOGRAPHY / "raj_samiti_std.csv")
